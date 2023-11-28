@@ -1,4 +1,59 @@
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+
+  head: {
+    titleTemplate: "LK",
+    htmlAttrs: {
+      lang: "en",
+    },
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
+      { name: "format-detection", content: "telephone=no" },
+    ],
+    link: [
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
+      },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+    ],
+  },
+
+  axios: {
+    proxy: true,
+    proxyHeaders: true,
+    progress: false
+  },
+
+  proxy: {
+    '/api/': { 
+      target: process.env.API_URL, 
+      pathRewrite: { '^/api/': '' }
+    }
+  },
+
+  build: {
+    transpile: ['vuetify'],
+  },
+
+  modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+  ],
+
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
 })
