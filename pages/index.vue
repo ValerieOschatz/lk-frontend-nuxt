@@ -1,7 +1,16 @@
-<template ><span>Главная страница!</span></template>
-<script>
-export default {
-  // middleware: "checkedAuth",
-  // layout: "SessionLayout",
-};
+<template></template>
+
+<script setup>
+definePageMeta({
+  middleware: [
+    function() {
+      const token = useCookie('token');
+      if (token.value) {
+        return navigateTo('/profile')
+      } else {
+        return navigateTo('/sign-in')
+      }
+    }
+  ],
+})
 </script>
