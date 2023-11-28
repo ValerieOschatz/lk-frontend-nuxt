@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <v-card-title class="title">Вход</v-card-title>
     <v-form>
       <v-text-field
@@ -16,13 +16,13 @@
       >
       Войти</v-btn>
     </v-form>
-    <NuxtLink to="sign-up" class="link">Зарегистрироваться</NuxtLink>
-  </div>
+    <NuxtLink to="sign-up"></NuxtLink>
+  </div> -->
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  name: "SignInPage",
+  name: "SignГзPage",
   layout: 'session-layout'
 })
 </script>
@@ -31,14 +31,4 @@ definePageMeta({
 .title {
   text-align: center;
 }
-
-.link {
-  text-decoration: none;
-  color: rgb(102, 92, 110);
-  font-size: 12px;
-  text-align: center;
-  display: block;
-  margin: 5px;
-}
-
 </style>

@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <div class="page">
-      <slot />
+      <v-card class="content">
+        <slot />
+      </v-card>
     </div>
   </v-app>
 </template>
@@ -16,6 +18,13 @@ export default {
 .page {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(201, 174, 226);
+  background-image: url(~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg);
+  display: flex;
+}
+
+.content {
+  padding: 20px;
+  margin: auto;
+  min-width: 344px;
 }
 </style>
