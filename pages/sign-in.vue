@@ -28,6 +28,7 @@
       Войти</v-btn>
     </v-form>
     <NuxtLink to="sign-up" class="link">Зарегистрироваться</NuxtLink>
+    <Alert />
   </div>
 </template>
 
@@ -40,8 +41,12 @@ definePageMeta({
 
 <script>
 import { mapActions } from "vuex";
+import Alert from '../components/Alert.vue'
 
 export default {
+  components: {
+    Alert,
+  },
   data: () => ({
     login: '',
     password: '',
@@ -54,6 +59,9 @@ export default {
     passwordRules: [
       v => !!v || 'Обязательное поле',
     ],
+    // alertOpen: false,
+    // alertText: '',
+    // alertColor: ''
   }),
   methods: {
     ...mapActions({
@@ -69,7 +77,10 @@ export default {
       if (valid) {
         this.loginUser({ login: this.login, password: this.password});
       }
-    }
+    },
+    // closeAlert() {
+    //   this.alertOpen = false;
+    // }
   },
 }
 </script>

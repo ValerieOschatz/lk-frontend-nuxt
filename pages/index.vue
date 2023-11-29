@@ -4,7 +4,7 @@
 definePageMeta({
   middleware: [
     function() {
-      const token = useCookie('token');
+      const token = useCookie('jwt');
       if (token.value) {
         return navigateTo('/profile')
       } else {
