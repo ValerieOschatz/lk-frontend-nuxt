@@ -26,18 +26,18 @@ export default defineNuxtConfig({
     ],
   },
 
-  axios: {
-    proxy: true,
-    proxyHeaders: true,
-    progress: false
-  },
+  // axios: {
+  //   proxy: true,
+  //   proxyHeaders: true,
+  //   progress: false
+  // },
 
-  proxy: {
-    '/api/': { 
-      target: process.env.API_URL, 
-      pathRewrite: { '^/api/': '' }
-    }
-  },
+  // proxy: {
+  //   '/api/': { 
+  //     target: process.env.API_URL, 
+  //     pathRewrite: { '^/api/': '' }
+  //   }
+  // },
 
   build: {
     transpile: ['vuetify'],
@@ -49,6 +49,7 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
+    'nuxt3-vuex-module',
   ],
 
   vite: {
