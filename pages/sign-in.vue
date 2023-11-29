@@ -59,9 +59,6 @@ export default {
     passwordRules: [
       v => !!v || 'Обязательное поле',
     ],
-    // alertOpen: false,
-    // alertText: '',
-    // alertColor: ''
   }),
   methods: {
     ...mapActions({
@@ -78,9 +75,6 @@ export default {
         this.loginUser({ login: this.login, password: this.password});
       }
     },
-    // closeAlert() {
-    //   this.alertOpen = false;
-    // }
   },
 }
 </script>
