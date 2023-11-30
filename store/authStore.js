@@ -11,7 +11,7 @@ export const actions = {
   login({ dispatch }, { login, password }) {
     loginUserApi({ login, password })
     .then(res => {
-      dispatch("profileStore/setProfile", { root: true });
+      // dispatch("profileStore/setProfile", { root: true });
       navigateTo('/profile');
     })
     .catch(err => {

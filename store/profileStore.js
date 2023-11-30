@@ -37,8 +37,8 @@ export const mutations = {
   },
   setPrivatSettings(state, data) {
     state.privatSettings = {
-      comments: data.comments,
-      profileInfo: data.profileInfo,
+      comments: data.privatSettings.comments,
+      profileInfo: data.privatSettings.profileInfo,
     };
   },
 };

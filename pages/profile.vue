@@ -11,7 +11,7 @@ definePageMeta({
 </script>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import ProfileInfo from '../components/profile/ProfileInfo.vue'
 
 export default {
@@ -20,10 +20,21 @@ export default {
   },
   data: () => ({
   }),
-  methods: {
-    ...mapActions({
+  computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
     }),
   },
+  methods: {
+    ...mapActions({
+      setProfile: "profileStore/setProfile",
+    }),
+  },
+  mounted() {
+    if (this.profile && !this.profile.id) {
+      this.setProfile();
+    }
+  }
 }
 </script>
 

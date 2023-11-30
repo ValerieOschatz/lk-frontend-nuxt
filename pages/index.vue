@@ -6,9 +6,9 @@ definePageMeta({
     function() {
       const token = useCookie('jwt');
       if (token.value) {
-        return navigateTo('/profile')
+        return navigateTo('/profile');
       } else {
-        return navigateTo('/sign-in')
+        return navigateTo('/sign-in');
       }
     }
   ],
