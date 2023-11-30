@@ -1,10 +1,16 @@
 <template>
   <v-app>
-    <slot />
+    <div class="page">
+      <slot />
+    </div>
   </v-app>
 </template>
 
-<script>
-export default {
-};
-</script>
+<style scoped>
+.page {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(234, 223, 255);
+  display: flex;
+}
+</style>

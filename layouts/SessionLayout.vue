@@ -8,12 +8,6 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  name: "SessionLayout",
-};
-</script>
-
 <style scoped>
 .page {
   width: 100vw;
