@@ -11,6 +11,7 @@ export const actions = {
   login({ dispatch }, { login, password }) {
     loginUserApi({ login, password })
     .then(res => {
+      dispatch("profileStore/setProfile", { root: true });
       navigateTo('/profile');
     })
     .catch(err => {
@@ -26,7 +27,6 @@ export const actions = {
   register({ dispatch }, { name, login, password }) {
     registerApi({ name, login, password })
     .then(res => {
-      console.log('res', res)
       dispatch("login", { login, password });
     })
     .catch(err => {
