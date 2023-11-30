@@ -83,7 +83,6 @@ export default {
 .title {
   text-align: center;
 }
-
 .link {
   text-decoration: none;
   color: rgb(102, 92, 110);
@@ -92,5 +91,4 @@ export default {
   display: block;
   margin: 5px;
 }
-
 </style>

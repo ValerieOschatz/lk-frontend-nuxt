@@ -1,5 +1,7 @@
 <template>
-  <v-card class="content">profile</v-card>
+  <v-card class="content">
+    <ProfileInfo />
+  </v-card>
 </template>
 
 <script setup>
@@ -10,10 +12,11 @@ definePageMeta({
 
 <script>
 import { mapActions } from "vuex";
-import Alert from '../components/Alert.vue'
+import ProfileInfo from '../components/profile/ProfileInfo.vue'
 
 export default {
   components: {
+    ProfileInfo,
   },
   data: () => ({
   }),
@@ -30,5 +33,6 @@ export default {
   height: 95%;
   max-width: 880px;
   margin: auto;
+  padding: 40px;
 }
 </style>
