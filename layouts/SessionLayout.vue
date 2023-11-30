@@ -25,6 +25,6 @@ export default {
 .content {
   padding: 20px;
   margin: auto;
-  min-width: 344px;
+  width: 344px;
 }
 </style>

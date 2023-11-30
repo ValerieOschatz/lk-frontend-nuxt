@@ -3,6 +3,7 @@
     <v-alert
       v-model="alertOpen"
       variant="tonal"
+      :icon="icon"
       closable
       close-label="Close Alert"
       :color="color"
@@ -31,6 +32,9 @@ export default {
     },
     color() {
       return this.alert.color;
+    },
+    icon() {
+      return this.alert.icon;
     }
   },
   methods: {

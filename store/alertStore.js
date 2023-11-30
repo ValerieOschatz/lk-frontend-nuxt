@@ -3,6 +3,7 @@ export const state = () => ({
     isOpen: false,
     text: '',
     color: '',
+    icon: '',
   }
 });
 
@@ -13,11 +14,12 @@ export const getters = {
 };
 
 export const mutations = {
-  setAlert(state, { isOpen, text, color }) {
+  setAlert(state, { isOpen, text, color, icon }) {
     state.alert = {
       isOpen,
       text,
       color,
+      icon,
     };
   },
   closeAlert(state) {
@@ -25,6 +27,7 @@ export const mutations = {
       isOpen: false,
       text: '',
       color: '',
+      icon: '',
     };
   },
 };

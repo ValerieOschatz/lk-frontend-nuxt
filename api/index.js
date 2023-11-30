@@ -1,3 +1,4 @@
 export {
-  loginUser,
+  loginUserApi,
+  registerApi,
 } from "./auth";
