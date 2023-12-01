@@ -1,6 +1,10 @@
 <template>
   <v-card class="content">
-    <ProfileInfo />
+    <ProfileInfo
+      :user="profile"
+      :privatSettings="privatSettings"
+      :owner="true"
+    />
   </v-card>
 </template>
 
@@ -23,6 +27,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
+      privatSettings: "profileStore/getPrivatSettings",
     }),
   },
   methods: {

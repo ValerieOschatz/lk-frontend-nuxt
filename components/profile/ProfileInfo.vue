@@ -6,13 +6,14 @@
           size="100"
         >
           <v-img
-            v-if="photo"
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            v-if="user.photo"
+            :src="user.photo"
             alt="avatar"
           ></v-img>
-          <span v-else class="text-h5">NM</span>
+          <span v-else class="text-h5">{{ user.name && user.name[0] }}</span>
         </v-avatar>
         <v-btn
+          v-if="owner"
           size="x-small"
           width="100%"
           color="#B388FF"
@@ -22,12 +23,12 @@
       </div>
       <div class="info-column">
         <v-card-title class="name">
-          <span>Name</span>
-          <span class="subscribers">0 подписчиков</span>
+          <span>{{ user.name }}</span>
+          <span class="subscribers">Подписчиков {{ user.subscribers.length }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <div class="info-container">
-          <p class="px-0 py-0 my-3">text</p>
+          <p class="px-0 py-0 my-3">{{ user.description }}</p>
           <div class="d-flex justify-space-evenly">
             <NuxtLink to="" class="link">Подписки на каналы</NuxtLink>
             <NuxtLink to="" class="link">Подписки на людей</NuxtLink>
@@ -43,8 +44,34 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   data: () => ({
-    photo: null,
   }),
+  props: {
+    user: {
+      type: Object,
+      default() {
+        return {
+          id: '',
+          name: '',
+          photo: '',
+          description: '',
+          subscribers: [],
+        }
+      },
+    },
+    privatSettings: {
+      type: Object,
+      default() {
+        return {
+          comments: null,
+          profileInfo: null,
+        }
+      },
+    },
+    owner: {
+      type: Boolean,
+      default: false,
+    }
+  },
   computed: {
     ...mapGetters({
     }),
