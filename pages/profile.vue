@@ -5,6 +5,7 @@
       :privatSettings="privatSettings"
       :owner="true"
     />
+    <v-divider></v-divider>
     <ProfilePostList 
       :privatSettings="privatSettings"
       :owner="true"

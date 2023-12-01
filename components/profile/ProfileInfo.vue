@@ -89,6 +89,7 @@ export default {
 .info-card {
   display: flex;
   gap: 40px;
+  padding-bottom: 20px;
 }
 .photo-column {
   display: flex;
@@ -113,7 +114,7 @@ export default {
   padding: 0;
 }
 .subscribers {
-  font-size: 14px;
+  font-size: 12px;
 }
 .link {
   text-decoration: none;
