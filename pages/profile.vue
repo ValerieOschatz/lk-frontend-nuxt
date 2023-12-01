@@ -10,6 +10,7 @@
       :privatSettings="privatSettings"
       :owner="true"
     />
+    <ModalAddPost />
   </v-card>
 </template>
 
@@ -28,6 +29,7 @@ export default {
   components: {
     ProfileInfo,
     ProfilePostList,
+    ModalAddPost,
   },
   data: () => ({
   }),
