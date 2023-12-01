@@ -5,6 +5,10 @@
       :privatSettings="privatSettings"
       :owner="true"
     />
+    <ProfilePostList 
+      :privatSettings="privatSettings"
+      :owner="true"
+    />
   </v-card>
 </template>
 
@@ -16,11 +20,13 @@ definePageMeta({
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import ProfileInfo from '../components/profile/ProfileInfo.vue'
+import ProfileInfo from '../components/profile/ProfileInfo.vue';
+import ProfilePostList from '../components/profile/ProfilePostList.vue';
 
 export default {
   components: {
     ProfileInfo,
+    ProfilePostList,
   },
   data: () => ({
   }),
@@ -45,10 +51,9 @@ export default {
 
 <style scoped>
 .content {
-  width: 95%;
-  height: 95%;
+  width: calc(100% - 20px);
   max-width: 880px;
-  margin: auto;
+  margin: 20px auto;
   padding: 40px;
 }
 </style>

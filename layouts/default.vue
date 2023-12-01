@@ -9,7 +9,7 @@
 <style scoped>
 .page {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgb(234, 223, 255);
   display: flex;
 }
