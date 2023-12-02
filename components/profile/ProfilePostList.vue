@@ -3,7 +3,12 @@
     <div class="title-container">
       <h2 v-if="posts.length" class="list-title">Список постов:</h2>
       <h2 v-else class="list-title">Список постов пуст</h2>
-      <v-btn density="compact" icon="mdi-plus"></v-btn>
+      <v-btn
+        v-if="owner"
+        density="compact"
+        icon="mdi-plus"
+        @click="addPost"
+      ></v-btn>
     </div>
     <ul class="list">
       <li v-for="post in posts" :key="post.id">
@@ -77,7 +82,11 @@ computed: {
 },
 methods: {
   ...mapActions({
+    setModalAddPost: "modalStore/setModalAddPost",
   }),
+  addPost() {
+    this.setModalAddPost(true);
+  }
 },
 watch: {
 }

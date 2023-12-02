@@ -24,6 +24,7 @@ definePageMeta({
 import { mapGetters, mapActions } from "vuex";
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
+import ModalAddPost from '../components/modals/ModalAddPost.vue';
 
 export default {
   components: {
