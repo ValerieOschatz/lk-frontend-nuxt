@@ -1,4 +1,4 @@
-import { instance, token } from "./instanceAxios"
+import { instance } from "./instanceAxios"
 
 export const loginUserApi = ({ login, password }) => {
   return instance.post("/auth/login", {

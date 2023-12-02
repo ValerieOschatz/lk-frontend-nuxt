@@ -19,17 +19,16 @@
               :rules="textRules"
             ></v-textarea>
             <v-file-input
-              multiple
               accept="image/png, image/jpeg, image/bmp"
               variant="underlined"
               label="Фотографии"
-              v-model="files"
+              v-model="image"
             ></v-file-input>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="dialog = false">Сохранить</v-btn>
+          <v-btn @click="submitForm">Сохранить</v-btn>
           <v-btn @click="dialog = false">Отмена</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
@@ -50,7 +49,7 @@ export default {
   data: () => ({
     dialog: false,
     text: '',
-    files: [],
+    image: null,
     textRules: [
       v => (v.length <= 80) || 'Допустимо не более 80 символов',
     ],
@@ -63,21 +62,22 @@ export default {
   methods: {
     ...mapActions({
       setModalAddPost: "modalStore/setModalAddPost",
+      createPost: "postsStore/createPost",
     }),
     async validate () {
       return await this.$refs.form.validate();
     },
     async submitForm() {
-      // const validity = await this.validate();
-      // const valid = validity.valid;
-
-      // if (valid) {
-      //   this.register({
-      //     name: this.name,
-      //     login: this.login,
-      //     password: this.password
-      //   });
-      // }
+      const validity = await this.validate();
+      const valid = validity.valid;
+      
+      if (valid) {
+        const formData = new FormData();
+        formData.append('text', this.text)
+        formData.append('image', this.image[0])
+        
+        this.createPost(formData);
+      }
     }
   },
   watch: {
