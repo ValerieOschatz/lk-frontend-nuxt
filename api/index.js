@@ -9,4 +9,5 @@ export {
 
 export {
   createPostApi,
+  getPostListApi,
 } from "./post";

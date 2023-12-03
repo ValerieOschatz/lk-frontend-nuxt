@@ -37,59 +37,65 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-data: () => ({
-  posts: [
-    // {
-    //   id: 1,
-    //   text: 'text text',
-    //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
-    //   likes: [1,2,3],
-    //   createdAt: '11.11.11'
-    // },
-    // {
-    //   id: 2,
-    //   text: '123456',
-    //   photos: [],
-    //   likes: [],
-    //   createdAt: '11.11.11'
-    // },
-    // {
-    //   id: 3,
-    //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
-    //   likes: [1],
-    //   createdAt: '11.11.11'
-    // },
-  ]
-}),
-props: {
-  privatSettings: {
-    type: Object,
-    default() {
-      return {
-        comments: null,
-        profileInfo: null,
-      }
+  data: () => ({
+    posts: [
+      // {
+      //   id: 1,
+      //   text: 'text text',
+      //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
+      //   likes: [1,2,3],
+      //   createdAt: '11.11.11'
+      // },
+      // {
+      //   id: 2,
+      //   text: '123456',
+      //   photos: [],
+      //   likes: [],
+      //   createdAt: '11.11.11'
+      // },
+      // {
+      //   id: 3,
+      //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
+      //   likes: [1],
+      //   createdAt: '11.11.11'
+      // },
+    ]
+  }),
+  props: {
+    privatSettings: {
+      type: Object,
+      default() {
+        return {
+          comments: null,
+          profileInfo: null,
+        }
+      },
     },
+    owner: {
+      type: Boolean,
+      default: false,
+    },
+    userId: {
+      type: String,
+      default: '',
+    }
   },
-  owner: {
-    type: Boolean,
-    default: false,
+  computed: {
+    ...mapGetters({
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setModalAddPost: "modalStore/setModalAddPost",
+      setPostList: "postsStore/setPostList",
+    }),
+    addPost() {
+      this.setModalAddPost(true);
+    }
+  },
+  mounted() {
+    this.setPostList({ owner: this.userId });
   }
-},
-computed: {
-  ...mapGetters({
-  }),
-},
-methods: {
-  ...mapActions({
-    setModalAddPost: "modalStore/setModalAddPost",
-  }),
-  addPost() {
-    this.setModalAddPost(true);
-  }
-},
-watch: {
-}
 }
 </script>
 

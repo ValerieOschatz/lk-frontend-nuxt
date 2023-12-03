@@ -1,14 +1,22 @@
 import {
-  createPostApi
+  createPostApi,
+  getPostListApi,
 } from "../api";
 
 export const state = () => ({
+  postList: [],
 });
 
 export const getters = {
+  getPostList(state) {
+    return state.postList;
+  },
 };
 
 export const mutations = {
+  setPostList(state, data) {
+    state.postList = data;
+  },
 };
 
 export const actions = {
@@ -28,4 +36,14 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
+  setPostList({ commit }, { owner, ownerChanel }) {
+    getPostListApi({ owner, ownerChanel })
+    .then(res => {
+      commit("setPostList", res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 };
+

@@ -7,3 +7,12 @@ export const createPostApi = (data) => {
     },
   });
 };
+
+export const getPostListApi = ({ owner, ownerChanel }) =>
+  instance.get("/post/list", {
+    params: {
+      owner,
+      ownerChanel,
+    },
+  }
+);

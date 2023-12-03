@@ -9,6 +9,7 @@
     <ProfilePostList 
       :privatSettings="privatSettings"
       :owner="true"
+      :userId="profile.id"
     />
     <ModalAddPost />
   </v-card>
