@@ -26,19 +26,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  // axios: {
-  //   proxy: true,
-  //   proxyHeaders: true,
-  //   progress: false
-  // },
-
-  // proxy: {
-  //   '/api/': { 
-  //     target: process.env.API_URL, 
-  //     pathRewrite: { '^/api/': '' }
-  //   }
-  // },
-
   build: {
     transpile: ['vuetify'],
   },

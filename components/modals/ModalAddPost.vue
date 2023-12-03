@@ -73,9 +73,8 @@ export default {
       
       if (valid) {
         const formData = new FormData();
-        formData.append('text', this.text)
-        formData.append('image', this.image[0])
-        
+        if (this.text) formData.append('text', this.text);
+        if (this.image) formData.append('image', this.image[0]);
         this.createPost(formData);
       }
     }

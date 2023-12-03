@@ -1,7 +1,7 @@
 <template>
   <div class="post-list">
     <div class="title-container">
-      <h2 v-if="posts.length" class="list-title">Список постов:</h2>
+      <h2 v-if="postList.length" class="list-title">Список постов:</h2>
       <h2 v-else class="list-title">Список постов пуст</h2>
       <v-btn
         v-if="owner"
@@ -11,19 +11,19 @@
       ></v-btn>
     </div>
     <ul class="list">
-      <li v-for="post in posts" :key="post.id">
+      <li v-for="post in postList" :key="post.id">
         <v-card elevation="4">
           <div class="owner-container">
-            <span>Name</span>
+            <span>{{ post.owner.name }}</span>
             <v-btn density="compact" icon="mdi-dots-vertical"></v-btn>
           </div>
-          <span class="date">{{ post.createdAt }}</span>
-          <img v-if="post.photos.length" src="~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg" class="image" />
+          <span class="date">{{ convertDate(post.createdAt) }}</span>
+          <img v-if="post.photo" src="http://localhost:3001/image-1701610655936.jpg" class="image" />
           <p v-if="post.text" class="text">{{ post.text }}</p>
           <div class="actions">
             <div class="likes">
               <v-btn density="compact" icon="mdi-heart-outline"></v-btn>
-              <span>{{ post.likes.length }}</span>
+              <span class="lokes-count">{{ post.likes.length }}</span>
             </div>
             <v-btn variant="text">Комментарии</v-btn>
           </div>
@@ -38,27 +38,19 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   data: () => ({
-    posts: [
-      // {
-      //   id: 1,
-      //   text: 'text text',
-      //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
-      //   likes: [1,2,3],
-      //   createdAt: '11.11.11'
-      // },
-      // {
-      //   id: 2,
-      //   text: '123456',
-      //   photos: [],
-      //   likes: [],
-      //   createdAt: '11.11.11'
-      // },
-      // {
-      //   id: 3,
-      //   photos: ['~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg'],
-      //   likes: [1],
-      //   createdAt: '11.11.11'
-      // },
+    months: [
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
+      'декабря'
     ]
   }),
   props: {
@@ -82,6 +74,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      postList: "postsStore/getPostList",
     }),
   },
   methods: {
@@ -91,10 +84,19 @@ export default {
     }),
     addPost() {
       this.setModalAddPost(true);
+    },
+    convertDate(value) {
+      const date = new Date(value);
+      return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}г. ${date.getHours()}:${date.getMinutes()}`
+    }
+  },
+  watch: {
+    userId() {
+      this.setPostList({ owner: this.userId });
     }
   },
   mounted() {
-    this.setPostList({ owner: this.userId });
+    if (this.userId) this.setPostList({ owner: this.userId });
   }
 }
 </script>
@@ -147,5 +149,10 @@ export default {
 }
 .likes {
   margin: 10px;
+  display: flex;
+  align-items: center;
+}
+.lokes-count {
+  margin: 0 5px;
 }
 </style>
