@@ -1,6 +1,7 @@
 import {
   getProfileApi,
   updateProfilePhotoApi,
+  updateProfileInfoApi,
 } from "../api";
 
 export const state = () => ({
@@ -60,6 +61,16 @@ export const actions = {
     .then(res => {
       dispatch("setProfile");
       dispatch("modalStore/setModal", { type: 'modalEditProfilePhoto', value: false }, { root: true });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+  editProfileInfo({ dispatch }, data) {
+    updateProfileInfoApi(data)
+    .then(res => {
+      dispatch("setProfile");
+      dispatch("modalStore/setModal", { type: 'modalEditProfileInfo', value: false }, { root: true });
     })
     .catch(err => {
       console.log(err);

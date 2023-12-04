@@ -13,6 +13,7 @@
     />
     <ModalAddPost />
     <ModalEditProfilePhoto />
+    <ModalEditProfileInfo />
   </v-card>
 </template>
 
@@ -28,6 +29,7 @@ import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalAddPost from '../components/modals/ModalAddPost.vue';
 import ModalEditProfilePhoto from "~/components/modals/ModalEditProfilePhoto.vue";
+import ModalEditProfileInfo from "~/components/modals/ModalEditProfileInfo.vue"; 
 
 export default {
   components: {
@@ -35,6 +37,7 @@ export default {
     ProfilePostList,
     ModalAddPost,
     ModalEditProfilePhoto,
+    ModalEditProfileInfo,
   },
   data: () => ({
   }),

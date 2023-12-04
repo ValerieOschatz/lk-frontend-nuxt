@@ -9,3 +9,10 @@ export const updateProfilePhotoApi = (data) => {
     },
   });
 };
+
+export const updateProfileInfoApi = ({ name, description}) => {
+  return instance.patch("/profile/info", {
+    name,
+    description,
+  });
+};

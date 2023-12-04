@@ -35,7 +35,7 @@ export default {
       },
       {
         title: 'Изменить данные профиля',
-        type: '',
+        type: 'modalEditProfileInfo',
       },
       { 
         title: 'Изменить настройки приватности',
