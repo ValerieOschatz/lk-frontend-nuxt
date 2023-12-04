@@ -18,11 +18,12 @@
             <v-btn density="compact" icon="mdi-dots-vertical"></v-btn>
           </div>
           <span class="date">{{ convertDate(post.createdAt) }}</span>
-          <img v-if="post.photo" src="http://localhost:3001/image-1701610655936.jpg" class="image" />
+          <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="image" />
           <p v-if="post.text" class="text">{{ post.text }}</p>
           <div class="actions">
             <div class="likes">
-              <v-btn density="compact" icon="mdi-heart-outline"></v-btn>
+              <v-btn v-if="getOwnLike(post)" density="compact" icon="mdi-heart"></v-btn>
+              <v-btn v-else density="compact" icon="mdi-heart-outline"></v-btn>
               <span class="lokes-count">{{ post.likes.length }}</span>
             </div>
             <v-btn variant="text">Комментарии</v-btn>
@@ -75,6 +76,7 @@ export default {
   computed: {
     ...mapGetters({
       postList: "postsStore/getPostList",
+      profile: "profileStore/getProfile",
     }),
   },
   methods: {
@@ -88,6 +90,9 @@ export default {
     convertDate(value) {
       const date = new Date(value);
       return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}г. ${date.getHours()}:${date.getMinutes()}`
+    },
+    getOwnLike(post) {
+      return post.likes.includes(this.profile.id);
     }
   },
   watch: {

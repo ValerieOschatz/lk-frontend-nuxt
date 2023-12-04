@@ -51,7 +51,7 @@ export default {
     text: '',
     image: null,
     textRules: [
-      v => (v.length <= 80) || 'Допустимо не более 80 символов',
+      v => (v.length <= 500) || 'Допустимо не более 500 символов',
     ],
   }),
   computed: {
@@ -76,7 +76,12 @@ export default {
         if (this.text) formData.append('text', this.text);
         if (this.image) formData.append('image', this.image[0]);
         this.createPost(formData);
+        this.clear();
       }
+    },
+    clear() {
+      this.text = '';
+      this.image = '';
     }
   },
   watch: {
@@ -86,6 +91,7 @@ export default {
     dialog() {
       if (this.dialog === false) {
         this.setModalAddPost(false);
+        this.clear();
       }
     }
   }
