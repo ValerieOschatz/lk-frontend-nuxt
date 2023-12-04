@@ -12,14 +12,7 @@
           ></v-img>
           <span v-else class="text-h5">{{ user.name && user.name[0] }}</span>
         </v-avatar>
-        <v-btn
-          v-if="owner"
-          size="x-small"
-          width="100%"
-          color="#B388FF"
-        >
-          Редактировать
-        </v-btn>
+        <ProfileEditBtn v-if="owner" />
       </div>
       <div class="info-column">
         <v-card-title class="name">
@@ -41,8 +34,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ProfileEditBtn from "./ProfileEditBtn.vue";
 
 export default {
+  components: {
+    ProfileEditBtn,
+  },
   data: () => ({
   }),
   props: {
