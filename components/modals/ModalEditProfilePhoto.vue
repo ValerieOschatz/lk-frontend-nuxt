@@ -6,18 +6,12 @@
     >
       <v-card>
         <v-card-title>
-          Добавить пост:
+          Изменить фото:
         </v-card-title>
         <v-card-text>
           <v-form
             ref="form"
           >
-            <v-textarea
-              variant="underlined"
-              label="Текст"
-              v-model="text"
-              :rules="textRules"
-            ></v-textarea>
             <v-file-input
               accept="image/png, image/jpeg, image/bmp"
               variant="underlined"
@@ -48,21 +42,17 @@ export default {
   },
   data: () => ({
     dialog: false,
-    text: '',
     image: null,
-    textRules: [
-      v => (v.length <= 500) || 'Допустимо не более 500 символов',
-    ],
   }),
   computed: {
     ...mapGetters({
-      modalAddPost: "modalStore/getModalAddPost",
+      modalEditProfilePhoto: "modalStore/getModalEditProfilePhoto",
     }),
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      createPost: "postsStore/createPost",
+      editPhoto: "profileStore/editProfilePhoto",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -73,28 +63,26 @@ export default {
       
       if (valid) {
         const formData = new FormData();
-        if (this.text) formData.append('text', this.text);
         if (this.image) formData.append('image', this.image[0]);
-        if (!this.text && !this.image) {
+        if (!this.image) {
           this.dialog = false;
         } else {
-          this.createPost(formData);
+          this.editPhoto(formData);
         }
         this.clear();
       }
     },
     clear() {
-      this.text = '';
       this.image = null;
     }
   },
   watch: {
-    modalAddPost() {
-      this.dialog = this.modalAddPost;
+    modalEditProfilePhoto() {
+      this.dialog = this.modalEditProfilePhoto;
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalAddPost', value: false });
+        this.setModal({ type: 'modalEditProfilePhoto', value: false });
         this.clear();
       }
     }

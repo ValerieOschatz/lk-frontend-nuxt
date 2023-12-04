@@ -15,6 +15,7 @@
       v-for="(item, index) in items"
       :key="index"
       :value="index"
+      @click="setOption(item.type)"
     >
       <v-list-item-title>{{ item.title }}</v-list-item-title>
     </v-list-item>
@@ -23,15 +24,40 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Изменить фото' },
-        { title: 'Изменить данные профиля' },
-        { title: 'Изменить настройки приватности' },
-        { title: 'Изменить учетные данные' },
-        { title: 'Выйти из профиля' },
-      ],
+import { mapActions } from "vuex";
+
+export default {
+  data: () => ({
+    items: [
+      {
+        title: 'Изменить фото',
+        type: 'modalEditProfilePhoto',
+      },
+      {
+        title: 'Изменить данные профиля',
+        type: '',
+      },
+      { 
+        title: 'Изменить настройки приватности',
+        type: '',
+      },
+      {
+        title: 'Изменить учетные данные',
+        type: '',
+      },
+      {
+        title: 'Выйти из профиля',
+        type: '',
+      },
+    ],
+  }),
+  methods: {
+    ...mapActions({
+      setModal: "modalStore/setModal",
     }),
+    setOption(type) {
+      this.setModal({ type, value: true });
+    }
   }
+}
 </script>

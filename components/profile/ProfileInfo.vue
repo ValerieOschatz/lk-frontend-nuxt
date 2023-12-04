@@ -7,8 +7,9 @@
         >
           <v-img
             v-if="user.photo"
-            :src="user.photo"
+            :src="`http://localhost:3001/${user.photo}`"
             alt="avatar"
+            cover
           ></v-img>
           <span v-else class="text-h5">{{ user.name && user.name[0] }}</span>
         </v-avatar>

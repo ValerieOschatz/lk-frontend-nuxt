@@ -24,7 +24,7 @@ export const actions = {
     createPostApi(data)
     .then(res => {
       dispatch("setPostList", { owner: res.data.owner });
-      dispatch("modalStore/setModalAddPost", false, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalAddPost', value: false }, { root: true });
     })
     .catch(err => {
       console.log(err);

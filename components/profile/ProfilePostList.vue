@@ -81,11 +81,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      setModalAddPost: "modalStore/setModalAddPost",
+      setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
     }),
     addPost() {
-      this.setModalAddPost(true);
+      this.setModal({ type: 'modalAddPost', value: true });
     },
     convertDate(value) {
       const date = new Date(value);
