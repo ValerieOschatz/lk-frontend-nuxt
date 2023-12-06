@@ -14,6 +14,7 @@
     <ModalAddPost />
     <ModalEditProfilePhoto />
     <ModalEditProfileInfo />
+    <ModalEditPrivatSettings />
   </v-card>
 </template>
 
@@ -29,7 +30,8 @@ import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalAddPost from '../components/modals/ModalAddPost.vue';
 import ModalEditProfilePhoto from "~/components/modals/ModalEditProfilePhoto.vue";
-import ModalEditProfileInfo from "~/components/modals/ModalEditProfileInfo.vue"; 
+import ModalEditProfileInfo from "~/components/modals/ModalEditProfileInfo.vue";
+import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 
 export default {
   components: {
@@ -38,9 +40,8 @@ export default {
     ModalAddPost,
     ModalEditProfilePhoto,
     ModalEditProfileInfo,
+    ModalEditPrivatSettings,
   },
-  data: () => ({
-  }),
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",

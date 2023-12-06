@@ -27,7 +27,6 @@ export const actions = {
       dispatch("modalStore/setModal", { type: 'modalAddPost', value: false }, { root: true });
     })
     .catch(err => {
-      console.log(err);
       const data = {
         isOpen: true,
         text: err.response.data.message,

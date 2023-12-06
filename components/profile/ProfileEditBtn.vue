@@ -3,11 +3,11 @@
   <template v-slot:activator="{ props }">
     <v-btn
       v-bind="props"
-      size="x-small"
+      size="small"
       width="100%"
       color="#B388FF"
     >
-      Управление профилем
+      Настройки
     </v-btn>
   </template>
   <v-list>
@@ -39,7 +39,7 @@ export default {
       },
       { 
         title: 'Изменить настройки приватности',
-        type: '',
+        type: 'modalEditPrivatSettings',
       },
       {
         title: 'Изменить учетные данные',

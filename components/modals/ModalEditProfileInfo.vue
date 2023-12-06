@@ -51,9 +51,9 @@ export default {
     name: '',
     description: '',
     nameRules: [
-      // v => !!v || 'Обязательное поле',
-      v => (v.length <= 20) || 'Допустимо не более 20 символов',
-      v => (!v || v.length >= 2) || 'Допустимо не менее 2 символов',
+      v => !!v || 'Обязательное поле',
+      v => (v && v.length <= 20) || 'Допустимо не более 20 символов',
+      v => (v && v.length >= 2) || 'Допустимо не менее 2 символов',
     ],
     descriptionRules: [
       v => (v.length <= 50) || 'Допустимо не более 50 символов',
@@ -62,6 +62,7 @@ export default {
   computed: {
     ...mapGetters({
       modalEditProfileInfo: "modalStore/getModalEditProfileInfo",
+      profile: "profileStore/getProfile",
     }),
   },
   methods: {
@@ -77,31 +78,32 @@ export default {
       const valid = validity.valid;
       
       if (valid) {
-        const data = {};
-        if (this.name) data.name = this.name;
-        if (this.description) data.description = this.description;
+        const data = {
+          name: this.name,
+          description: this.description
+        };
 
-        if (!this.name && !this.description) {
-          this.dialog = false;
-        } else {
-          this.editProfileInfo(data);
-        }
-        this.clear();
+        this.editProfileInfo(data);
       }
     },
-    clear() {
-      this.name = '';
-      this.description = '';
+    setValues() {
+      this.name = this.profile.name;
+      this.description = this.profile.description;
     }
   },
   watch: {
+    profile() {
+      this.name = this.profile.name;
+      this.description = this.profile.description;
+    },
     modalEditProfileInfo() {
       this.dialog = this.modalEditProfileInfo;
     },
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalEditProfileInfo', value: false });
-        this.clear();
+      } else {
+        this.setValues();
       }
     }
   }

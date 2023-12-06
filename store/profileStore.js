@@ -2,6 +2,7 @@ import {
   getProfileApi,
   updateProfilePhotoApi,
   updateProfileInfoApi,
+  updateProfilePrivatSettingsApi,
 } from "../api";
 
 export const state = () => ({
@@ -14,7 +15,7 @@ export const state = () => ({
   },
   privatSettings: {
     comments: null,
-    profileInfo: null,
+    posts: null,
   }
 });
 
@@ -40,7 +41,7 @@ export const mutations = {
   setPrivatSettings(state, data) {
     state.privatSettings = {
       comments: data.privatSettings.comments,
-      profileInfo: data.privatSettings.profileInfo,
+      posts: data.privatSettings.posts,
     };
   },
 };
@@ -63,7 +64,13 @@ export const actions = {
       dispatch("modalStore/setModal", { type: 'modalEditProfilePhoto', value: false }, { root: true });
     })
     .catch(err => {
-      console.log(err);
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
     })
   },
   editProfileInfo({ dispatch }, data) {
@@ -73,7 +80,27 @@ export const actions = {
       dispatch("modalStore/setModal", { type: 'modalEditProfileInfo', value: false }, { root: true });
     })
     .catch(err => {
-      console.log(err);
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  editPrivatSettings({ dispatch }, data) {
+    updateProfilePrivatSettingsApi(data)
+    .then(res => {
+      dispatch("setProfile");
+      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
     })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
   },
 };

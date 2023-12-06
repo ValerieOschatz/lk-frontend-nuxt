@@ -2,6 +2,7 @@ export const state = () => ({
   modalAddPost: false,
   modalEditProfilePhoto: false,
   modalEditProfileInfo: false,
+  modalEditPrivatSettings: false,
 });
 
 export const getters = {
@@ -13,6 +14,9 @@ export const getters = {
   },
   getModalEditProfileInfo(state) {
     return state.modalEditProfileInfo;
+  },
+  getModalEditPrivatSettings(state) {
+    return state.modalEditPrivatSettings;
   },
 };
 

@@ -7,6 +7,7 @@ export {
   getProfileApi,
   updateProfilePhotoApi,
   updateProfileInfoApi,
+  updateProfilePrivatSettingsApi,
 } from "./profile";
 
 export {
