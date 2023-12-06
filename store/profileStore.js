@@ -54,7 +54,14 @@ export const actions = {
       commit("setPrivatSettings", res.data);
     })
     .catch(err => {
-      console.log(err);
+      navigateTo('/sign-in');
+      const data = {
+        isOpen: true,
+        text: "На сервере произошла ошибка",
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
     })
   },
   editProfilePhoto({ dispatch }, data) {

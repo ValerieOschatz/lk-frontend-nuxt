@@ -42,12 +42,8 @@ export default {
         type: 'modalEditPrivatSettings',
       },
       {
-        title: 'Изменить учетные данные',
-        type: '',
-      },
-      {
         title: 'Выйти из профиля',
-        type: '',
+        type: 'modalLogout',
       },
     ],
   }),

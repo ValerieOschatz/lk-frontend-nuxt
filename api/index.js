@@ -1,6 +1,7 @@
 export {
   loginUserApi,
   registerApi,
+  logoutUserApi,
 } from "./auth";
 
 export {

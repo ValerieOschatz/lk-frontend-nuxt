@@ -22,6 +22,7 @@
       <v-text-field
         variant="underlined"
         label="Пароль"
+        type="password"
         v-model="password"
         :rules="passwordRules"
         required

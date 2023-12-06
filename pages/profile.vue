@@ -15,6 +15,7 @@
     <ModalEditProfilePhoto />
     <ModalEditProfileInfo />
     <ModalEditPrivatSettings />
+    <ModalLogout />
   </v-card>
 </template>
 
@@ -32,6 +33,7 @@ import ModalAddPost from '../components/modals/ModalAddPost.vue';
 import ModalEditProfilePhoto from "~/components/modals/ModalEditProfilePhoto.vue";
 import ModalEditProfileInfo from "~/components/modals/ModalEditProfileInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
+import ModalLogout from "~/components/modals/ModalLogout.vue";
 
 export default {
   components: {
@@ -41,6 +43,7 @@ export default {
     ModalEditProfilePhoto,
     ModalEditProfileInfo,
     ModalEditPrivatSettings,
+    ModalLogout,
   },
   computed: {
     ...mapGetters({

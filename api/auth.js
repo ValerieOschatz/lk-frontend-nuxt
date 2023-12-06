@@ -14,3 +14,5 @@ export const registerApi = ({ name, login, password }) => {
     password,
   });
 };
+
+export const logoutUserApi = () => instance.get("/auth/logout", {});

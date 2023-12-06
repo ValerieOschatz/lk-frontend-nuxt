@@ -1,6 +1,7 @@
 import {
   loginUserApi,
   registerApi,
+  logoutUserApi,
 } from "../api";
 
 export const state = () => ({});
@@ -11,7 +12,6 @@ export const actions = {
   login({ dispatch }, { login, password }) {
     loginUserApi({ login, password })
     .then(res => {
-      // dispatch("profileStore/setProfile", { root: true });
       navigateTo('/profile');
     })
     .catch(err => {
@@ -28,6 +28,22 @@ export const actions = {
     registerApi({ name, login, password })
     .then(res => {
       dispatch("login", { login, password });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  logout({ dispatch }) {
+    logoutUserApi()
+    .then(res => {
+      dispatch("modalStore/setModal", { type: 'modalLogout', value: false }, { root: true });
+      navigateTo('/sign-in');
     })
     .catch(err => {
       const data = {
