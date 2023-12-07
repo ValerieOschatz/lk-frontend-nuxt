@@ -56,11 +56,11 @@ export default {
       setProfile: "profileStore/setProfile",
     }),
   },
-  mounted() {
-    if (this.profile && !this.profile.id) {
-      this.setProfile();
-    }
-  }
+  // mounted() {
+  //   if (this.profile && !this.profile.id) {
+  //     this.setProfile();
+  //   }
+  // }
 }
 </script>
 
