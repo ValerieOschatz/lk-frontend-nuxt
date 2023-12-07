@@ -1,14 +1,25 @@
 <template>
 <v-navigation-drawer
-  expand-on-hover
-  rail
+  v-model="drawer"
+  :rail="rail"
+  permanent
+  @click="rail = false"
 >
   <v-list>
     <v-list-item
-      prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-      title="Sandra Adams"
-      subtitle="sandra_a88@gmailcom"
-    ></v-list-item>
+      :prepend-avatar="profile.photo && `http://localhost:3001/${profile.photo}`"
+      :title="profile.name"
+      nav
+      height="60"
+    >
+      <template v-slot:append v-if="!rail">
+        <v-btn
+          variant="text"
+          icon="mdi-chevron-left"
+          @click.stop="rail = !rail"
+        ></v-btn>
+      </template>
+    </v-list-item>
   </v-list>
 
   <v-divider></v-divider>
@@ -21,4 +32,22 @@
 </v-navigation-drawer>
 </template>
 
-<script></script>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data () {
+    return {
+      drawer: true,
+      rail: true,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
+    }),
+    isLarge() {
+        return this.$vuetify.breakpoint.name !== 'sm'
+    },
+  }
+}
+</script>
