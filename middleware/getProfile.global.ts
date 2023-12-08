@@ -5,6 +5,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (to.path === '/sign-in' || to.path === '/sign-up') {
       return abortNavigation();
     }
+    if (to.path === '/') {
+      return navigateTo('/profile');
+    }
     return;
   } else {
     return navigateTo('/sign-in');
