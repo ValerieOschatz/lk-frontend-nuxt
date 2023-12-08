@@ -17,6 +17,7 @@
         <v-btn
           variant="text"
           icon="mdi-chevron-left"
+          color="#E57373"
           @click.stop="rail = !rail"
         ></v-btn>
       </template>
@@ -33,6 +34,7 @@
       :to="route.link"
       :prepend-icon="route.icon"
       :title="route.name"
+      color="#E57373"
     ></v-list-item>
   </v-list>
 </v-navigation-drawer>

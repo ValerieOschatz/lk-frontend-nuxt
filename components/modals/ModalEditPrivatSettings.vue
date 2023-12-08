@@ -26,8 +26,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="submitForm">Сохранить</v-btn>
-          <v-btn @click="dialog = false">Отмена</v-btn>
+          <v-btn @click="submitForm" color="#7B1FA2">Сохранить</v-btn>
+          <v-btn @click="dialog = false" color="#C2185B">Отмена</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>

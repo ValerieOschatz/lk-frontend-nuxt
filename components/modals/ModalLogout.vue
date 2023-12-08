@@ -10,8 +10,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="logout">Да</v-btn>
-          <v-btn @click="dialog = false">Нет</v-btn>
+          <v-btn @click="logout" color="#7B1FA2">Да</v-btn>
+          <v-btn @click="dialog = false" color="#C2185B">Нет</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>

@@ -5,7 +5,7 @@
       v-bind="props"
       size="small"
       width="100%"
-      color="#B388FF"
+      color="#E57373"
     >
       Настройки
     </v-btn>

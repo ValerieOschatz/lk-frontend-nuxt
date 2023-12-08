@@ -116,7 +116,7 @@ export default {
 }
 .link {
   text-decoration: none;
-  color: rgb(102, 92, 110);
+  color: rgb(179, 91, 67);
   font-size: 12px;
 }
 </style>

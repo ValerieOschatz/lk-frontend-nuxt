@@ -7,6 +7,8 @@
         v-if="owner"
         density="compact"
         icon="mdi-plus"
+        color="#EA80FC"
+        variant="tonal"
         @click="addPost"
       ></v-btn>
     </div>
@@ -15,18 +17,35 @@
         <v-card elevation="4">
           <div class="owner-container">
             <span>{{ post.owner.name }}</span>
-            <v-btn density="compact" icon="mdi-dots-vertical"></v-btn>
+            <v-btn
+              density="compact"
+              icon="mdi-dots-vertical"
+              color="#EA80FC"
+              variant="tonal"
+            ></v-btn>
           </div>
           <span class="date">{{ convertDate(post.createdAt) }}</span>
           <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="image" />
           <p v-if="post.text" class="text">{{ post.text }}</p>
           <div class="actions">
             <div class="likes">
-              <v-btn v-if="getOwnLike(post)" density="compact" icon="mdi-heart"></v-btn>
-              <v-btn v-else density="compact" icon="mdi-heart-outline"></v-btn>
+              <v-btn
+                v-if="getOwnLike(post)"
+                density="compact"
+                icon="mdi-heart"
+                color="#E57373"
+                variant="tonal"
+              ></v-btn>
+              <v-btn
+                v-else
+                density="compact"
+                icon="mdi-heart-outline"
+                color="#E57373"
+                variant="tonal"
+              ></v-btn>
               <span class="lokes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text">Комментарии</v-btn>
+            <v-btn variant="text" color="#7B1FA2">Комментарии</v-btn>
           </div>
         </v-card>
       </li>
@@ -36,6 +55,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 
 export default {
   data: () => ({
@@ -159,5 +179,6 @@ export default {
 }
 .lokes-count {
   margin: 0 5px;
+  color: rgb(179, 91, 67);
 }
 </style>
