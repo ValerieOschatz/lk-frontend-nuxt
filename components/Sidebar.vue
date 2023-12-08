@@ -8,6 +8,7 @@
   <v-list>
     <v-list-item
       :prepend-avatar="profile.photo && `http://localhost:3001/${profile.photo}`"
+      :prepend-icon="!profile.photo && 'mdi-account-circle-outline'"
       :title="profile.name"
       nav
       height="60"
@@ -25,15 +26,22 @@
   <v-divider></v-divider>
 
   <v-list density="compact" nav>
-    <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-    <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-    <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+    <v-list-item
+      v-for="(route, index) in routes"
+      :key="index"
+      link
+      :to="route.link"
+      :prepend-icon="route.icon"
+      :title="route.name"
+    ></v-list-item>
   </v-list>
 </v-navigation-drawer>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { routes } from "~/utils/navigation";
+
 export default {
   data () {
     return {
@@ -44,10 +52,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
-    }),
-    isLarge() {
-        return this.$vuetify.breakpoint.name !== 'sm'
-    },
+    })
   }
 }
 </script>
