@@ -45,11 +45,12 @@
               ></v-btn>
               <span class="lokes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text" color="#7B1FA2">Комментарии</v-btn>
+            <v-btn variant="text" color="#7B1FA2" @click="showCommentList">Комментарии</v-btn>
           </div>
         </v-card>
       </li>
     </ul>
+    <ModalCommentList />
   </div>
 </template>
 
@@ -58,6 +59,9 @@ import { mapGetters, mapActions } from "vuex";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 
 export default {
+  components: {
+    ModalCommentList,
+  },
   data: () => ({
     months: [
       'января',
@@ -113,6 +117,9 @@ export default {
     },
     getOwnLike(post) {
       return post.likes.includes(this.profile.id);
+    },
+    showCommentList() {
+      this.setModal({ type: 'modalCommentList', value: true });
     }
   },
   watch: {

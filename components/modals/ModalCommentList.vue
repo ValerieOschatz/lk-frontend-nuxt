@@ -3,46 +3,42 @@
     <v-dialog
       v-model="dialog"
       width="500"
+      height="500"
       scrollable
     >
       <v-card>
-        <!-- <v-card-title>
-          Комментарии:
-        </v-card-title> -->
         <v-toolbar color="rgb(220, 205, 235)">
-          <v-btn variant="text" icon="mdi-menu"></v-btn>
           <v-toolbar-title>Комментарии</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn variant="text" icon="mdi-magnify"></v-btn>
+          <v-btn variant="text" icon="mdi-close" @click="dialog = false"></v-btn>
         </v-toolbar>
         <v-card-text>
           <v-form
-            v-if="adding"
             ref="form"
           >
             <v-textarea
               variant="underlined"
-              label="Информация"
-              v-model="description"
-              :rules="descriptionRules"
+              label="Новый комментарий"
+              v-model="text"
+              :rules="textRules"
             ></v-textarea>
+            <v-btn variant="text" color="#7B1FA2" size="x-small" block @click="submitForm">Отправить</v-btn>
           </v-form>
-          <v-list
-            :items="items"
-            item-props
-            lines="three"
-          >
-            <template v-slot:subtitle="{ subtitle }">
-              <div v-html="subtitle"></div>
-            </template>
+          <v-list lines="three">
+            <div v-for="item in items" :key="item.id">
+              <v-divider></v-divider>
+              <v-list-item
+                :prepend-avatar="item.qwe && `http://localhost:3001/${item.photo}`"
+                :prepend-icon="!item.qwe && 'mdi-account-circle-outline'"
+                :title="item.name"
+                :subtitle="item.text"
+                nav
+                height="60"
+              >
+              </v-list-item>
+            </div>
           </v-list>
         </v-card-text>
-        <!-- <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="submitForm">Сохранить</v-btn>
-          <v-btn @click="dialog = false">Отмена</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions> -->
       </v-card>
     </v-dialog>
     <Alert />
@@ -59,60 +55,49 @@ export default {
   },
   data: () => ({
     dialog: false,
-    adding: false,
-    name: '',
-    description: '',
-    nameRules: [
-      v => !!v || 'Обязательное поле',
-      v => (v && v.length <= 20) || 'Допустимо не более 20 символов',
-      v => (v && v.length >= 2) || 'Допустимо не менее 2 символов',
-    ],
-    descriptionRules: [
-      v => (v.length <= 50) || 'Допустимо не более 50 символов',
+    text: '',
+    textRules: [
+      v => (v.length <= 80) || 'Допустимо не более 80 символов',
     ],
     items: [
-      { type: 'subheader', title: 'Today' },
       {
         prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-        title: 'Brunch this weekend?',
-        subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        name: 'Brunch this weekend?',
+        text: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
       },
-      { type: 'divider', inset: true },
       {
         prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-        title: 'Summer BBQ',
-        subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+        name: 'Summer BBQ',
+        text: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
       },
-      { type: 'divider', inset: true },
       {
         prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-        title: 'Oui oui',
-        subtitle: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+        name: 'Oui oui',
+        text: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
       },
-      { type: 'divider', inset: true },
+ 
       {
         prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-        title: 'Birthday gift',
-        subtitle: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        name: 'Birthday gift',
+        text: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
       },
-      { type: 'divider', inset: true },
       {
         prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-        title: 'Recipe to try',
-        subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        name: 'Recipe to try',
+        text: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
       },
     ],
   }),
   computed: {
     ...mapGetters({
-      modalEditProfileInfo: "modalStore/getModalEditProfileInfo",
-      profile: "profileStore/getProfile",
+      modalCommentList: "modalStore/getModalCommentList",
+      // profile: "profileStore/getProfile",
     }),
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      editProfileInfo: "profileStore/editProfileInfo",
+      // editProfileInfo: "profileStore/editProfileInfo",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -121,31 +106,31 @@ export default {
       const validity = await this.validate();
       const valid = validity.valid;
       
-      if (valid) {
-        const data = {
-          name: this.name,
-          description: this.description
-        };
+      // if (valid) {
+      //   const data = {
+      //     name: this.name,
+      //     description: this.description
+      //   };
 
-        this.editProfileInfo(data);
-      }
+      //   this.editProfileInfo(data);
+      // }
     },
     setValues() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
+      // this.name = this.profile.name;
+      // this.description = this.profile.description;
     }
   },
   watch: {
-    profile() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
-    },
-    modalEditProfileInfo() {
-      this.dialog = this.modalEditProfileInfo;
+    // profile() {
+    //   this.name = this.profile.name;
+    //   this.description = this.profile.description;
+    // },
+    modalCommentList() {
+      this.dialog = this.modalCommentList;
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalEditProfileInfo', value: false });
+        this.setModal({ type: 'modalCommentList', value: false });
       } else {
         this.setValues();
       }

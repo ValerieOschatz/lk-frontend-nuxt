@@ -4,6 +4,7 @@ export const state = () => ({
   modalEditProfileInfo: false,
   modalEditPrivatSettings: false,
   modalLogout: false,
+  modalCommentList: false,
 });
 
 export const getters = {
@@ -21,6 +22,9 @@ export const getters = {
   },
   getModalLogout(state) {
     return state.modalLogout;
+  },
+  getModalCommentList(state) {
+    return state.modalCommentList;
   },
 };
 
