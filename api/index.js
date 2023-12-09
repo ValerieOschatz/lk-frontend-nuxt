@@ -15,3 +15,7 @@ export {
   createPostApi,
   getPostListApi,
 } from "./post";
+
+export {
+  createCommentApi,
+} from "./comment";

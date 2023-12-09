@@ -5,17 +5,24 @@ import {
 
 export const state = () => ({
   postList: [],
+  selectedPostId: null,
 });
 
 export const getters = {
   getPostList(state) {
     return state.postList;
   },
+  getSelectedPostId(state) {
+    return state.selectedPostId;
+  },
 };
 
 export const mutations = {
   setPostList(state, data) {
     state.postList = data;
+  },
+  setSelectedPostId(state, data) {
+    state.selectedPostId = data;
   },
 };
 

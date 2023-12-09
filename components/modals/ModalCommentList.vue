@@ -91,13 +91,13 @@ export default {
   computed: {
     ...mapGetters({
       modalCommentList: "modalStore/getModalCommentList",
-      // profile: "profileStore/getProfile",
+      selectedPostId: "postsStore/getSelectedPostId",
     }),
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      // editProfileInfo: "profileStore/editProfileInfo",
+      createComment: "commentsStore/createComment",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -106,25 +106,18 @@ export default {
       const validity = await this.validate();
       const valid = validity.valid;
       
-      // if (valid) {
-      //   const data = {
-      //     name: this.name,
-      //     description: this.description
-      //   };
-
-      //   this.editProfileInfo(data);
-      // }
+      if (valid) {
+        const data = {
+          post: this.selectedPostId,
+          text: this.text,
+        };
+        
+        this.createComment(data);
+        this.text = '';
+      }
     },
-    setValues() {
-      // this.name = this.profile.name;
-      // this.description = this.profile.description;
-    }
   },
   watch: {
-    // profile() {
-    //   this.name = this.profile.name;
-    //   this.description = this.profile.description;
-    // },
     modalCommentList() {
       this.dialog = this.modalCommentList;
     },

@@ -13,7 +13,7 @@
       ></v-btn>
     </div>
     <ul class="list">
-      <li v-for="post in postList" :key="post.id">
+      <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
           <div class="owner-container">
             <span>{{ post.owner.name }}</span>
@@ -45,7 +45,7 @@
               ></v-btn>
               <span class="lokes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text" color="#7B1FA2" @click="showCommentList">Комментарии</v-btn>
+            <v-btn variant="text" color="#7B1FA2" @click="showCommentList(post._id)">Комментарии</v-btn>
           </div>
         </v-card>
       </li>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 
 export default {
@@ -104,6 +104,9 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations({
+      setSelectedPostId: "postsStore/setSelectedPostId",
+    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
@@ -118,7 +121,8 @@ export default {
     getOwnLike(post) {
       return post.likes.includes(this.profile.id);
     },
-    showCommentList() {
+    showCommentList(id) {
+      this.setSelectedPostId(id);
       this.setModal({ type: 'modalCommentList', value: true });
     }
   },
