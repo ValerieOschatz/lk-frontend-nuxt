@@ -131,9 +131,6 @@ export default {
       this.setPostList({ owner: this.userId });
     }
   },
-  mounted() {
-    if (this.userId) this.setPostList({ owner: this.userId });
-  }
 }
 </script>
 

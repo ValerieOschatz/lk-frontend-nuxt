@@ -24,13 +24,13 @@
             ></v-textarea>
             <v-btn variant="text" color="#7B1FA2" size="x-small" block @click="submitForm">Отправить</v-btn>
           </v-form>
-          <v-list lines="three">
-            <div v-for="item in items" :key="item.id">
+          <v-list v-if="commentList.length" lines="three">
+            <div v-for="item in commentList" :key="item.id">
               <v-divider></v-divider>
               <v-list-item
-                :prepend-avatar="item.qwe && `http://localhost:3001/${item.photo}`"
-                :prepend-icon="!item.qwe && 'mdi-account-circle-outline'"
-                :title="item.name"
+                :prepend-avatar="item.owner.photo && `http://localhost:3001/${item.owner.photo}`"
+                :prepend-icon="!item.owner.photo && 'mdi-account-circle-outline'"
+                :title="item.owner.name"
                 :subtitle="item.text"
                 nav
                 height="60"
@@ -57,47 +57,21 @@ export default {
     dialog: false,
     text: '',
     textRules: [
-      v => (v.length <= 80) || 'Допустимо не более 80 символов',
-    ],
-    items: [
-      {
-        prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-        name: 'Brunch this weekend?',
-        text: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-      },
-      {
-        prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-        name: 'Summer BBQ',
-        text: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-      },
-      {
-        prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-        name: 'Oui oui',
-        text: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-      },
- 
-      {
-        prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-        name: 'Birthday gift',
-        text: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-      },
-      {
-        prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-        name: 'Recipe to try',
-        text: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-      },
+      v => (v.length <= 150) || 'Допустимо не более 150 символов',
     ],
   }),
   computed: {
     ...mapGetters({
       modalCommentList: "modalStore/getModalCommentList",
       selectedPostId: "postsStore/getSelectedPostId",
+      commentList: "commentsStore/getCommentList",
     }),
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
       createComment: "commentsStore/createComment",
+      setCommentList: "commentsStore/setCommentList",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -124,9 +98,11 @@ export default {
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalCommentList', value: false });
-      } else {
-        this.setValues();
+        this.text = '';
       }
+    },
+    selectedPostId() {
+      this.setCommentList({ post: this.selectedPostId });
     }
   }
 }

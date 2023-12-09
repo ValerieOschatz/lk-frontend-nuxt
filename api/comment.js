@@ -1,17 +1,16 @@
 import { instance } from "./instanceAxios";
 
 export const createCommentApi = ({ post, text }) => {
-  return instance.post("/post/create", {
+  return instance.post("/comment/create", {
     post,
     text,
   });
 };
 
-// export const getPostListApi = ({ owner, ownerChanel }) =>
-//   instance.get("/post/list", {
-//     params: {
-//       owner,
-//       ownerChanel,
-//     },
-//   }
-// );
+export const getCommentListApi = ({ post }) =>
+  instance.get("/comment/list", {
+    params: {
+      post,
+    },
+  }
+);

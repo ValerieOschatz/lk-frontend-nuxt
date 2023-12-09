@@ -55,12 +55,7 @@ export default {
     ...mapActions({
       setProfile: "profileStore/setProfile",
     }),
-  },
-  // mounted() {
-  //   if (this.profile && !this.profile.id) {
-  //     this.setProfile();
-  //   }
-  // }
+  }
 }
 </script>
 

@@ -1,30 +1,29 @@
 import {
   createCommentApi,
-  // getPostListApi,
+  getCommentListApi,
 } from "../api";
 
 export const state = () => ({
-  // postList: [],
+  commentList: [],
 });
 
 export const getters = {
-  // getPostList(state) {
-  //   return state.postList;
-  // },
+  getCommentList(state) {
+    return state.commentList;
+  },
 };
 
 export const mutations = {
-  // setPostList(state, data) {
-  //   state.postList = data;
-  // },
+  setCommentList(state, data) {
+    state.commentList = data;
+  },
 };
 
 export const actions = {
   createComment({ dispatch }, { post, text }) {
     createCommentApi({ post, text })
     .then(res => {
-      console.log(res)
-      // dispatch("setPostList", { owner: res.data.owner });
+      dispatch("setCommentList", { post });
     })
     .catch(err => {
       const data = {
@@ -36,14 +35,13 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  // setPostList({ commit }, { owner, ownerChanel }) {
-  //   getPostListApi({ owner, ownerChanel })
-  //   .then(res => {
-  //     commit("setPostList", res.data);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
-  // }
+  setCommentList({ commit }, { post }) {
+    getCommentListApi({ post })
+    .then(res => {
+      commit("setCommentList", res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 };
-
