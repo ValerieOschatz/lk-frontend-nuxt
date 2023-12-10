@@ -58,6 +58,9 @@ export default {
     ...mapGetters({
       modalAddPost: "modalStore/getModalAddPost",
     }),
+    isOpen() {
+      return this.modalAddPost.isOpen;
+    },
   },
   methods: {
     ...mapActions({
@@ -89,8 +92,8 @@ export default {
     }
   },
   watch: {
-    modalAddPost() {
-      this.dialog = this.modalAddPost;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {

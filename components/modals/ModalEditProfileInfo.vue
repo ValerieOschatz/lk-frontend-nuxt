@@ -64,6 +64,9 @@ export default {
       modalEditProfileInfo: "modalStore/getModalEditProfileInfo",
       profile: "profileStore/getProfile",
     }),
+    isOpen() {
+      return this.modalEditProfileInfo.isOpen;
+    },
   },
   methods: {
     ...mapActions({
@@ -96,8 +99,8 @@ export default {
       this.name = this.profile.name;
       this.description = this.profile.description;
     },
-    modalEditProfileInfo() {
-      this.dialog = this.modalEditProfileInfo;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {

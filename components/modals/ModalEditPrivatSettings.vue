@@ -54,6 +54,9 @@ export default {
       modalEditPrivatSettings: "modalStore/getModalEditPrivatSettings",
       privatSettings: "profileStore/getPrivatSettings",
     }),
+    isOpen() {
+      return this.modalEditPrivatSettings.isOpen;
+    },
   },
   methods: {
     ...mapActions({
@@ -78,8 +81,8 @@ export default {
       this.comments = this.privatSettings.comments ? true : false;
       this.posts = this.privatSettings.posts ? true : false;
     },
-    modalEditPrivatSettings() {
-      this.dialog = this.modalEditPrivatSettings;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {

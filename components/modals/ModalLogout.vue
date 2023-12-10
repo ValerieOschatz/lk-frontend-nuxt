@@ -35,6 +35,9 @@ export default {
     ...mapGetters({
       modalLogout: "modalStore/getModalLogout",
     }),
+    isOpen() {
+      return this.modalLogout.isOpen;
+    },
   },
   methods: {
     ...mapActions({
@@ -43,8 +46,8 @@ export default {
     }),
   },
   watch: {
-    modalLogout() {
-      this.dialog = this.modalLogout;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {

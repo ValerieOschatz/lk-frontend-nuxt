@@ -48,6 +48,9 @@ export default {
     ...mapGetters({
       modalEditProfilePhoto: "modalStore/getModalEditProfilePhoto",
     }),
+    isOpen() {
+      return this.modalEditProfilePhoto.isOpen;
+    },
   },
   methods: {
     ...mapActions({
@@ -77,8 +80,8 @@ export default {
     }
   },
   watch: {
-    modalEditProfilePhoto() {
-      this.dialog = this.modalEditProfilePhoto;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {
