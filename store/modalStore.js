@@ -27,6 +27,10 @@ export const state = () => ({
     isOpen: false,
     option: '',
   },
+  modalDeleteComment: {
+    isOpen: false,
+    option: '',
+  },
 });
 
 export const getters = {
@@ -50,6 +54,9 @@ export const getters = {
   },
   getModalAddComment(state) {
     return state.modalAddComment;
+  },
+  getModalDeleteComment(state) {
+    return state.modalDeleteComment;
   },
 };
 

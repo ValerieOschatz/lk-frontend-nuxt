@@ -2,6 +2,7 @@ import {
   createCommentApi,
   getCommentListApi,
   updateCommentApi,
+  deleteCommentApi,
 } from "../api";
 
 export const state = () => ({
@@ -58,6 +59,22 @@ export const actions = {
     .then(res => {
       dispatch("setCommentList", { post: res.data.post });
       dispatch("modalStore/setModal", { type: 'modalAddComment', value: false, option: '' }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  deleteComment({ dispatch }, { post, commentId }) {
+    deleteCommentApi({ commentId })
+    .then(res => {
+      dispatch("setCommentList", { post });
+      dispatch("modalStore/setModal", { type: 'modalDeleteComment', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

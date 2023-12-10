@@ -21,7 +21,6 @@
             @click="addComment"
             >Написатть комментарий
           </v-btn>
-          <ModalAddComment />
           <ul class="list mt-2" v-if="commentList.length">
             <li v-for="comment in commentList" :key="comment._id">
               <v-card elevation="4">
@@ -41,11 +40,11 @@
                       variant="tonal"
                     ></v-btn>
                     <v-btn
-                      v-else
-                      density="compact"
-                      icon="mdi-heart-outline"
-                      color="#E57373"
-                      variant="tonal"
+                    v-else
+                    density="compact"
+                    icon="mdi-heart-outline"
+                    color="#E57373"
+                    variant="tonal"
                     ></v-btn>
                     <span class="likes-count">{{ comment.likes.length }}</span>
                   </div>
@@ -56,6 +55,8 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <ModalAddComment />
+    <ModalDeleteComment />
   </div>
 </template>
 
@@ -63,11 +64,13 @@
 import { mapGetters, mapActions } from "vuex";
 import { convertDate } from "~/utils/convertDate";
 import ModalAddComment from "./ModalAddComment.vue";
+import ModalDeleteComment from "./ModalDeleteComment.vue";
 import CommentBtn from "~/components/CommentBtn.vue";
 
 export default {
   components: {
     ModalAddComment,
+    ModalDeleteComment,
     CommentBtn,
   },
   data: () => ({
