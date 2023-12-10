@@ -1,10 +1,32 @@
 export const state = () => ({
-  modalAddPost: false,
-  modalEditProfilePhoto: false,
-  modalEditProfileInfo: false,
-  modalEditPrivatSettings: false,
-  modalLogout: false,
-  modalCommentList: false,
+  modalAddPost: {
+    isOpen: false,
+    option: '',
+  },
+  modalEditProfilePhoto: {
+    isOpen: false,
+    option: '',
+  },
+  modalEditProfileInfo: {
+    isOpen: false,
+    option: '',
+  },
+  modalEditPrivatSettings: {
+    isOpen: false,
+    option: '',
+  },
+  modalLogout: {
+    isOpen: false,
+    option: '',
+  },
+  modalCommentList: {
+    isOpen: false,
+    option: '',
+  },
+  modalAddComment: {
+    isOpen: false,
+    option: '',
+  },
 });
 
 export const getters = {
@@ -26,16 +48,20 @@ export const getters = {
   getModalCommentList(state) {
     return state.modalCommentList;
   },
+  getModalAddComment(state) {
+    return state.modalAddComment;
+  },
 };
 
 export const mutations = {
-  setModal(state, { type, value }) {
-    state[type] = value;
+  setModal(state, { type, value, option }) {
+    state[type].isOpen = value;
+    if (option) state[type].option = option;
   },
 };
 
 export const actions = {
-  setModal({ commit }, { type, value }) {
-    commit("setModal", { type, value });
+  setModal({ commit }, { type, value, option }) {
+    commit("setModal", { type, value, option });
   },
 };

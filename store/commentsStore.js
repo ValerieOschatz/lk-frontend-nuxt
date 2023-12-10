@@ -24,6 +24,7 @@ export const actions = {
     createCommentApi({ post, text })
     .then(res => {
       dispatch("setCommentList", { post });
+      dispatch("modalStore/setModal", { type: 'modalAddComment', value: false, option: '' }, { root: true });
     })
     .catch(err => {
       const data = {

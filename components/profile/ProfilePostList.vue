@@ -43,7 +43,7 @@
                 color="#E57373"
                 variant="tonal"
               ></v-btn>
-              <span class="lokes-count">{{ post.likes.length }}</span>
+              <span class="likes-count">{{ post.likes.length }}</span>
             </div>
             <v-btn variant="text" color="#7B1FA2" @click="showCommentList(post._id)">Комментарии</v-btn>
           </div>
@@ -57,26 +57,13 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
+import { convertDate } from "~/utils/convertDate";
 
 export default {
   components: {
     ModalCommentList,
   },
   data: () => ({
-    months: [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря'
-    ]
   }),
   props: {
     privatSettings: {
@@ -114,10 +101,6 @@ export default {
     addPost() {
       this.setModal({ type: 'modalAddPost', value: true });
     },
-    convertDate(value) {
-      const date = new Date(value);
-      return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}г. ${date.getHours()}:${date.getMinutes()}`
-    },
     getOwnLike(post) {
       return post.likes.includes(this.profile.id);
     },
@@ -135,6 +118,7 @@ export default {
 </script>
 
 <style scoped>
+@import url(../../assets/styles/list.css);
 .post-list {
   padding-top: 20px;
 }
@@ -147,46 +131,5 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-.list {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.owner-container {
-  padding: 10px;
-  padding-bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.date {
-  font-size: 12px;
-  color: rgb(117, 117, 117);
-  padding: 0 10px;
-}
-.image {
-  margin-top: 10px;
-  width: 100%;
-  height: 100%;
-}
-.text {
-  padding: 10px;
-  padding-bottom: 0;
-}
-.actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.likes {
-  margin: 10px;
-  display: flex;
-  align-items: center;
-}
-.lokes-count {
-  margin: 0 5px;
-  color: rgb(179, 91, 67);
 }
 </style>

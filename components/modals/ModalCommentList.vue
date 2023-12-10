@@ -13,92 +13,99 @@
           <v-btn variant="text" icon="mdi-close" @click="dialog = false"></v-btn>
         </v-toolbar>
         <v-card-text>
-          <v-form
-            ref="form"
-          >
-            <v-textarea
-              variant="underlined"
-              label="Новый комментарий"
-              v-model="text"
-              :rules="textRules"
-            ></v-textarea>
-            <v-btn variant="text" color="#7B1FA2" size="x-small" block @click="submitForm">Отправить</v-btn>
-          </v-form>
-          <v-list v-if="commentList.length" lines="three">
-            <div v-for="item in commentList" :key="item.id">
-              <v-divider></v-divider>
-              <v-list-item
-                :prepend-avatar="item.owner.photo && `http://localhost:3001/${item.owner.photo}`"
-                :prepend-icon="!item.owner.photo && 'mdi-account-circle-outline'"
-                :title="item.owner.name"
-                :subtitle="item.text"
-                nav
-                height="60"
-              >
-              </v-list-item>
-            </div>
-          </v-list>
+          <v-btn
+            variant="text"
+            color="#7B1FA2"
+            size="small"
+            block
+            @click="addComment"
+            >Написатть комментарий
+          </v-btn>
+          <ModalAddComment />
+          <ul class="list mt-2" v-if="commentList.length">
+            <li v-for="comment in commentList" :key="comment._id">
+              <v-card elevation="4">
+                <div class="owner-container">
+                  <span>{{ comment.owner.name }}</span>
+                  <v-btn
+                    density="compact"
+                    icon="mdi-dots-vertical"
+                    color="#EA80FC"
+                    variant="tonal"
+                  ></v-btn>
+                </div>
+                <span class="date">{{ convertDate(comment.createdAt) }}</span>
+                <p class="text">{{ comment.text }}</p>
+                <div class="actions">
+                  <div class="likes">
+                    <v-btn
+                      v-if="getOwnLike(comment)"
+                      density="compact"
+                      icon="mdi-heart"
+                      color="#E57373"
+                      variant="tonal"
+                    ></v-btn>
+                    <v-btn
+                      v-else
+                      density="compact"
+                      icon="mdi-heart-outline"
+                      color="#E57373"
+                      variant="tonal"
+                    ></v-btn>
+                    <span class="likes-count">{{ comment.likes.length }}</span>
+                  </div>
+                </div>
+              </v-card>
+            </li>
+          </ul>
         </v-card-text>
       </v-card>
     </v-dialog>
-    <Alert />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Alert from '~/components/Alert.vue';
+import { convertDate } from "~/utils/convertDate";
+import ModalAddComment from "./ModalAddComment.vue";
 
 export default {
   components: {
-    Alert,
+    ModalAddComment,
   },
   data: () => ({
     dialog: false,
-    text: '',
-    textRules: [
-      v => (v.length <= 150) || 'Допустимо не более 150 символов',
-    ],
   }),
   computed: {
     ...mapGetters({
       modalCommentList: "modalStore/getModalCommentList",
-      selectedPostId: "postsStore/getSelectedPostId",
       commentList: "commentsStore/getCommentList",
+      profile: "profileStore/getProfile",
+      selectedPostId: "postsStore/getSelectedPostId",
     }),
+    isOpen() {
+      return this.modalCommentList.isOpen;
+    },
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      createComment: "commentsStore/createComment",
       setCommentList: "commentsStore/setCommentList",
     }),
-    async validate () {
-      return await this.$refs.form.validate();
+    getOwnLike(comment) {
+      return comment.likes.includes(this.profile.id);
     },
-    async submitForm() {
-      const validity = await this.validate();
-      const valid = validity.valid;
-      
-      if (valid) {
-        const data = {
-          post: this.selectedPostId,
-          text: this.text,
-        };
-        
-        this.createComment(data);
-        this.text = '';
-      }
-    },
+    addComment() {
+      this.setModal({ type: 'modalAddComment', value: true, option: 'create' });
+    }
   },
   watch: {
-    modalCommentList() {
-      this.dialog = this.modalCommentList;
+    isOpen() {
+      this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalCommentList', value: false });
-        this.text = '';
       }
     },
     selectedPostId() {
@@ -107,3 +114,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url(../../assets/styles/list.css);
+</style>
