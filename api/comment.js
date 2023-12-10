@@ -14,3 +14,10 @@ export const getCommentListApi = ({ post }) =>
     },
   }
 );
+
+export const updateCommentApi = ({ commentId, text }) => {
+  return instance.patch("/comment/update", {
+    commentId,
+    text,
+  });
+};

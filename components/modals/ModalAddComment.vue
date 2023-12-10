@@ -5,16 +5,13 @@
       width="400"
     >
       <v-card>
-        <v-card-title>
-          Добавить комментарий:
-        </v-card-title>
         <v-card-text>
           <v-form
             ref="form"
           >
             <v-textarea
               variant="underlined"
-              label="Новый комментарий"
+              :label="title"
               v-model="text"
               :rules="textRules"
             ></v-textarea>
@@ -48,15 +45,23 @@ export default {
     ...mapGetters({
       modalAddComment: "modalStore/getModalAddComment",
       selectedPostId: "postsStore/getSelectedPostId",
+      selectedComment: "commentsStore/getSelectedComment",
     }),
     isOpen() {
       return this.modalAddComment.isOpen;
     },
+    option() {
+      return this.modalAddComment.option;
+    },
+    title() {
+      return this.modalAddComment.option === 'create' ? 'Добавить комментарий:' : 'Редактировать комментарий';
+    }
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
       createComment: "commentsStore/createComment",
+      updateComment: "commentsStore/updateComment",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -64,14 +69,22 @@ export default {
     async submitForm() {
       const validity = await this.validate();
       const valid = validity.valid;
+      let data;
       
       if (valid) {
-        const data = {
-          post: this.selectedPostId,
-          text: this.text,
-        };
-        
-        this.createComment(data);
+        if (this.option === 'create') {
+          data = {
+            post: this.selectedPostId,
+            text: this.text,
+          };
+          this.createComment(data);
+        } else {
+          data = {
+            commentId: this.selectedComment._id,
+            text: this.text,
+          }
+          this.updateComment(data);
+        }
         this.text = '';
       }
     },
@@ -85,6 +98,9 @@ export default {
         this.setModal({ type: 'modalAddComment', value: false });
         this.text = '';
       }
+    },
+    selectedComment() {
+      this.text = this.selectedComment.text;
     }
   }
 }

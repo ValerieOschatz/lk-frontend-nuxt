@@ -19,4 +19,5 @@ export {
 export {
   createCommentApi,
   getCommentListApi,
+  updateCommentApi,
 } from "./comment";

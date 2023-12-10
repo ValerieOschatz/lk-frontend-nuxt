@@ -27,12 +27,7 @@
               <v-card elevation="4">
                 <div class="owner-container">
                   <span>{{ comment.owner.name }}</span>
-                  <v-btn
-                    density="compact"
-                    icon="mdi-dots-vertical"
-                    color="#EA80FC"
-                    variant="tonal"
-                  ></v-btn>
+                  <CommentBtn v-if="comment.owner._id === profile.id" :comment="comment" />
                 </div>
                 <span class="date">{{ convertDate(comment.createdAt) }}</span>
                 <p class="text">{{ comment.text }}</p>
@@ -68,10 +63,12 @@
 import { mapGetters, mapActions } from "vuex";
 import { convertDate } from "~/utils/convertDate";
 import ModalAddComment from "./ModalAddComment.vue";
+import CommentBtn from "~/components/CommentBtn.vue";
 
 export default {
   components: {
     ModalAddComment,
+    CommentBtn,
   },
   data: () => ({
     dialog: false,
