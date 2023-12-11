@@ -16,18 +16,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <Alert />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Alert from '~/components/Alert.vue';
 
 export default {
-  components: {
-    Alert,
-  },
   data: () => ({
     dialog: false,
   }),

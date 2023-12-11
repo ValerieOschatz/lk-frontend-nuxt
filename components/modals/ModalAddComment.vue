@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   data: () => ({
@@ -58,6 +58,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setSelectedComment: "commentsStore/setSelectedComment",
+    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       createComment: "commentsStore/createComment",
@@ -85,6 +88,7 @@ export default {
           }
           this.updateComment(data);
         }
+        this.setSelectedComment(null);
         this.text = '';
       }
     },
@@ -96,11 +100,12 @@ export default {
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalAddComment', value: false });
+        this.setSelectedComment(null);
         this.text = '';
       }
     },
     selectedComment() {
-      this.text = this.selectedComment.text;
+      if (this.selectedComment) this.text = this.selectedComment.text;
     }
   }
 }

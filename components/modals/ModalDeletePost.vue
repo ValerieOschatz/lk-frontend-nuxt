@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-text>
-          Удалить комментарий?
+          Удалить запись?
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -28,25 +28,25 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      modalDeleteComment: "modalStore/getModalDeleteComment",
+      profile: "profileStore/getProfile",
+      modalDeletePost: "modalStore/getModalDeletePost",
       selectedPost: "postsStore/getSelectedPost",
-      selectedComment: "commentsStore/getSelectedComment",
     }),
     isOpen() {
-      return this.modalDeleteComment.isOpen;
+      return this.modalDeletePost.isOpen;
     },
   },
   methods: {
     ...mapMutations({
-      setSelectedComment: "commentsStore/setSelectedComment",
+      setSelectedPost: "postsStore/setSelectedPost",
     }),
     ...mapActions({
       setModal: "modalStore/setModal",
-      deleteComment: "commentsStore/deleteComment",
+      deletePost: "postsStore/deletePost",
     }),
     onDelete() {
-      this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
-      this.setSelectedComment(null);
+      this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id });
+      this.setSelectedPost(null);
     }
   },
   watch: {
@@ -55,8 +55,8 @@ export default {
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalDeleteComment', value: false });
-        this.setSelectedComment(null);
+        this.setModal({ type: 'modalDeletePost', value: false });
+        this.setSelectedPost(null);
       }
     }
   }
