@@ -29,3 +29,17 @@ export const deleteCommentApi = ({ commentId }) => {
     }
   });
 };
+
+export const addLikeCommentApi = (commentId) => {
+  return instance.put("/comment/like", {
+    commentId,
+  });
+};
+
+export const deleteLikeCommentApi = (commentId) => {
+  return instance.delete("/comment/like", {
+    params: {
+      commentId,
+    }
+  });
+};

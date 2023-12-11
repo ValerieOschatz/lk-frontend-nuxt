@@ -38,13 +38,15 @@
                       icon="mdi-heart"
                       color="#E57373"
                       variant="tonal"
+                      @click="deleteLikeComment(comment._id)"
                     ></v-btn>
                     <v-btn
-                    v-else
-                    density="compact"
-                    icon="mdi-heart-outline"
-                    color="#E57373"
-                    variant="tonal"
+                      v-else
+                      density="compact"
+                      icon="mdi-heart-outline"
+                      color="#E57373"
+                      variant="tonal"
+                      @click="addLikeComment(comment._id)"
                     ></v-btn>
                     <span class="likes-count">{{ comment.likes.length }}</span>
                   </div>
@@ -91,6 +93,8 @@ export default {
     ...mapActions({
       setModal: "modalStore/setModal",
       setCommentList: "commentsStore/setCommentList",
+      addLikeComment: "commentsStore/addLikeComment",
+      deleteLikeComment: "commentsStore/deleteLikeComment",
     }),
     getOwnLike(comment) {
       return comment.likes.includes(this.profile.id);
