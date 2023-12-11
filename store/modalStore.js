@@ -1,8 +1,4 @@
 export const state = () => ({
-  modalAddPost: {
-    isOpen: false,
-    option: '',
-  },
   modalEditProfilePhoto: {
     isOpen: false,
     option: '',
@@ -16,6 +12,14 @@ export const state = () => ({
     option: '',
   },
   modalLogout: {
+    isOpen: false,
+    option: '',
+  },
+  modalAddPost: {
+    isOpen: false,
+    option: '',
+  },
+  modalDeletePost: {
     isOpen: false,
     option: '',
   },
@@ -34,9 +38,6 @@ export const state = () => ({
 });
 
 export const getters = {
-  getModalAddPost(state) {
-    return state.modalAddPost;
-  },
   getModalEditProfilePhoto(state) {
     return state.modalEditProfilePhoto;
   },
@@ -48,6 +49,12 @@ export const getters = {
   },
   getModalLogout(state) {
     return state.modalLogout;
+  },
+  getModalAddPost(state) {
+    return state.modalAddPost;
+  },
+  getModalDeletePost(state) {
+    return state.modalDeletePost;
   },
   getModalCommentList(state) {
     return state.modalCommentList;

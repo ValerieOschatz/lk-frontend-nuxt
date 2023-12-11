@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-title>
-          Добавить пост:
+          {{ title }}
         </v-card-title>
         <v-card-text>
           <v-form
@@ -19,6 +19,7 @@
               :rules="textRules"
             ></v-textarea>
             <v-file-input
+              v-if="modalAddPost.option === 'create'"
               accept="image/png, image/jpeg, image/bmp"
               variant="underlined"
               label="Фото"
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import Alert from '~/components/Alert.vue';
 
 export default {
@@ -57,15 +58,26 @@ export default {
   computed: {
     ...mapGetters({
       modalAddPost: "modalStore/getModalAddPost",
+      selectedPost: "postsStore/getSelectedPost",
     }),
     isOpen() {
       return this.modalAddPost.isOpen;
     },
+    option() {
+      return this.modalAddPost.option;
+    },
+    title() {
+      return this.option === 'create' ? 'Создать пост:' : 'Редактировать текст:';
+    }
   },
   methods: {
+    ...mapMutations({
+      setSelectedPost: "postsStore/setSelectedPost",
+    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       createPost: "postsStore/createPost",
+      updatePost: "postsStore/updatePost",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -75,13 +87,22 @@ export default {
       const valid = validity.valid;
       
       if (valid) {
-        const formData = new FormData();
-        if (this.text) formData.append('text', this.text);
-        if (this.image) formData.append('image', this.image[0]);
-        if (!this.text && !this.image) {
-          this.dialog = false;
+        
+        if (this.option === 'create') {
+          const formData = new FormData();
+          if (this.text) formData.append('text', this.text);
+          if (this.image) formData.append('image', this.image[0]);
+          if (!this.text && !this.image) {
+            this.dialog = false;
+          } else {
+            this.createPost(formData);
+          }
         } else {
-          this.createPost(formData);
+          const data = {
+            postId: this.selectedPost._id,
+            text: this.text,
+          }
+          this.updatePost(data);
         }
         this.clear();
       }
@@ -89,6 +110,7 @@ export default {
     clear() {
       this.text = '';
       this.image = null;
+      this.setSelectedPost(null);
     }
   },
   watch: {
@@ -100,6 +122,9 @@ export default {
         this.setModal({ type: 'modalAddPost', value: false });
         this.clear();
       }
+    },
+    selectedPost() {
+      if (this.selectedPost) this.text = this.selectedPost.text;
     }
   }
 }

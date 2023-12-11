@@ -2,7 +2,7 @@
   <div>
     <v-dialog
       v-model="dialog"
-      width="500"
+      width="400"
     >
       <v-card>
         <v-card-text>
@@ -34,7 +34,7 @@ export default {
   computed: {
     ...mapGetters({
       modalDeleteComment: "modalStore/getModalDeleteComment",
-      selectedPostId: "postsStore/getSelectedPostId",
+      selectedPost: "postsStore/getSelectedPost",
       selectedComment: "commentsStore/getSelectedComment",
     }),
     isOpen() {
@@ -47,7 +47,7 @@ export default {
       deleteComment: "commentsStore/deleteComment",
     }),
     onDelete() {
-      this.deleteComment({ post: this.selectedPostId, commentId: this.selectedComment._id });
+      this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
     }
   },
   watch: {

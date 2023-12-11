@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapGetters({
       modalAddComment: "modalStore/getModalAddComment",
-      selectedPostId: "postsStore/getSelectedPostId",
+      selectedPost: "postsStore/getSelectedPost",
       selectedComment: "commentsStore/getSelectedComment",
     }),
     isOpen() {
@@ -74,7 +74,7 @@ export default {
       if (valid) {
         if (this.option === 'create') {
           data = {
-            post: this.selectedPostId,
+            post: this.selectedPost._id,
             text: this.text,
           };
           this.createComment(data);

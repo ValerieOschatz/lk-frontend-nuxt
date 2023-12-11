@@ -17,12 +17,7 @@
         <v-card elevation="4">
           <div class="owner-container">
             <span>{{ post.owner.name }}</span>
-            <v-btn
-              density="compact"
-              icon="mdi-dots-vertical"
-              color="#EA80FC"
-              variant="tonal"
-            ></v-btn>
+            <PostBtn v-if="post.owner._id === profile.id" :post="post" />
           </div>
           <span class="date">{{ convertDate(post.createdAt) }}</span>
           <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="image" />
@@ -45,7 +40,7 @@
               ></v-btn>
               <span class="likes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text" color="#7B1FA2" @click="showCommentList(post._id)">Комментарии</v-btn>
+            <v-btn variant="text" color="#7B1FA2" @click="showCommentList(post)">Комментарии</v-btn>
           </div>
         </v-card>
       </li>
@@ -57,11 +52,13 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
+import PostBtn from "../PostBtn.vue";
 import { convertDate } from "~/utils/convertDate";
 
 export default {
   components: {
     ModalCommentList,
+    PostBtn,
   },
   data: () => ({
   }),
@@ -92,20 +89,20 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setSelectedPostId: "postsStore/setSelectedPostId",
+      setSelectedPost: "postsStore/setSelectedPost",
     }),
     ...mapActions({
       setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
     }),
     addPost() {
-      this.setModal({ type: 'modalAddPost', value: true });
+      this.setModal({ type: 'modalAddPost', value: true, option: 'create' });
     },
     getOwnLike(post) {
       return post.likes.includes(this.profile.id);
     },
-    showCommentList(id) {
-      this.setSelectedPostId(id);
+    showCommentList(post) {
+      this.setSelectedPost(post);
       this.setModal({ type: 'modalCommentList', value: true });
     }
   },

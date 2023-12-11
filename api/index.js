@@ -14,6 +14,10 @@ export {
 export {
   createPostApi,
   getPostListApi,
+  updatePostApi,
+  deletePostApi,
+  addLikePostApi,
+  deleteLikePostApi,
 } from "./post";
 
 export {

@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import { convertDate } from "~/utils/convertDate";
 import ModalAddComment from "./ModalAddComment.vue";
 import ModalDeleteComment from "./ModalDeleteComment.vue";
@@ -83,13 +83,16 @@ export default {
       modalCommentList: "modalStore/getModalCommentList",
       commentList: "commentsStore/getCommentList",
       profile: "profileStore/getProfile",
-      selectedPostId: "postsStore/getSelectedPostId",
+      selectedPost: "postsStore/getSelectedPost",
     }),
     isOpen() {
       return this.modalCommentList.isOpen;
     },
   },
   methods: {
+    ...mapMutations({
+      setSelectedPost: "postsStore/setSelectedPost",
+    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       setCommentList: "commentsStore/setCommentList",
@@ -110,10 +113,11 @@ export default {
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalCommentList', value: false });
+        this.setSelectedPost(null);
       }
     },
-    selectedPostId() {
-      this.setCommentList({ post: this.selectedPostId });
+    selectedPost() {
+      if (this.selectedPost) this.setCommentList({ post: this.selectedPost._id });
     }
   }
 }
