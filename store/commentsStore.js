@@ -37,7 +37,13 @@ export const actions = {
       commit("setCommentList", res.data);
     })
     .catch(err => {
-      console.log(err);
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
     })
   },
   createComment({ dispatch }, { post, text }) {

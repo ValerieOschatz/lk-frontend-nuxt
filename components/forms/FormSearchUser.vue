@@ -12,7 +12,8 @@
       append-inner-icon="mdi-magnify"
       single-line
       hide-details
-      v-model="text"
+      v-model="name"
+      @input="onSearch()"
       @click:append-inner="onClick"
     ></v-text-field>
   </v-card-text>
@@ -20,19 +21,27 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data: () => ({
     loaded: false,
     loading: false,
-    text: '',
-    textRules: [
-      v => !!v || 'Обязательное поле',
-      v => (v.length <= 150) || 'Допустимо не более 150 символов',
-    ],
+    name: '',
+    // nameRules: [
+    //   v => !!v || 'Обязательное поле',
+    //   v => (v.length <= 150) || 'Допустимо не более 150 символов',
+    // ],
   }),
+  computed: {
+    ...mapGetters({
+      userList: "usersStore/getUserList",
+    }),
+  },
   methods: {
+    ...mapActions({
+      setUserList: "usersStore/setUserList",
+    }),
     onClick () {
       this.loading = true
 
@@ -41,6 +50,9 @@ export default {
         this.loaded = true
       }, 2000)
     },
+    onSearch(value) {
+      this.setUserList({ name: this.name });
+    }
   },
 }
 </script>

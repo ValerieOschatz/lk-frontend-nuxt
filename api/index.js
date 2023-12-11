@@ -28,3 +28,7 @@ export {
   addLikeCommentApi,
   deleteLikeCommentApi,
 } from "./comment";
+
+export {
+  getUserListApi,
+} from "./user";
