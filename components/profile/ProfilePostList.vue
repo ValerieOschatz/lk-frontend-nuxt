@@ -30,6 +30,7 @@
                 icon="mdi-heart"
                 color="#E57373"
                 variant="tonal"
+                @click="deleteLikePost(post._id)"
               ></v-btn>
               <v-btn
                 v-else
@@ -37,6 +38,7 @@
                 icon="mdi-heart-outline"
                 color="#E57373"
                 variant="tonal"
+                @click="addLikePost(post._id)"
               ></v-btn>
               <span class="likes-count">{{ post.likes.length }}</span>
             </div>
@@ -94,6 +96,8 @@ export default {
     ...mapActions({
       setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
+      addLikePost: "postsStore/addLikePost",
+      deleteLikePost: "postsStore/deleteLikePost",
     }),
     addPost() {
       this.setModal({ type: 'modalAddPost', value: true, option: 'create' });

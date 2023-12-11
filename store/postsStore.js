@@ -103,7 +103,7 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  deleteLikeCPost({ dispatch }, postId) {
+  deleteLikePost({ dispatch }, postId) {
     deleteLikePostApi(postId)
     .then(res => {
       dispatch("setPostList", { owner: res.data.owner });
