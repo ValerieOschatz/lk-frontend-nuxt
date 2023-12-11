@@ -1,5 +1,5 @@
 <template>
-  <v-card class="content">
+  <div>
     <ProfileInfo
       :user="profile"
       :privatSettings="privatSettings"
@@ -18,7 +18,7 @@
     <ModalEditPrivatSettings />
     <ModalLogout />
     <Alert />
-  </v-card>
+  </div>
 </template>
 
 <script setup>
@@ -64,12 +64,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.content {
-  width: calc(100% - 20px);
-  max-width: 880px;
-  margin: 20px auto;
-  padding: 40px;
-}
-</style>

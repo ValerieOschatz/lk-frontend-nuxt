@@ -2,7 +2,9 @@
   <v-app>
     <div class="page">
       <Sidebar />
-      <slot />
+      <v-card class="content">
+        <slot />
+      </v-card>
     </div>
   </v-app>
 </template>
@@ -38,5 +40,11 @@ export default {
   min-height: 100vh;
   background-color: rgb(234, 223, 255);
   display: flex;
+}
+.content {
+  width: calc(100% - 20px);
+  max-width: 880px;
+  margin: 20px auto;
+  padding: 40px;
 }
 </style>
