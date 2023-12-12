@@ -19,17 +19,21 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   data: () => ({
     name: '',
   }),
   methods: {
+    ...mapMutations({
+      setSearchedName: "profileStore/setSearchedName",
+    }),
     ...mapActions({
       setUserList: "usersStore/setUserList",
     }),
-    onSearch(value) {
+    onSearch() {
+      this.setSearchedName(this.name);
       this.setUserList({ name: this.name });
     }
   },

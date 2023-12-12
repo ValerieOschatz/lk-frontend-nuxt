@@ -9,6 +9,8 @@ export {
   updateProfilePhotoApi,
   updateProfileInfoApi,
   updateProfilePrivatSettingsApi,
+  subscribeApi,
+  unsubscribeApi,
 } from "./profile";
 
 export {

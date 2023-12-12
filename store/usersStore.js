@@ -20,6 +20,11 @@ export const mutations = {
 
 export const actions = {
   setUserList({ commit }, { name }) {
+    if (!name) {
+      commit("setUserList", []);
+      return;
+    }
+    
     getUserListApi({ name })
     .then(res => {
       commit("setUserList", res.data);

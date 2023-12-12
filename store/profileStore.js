@@ -3,6 +3,8 @@ import {
   updateProfilePhotoApi,
   updateProfileInfoApi,
   updateProfilePrivatSettingsApi,
+  subscribeApi,
+  unsubscribeApi,
 } from "../api";
 
 export const state = () => ({
@@ -16,7 +18,8 @@ export const state = () => ({
   privatSettings: {
     comments: null,
     posts: null,
-  }
+  },
+  searchedName: '',
 });
 
 export const getters = {
@@ -25,6 +28,9 @@ export const getters = {
   },
   getPrivatSettings(state) {
     return state.privatSettings;
+  },
+  getSearchedName(state) {
+    return state.searchedName;
   },
 };
 
@@ -43,6 +49,9 @@ export const mutations = {
       comments: data.privatSettings.comments,
       posts: data.privatSettings.posts,
     };
+  },
+  setSearchedName(state, data) {
+    state.searchedName = data;
   },
 };
 
@@ -99,6 +108,36 @@ export const actions = {
     updateProfilePrivatSettingsApi(data)
     .then(res => {
       dispatch("setProfile");
+      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  subscribe({ state, dispatch }, userId) {
+    subscribeApi(userId)
+    .then(res => {
+      dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  unsubscribe({ state, dispatch }, userId) {
+    unsubscribeApi(userId)
+    .then(res => {
+      dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
       dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
     })
     .catch(err => {

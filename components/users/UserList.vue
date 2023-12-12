@@ -17,12 +17,14 @@
           variant="text"
           icon="mdi-account-minus"
           color="#E57373"
+          @click="onUnsubscribe(user._id)"
         ></v-btn>
         <v-btn
-        v-else
+          v-else
           variant="text"
           icon="mdi-account-plus"
           color="#E57373"
+          @click="onSubscribe(user._id)"
         ></v-btn>
         <v-btn
           variant="text"
@@ -51,9 +53,17 @@ export default {
   methods: {
     ...mapActions({
       setUserList: "usersStore/setUserList",
+      subscribe: "profileStore/subscribe",
+      unsubscribe: "profileStore/unsubscribe",
     }),
     isSubscribed(user) {
       return user.subscribers.includes(this.profile.id);
+    },
+    onSubscribe(userId) {
+      this.subscribe(userId);
+    },
+    onUnsubscribe(userId) {
+      this.unsubscribe(userId);
     }
   },
 }

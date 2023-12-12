@@ -23,3 +23,17 @@ export const updateProfilePrivatSettingsApi = ({ comments, posts }) => {
     posts,
   });
 };
+
+export const subscribeApi = (userId) => {
+  return instance.put("/profile/subscribe", {
+    userId,
+  });
+};
+
+export const unsubscribeApi = (userId) => {
+  return instance.delete("/profile/subscribe", {
+    params: {
+      userId,
+    }
+  });
+};
