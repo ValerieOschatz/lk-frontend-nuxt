@@ -2,14 +2,12 @@
   <div>
     <ProfileInfo
       :user="profile"
-      :privatSettings="privatSettings"
       :owner="true"
     />
     <v-divider></v-divider>
     <ProfilePostList 
-      :privatSettings="privatSettings"
+      :user="profile"
       :owner="true"
-      :userId="profile.id"
     />
     <ModalAddPost />
     <ModalDeletePostVue />
@@ -54,7 +52,6 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
-      privatSettings: "profileStore/getPrivatSettings",
     }),
   },
   methods: {

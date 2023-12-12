@@ -6,11 +6,11 @@
   <div v-for="user in userList" :key="user._id">
     <v-list-item
       :prepend-avatar="user.photo ? `http://localhost:3001/${user.photo}` : '/image2.jpg'"
-      :title="user.name"
-      :subtitle="`Подписчики: ${user.subscribers.length}`"
       nav
       height="60"
     >
+    <v-list-item-title class="link" @click="navigateTo(`/users/${user._id}`)">{{ user.name }}</v-list-item-title>
+    <v-list-item-subtitle>{{ `Подписчики: ${user.subscribers.length}` }}</v-list-item-subtitle>
       <template v-slot:append>
         <v-btn
           v-if="isSubscribed(user)"
@@ -68,3 +68,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.link {
+  cursor: pointer;
+}
+</style>

@@ -14,10 +14,10 @@ export const state = () => ({
     photo: '',
     description: '',
     subscribers: [],
-  },
-  privatSettings: {
-    comments: null,
-    posts: null,
+    privatSettings: {
+      comments: null,
+      posts: null,
+    },
   },
   searchedName: '',
 });
@@ -25,9 +25,6 @@ export const state = () => ({
 export const getters = {
   getProfile(state) {
     return state.profile;
-  },
-  getPrivatSettings(state) {
-    return state.privatSettings;
   },
   getSearchedName(state) {
     return state.searchedName;
@@ -42,12 +39,10 @@ export const mutations = {
       photo: data.photo,
       description: data.description,
       subscribers: data.subscribers,
-    };
-  },
-  setPrivatSettings(state, data) {
-    state.privatSettings = {
-      comments: data.privatSettings.comments,
-      posts: data.privatSettings.posts,
+      privatSettings: {
+        comments: data.privatSettings.comments,
+        posts: data.privatSettings.posts,
+      },
     };
   },
   setSearchedName(state, data) {
@@ -60,7 +55,6 @@ export const actions = {
     getProfileApi()
     .then(res => {
       commit("setProfile", res.data);
-      commit("setPrivatSettings", res.data);
     })
     .catch(err => {
       navigateTo('/sign-in');
@@ -123,7 +117,6 @@ export const actions = {
     subscribeApi(userId)
     .then(res => {
       dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
-      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
     })
     .catch(err => {
       const data = {
@@ -138,7 +131,6 @@ export const actions = {
     unsubscribeApi(userId)
     .then(res => {
       dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
-      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

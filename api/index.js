@@ -33,4 +33,5 @@ export {
 
 export {
   getUserListApi,
+  getUserCardApi,
 } from "./user";

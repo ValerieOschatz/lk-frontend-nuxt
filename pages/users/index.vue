@@ -28,7 +28,7 @@
 
 <script setup>
 definePageMeta({
-  name: "UsersPage",
+  name: "UserListPage",
 })
 </script>
 

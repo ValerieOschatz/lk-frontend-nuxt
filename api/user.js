@@ -7,3 +7,11 @@ export const getUserListApi = ({ name }) =>
     },
   }
 );
+
+export const getUserCardApi = ({ userId }) =>
+  instance.get("/user/card", {
+    params: {
+      userId,
+    },
+  }
+);

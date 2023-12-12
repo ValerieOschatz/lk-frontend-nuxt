@@ -42,7 +42,7 @@
               ></v-btn>
               <span class="likes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text" color="#7B1FA2" @click="showCommentList(post)">Комментарии</v-btn>
+            <v-btn variant="text" color="rgb(179, 91, 67)" @click="showCommentList(post)">Комментарии</v-btn>
           </div>
         </v-card>
       </li>
@@ -65,12 +65,19 @@ export default {
   data: () => ({
   }),
   props: {
-    privatSettings: {
+    user: {
       type: Object,
       default() {
         return {
-          comments: null,
-          profileInfo: null,
+          id: '',
+          name: '',
+          photo: '',
+          description: '',
+          subscribers: [],
+          privatSettings: {
+            comments: null,
+            profileInfo: null,
+          }
         }
       },
     },
@@ -78,16 +85,15 @@ export default {
       type: Boolean,
       default: false,
     },
-    userId: {
-      type: String,
-      default: '',
-    }
   },
   computed: {
     ...mapGetters({
       postList: "postsStore/getPostList",
       profile: "profileStore/getProfile",
     }),
+    userId() {
+      return this.user.id;
+    }
   },
   methods: {
     ...mapMutations({

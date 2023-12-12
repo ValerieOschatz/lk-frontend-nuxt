@@ -47,7 +47,7 @@ export default {
   computed: {
     ...mapGetters({
       modalEditPrivatSettings: "modalStore/getModalEditPrivatSettings",
-      privatSettings: "profileStore/getPrivatSettings",
+      profile: "profileStore/getProfile",
     }),
     isOpen() {
       return this.modalEditPrivatSettings.isOpen;
@@ -67,14 +67,14 @@ export default {
       this.editPrivatSettings(data);
     },
     setValues() {
-      this.comments = this.privatSettings.comments ? true : false;
-      this.posts = this.privatSettings.posts ? true : false;
+      this.comments = this.profile.privatSettings.comments ? true : false;
+      this.posts = this.profile.privatSettings.posts ? true : false;
     }
   },
   watch: {
-    privatSettings() {
-      this.comments = this.privatSettings.comments ? true : false;
-      this.posts = this.privatSettings.posts ? true : false;
+    profile() {
+      this.comments = this.profile.privatSettings.comments ? true : false;
+      this.posts = this.profile.privatSettings.posts ? true : false;
     },
     isOpen() {
       this.dialog = this.isOpen;

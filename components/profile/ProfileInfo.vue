@@ -53,15 +53,10 @@ export default {
           photo: '',
           description: '',
           subscribers: [],
-        }
-      },
-    },
-    privatSettings: {
-      type: Object,
-      default() {
-        return {
-          comments: null,
-          profileInfo: null,
+          privatSettings: {
+            comments: null,
+            profileInfo: null,
+          }
         }
       },
     },
