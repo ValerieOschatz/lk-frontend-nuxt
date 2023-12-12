@@ -47,7 +47,7 @@ export const mutations = {
 };
 
 export const actions = {
-  setProfile({ commit }) {
+  setProfile({ commit, dispatch }) {
     getProfileApi()
     .then(res => {
       commit("setProfile", res.data);

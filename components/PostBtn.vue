@@ -5,7 +5,7 @@
       v-bind="props"  
       density="compact"
       icon="mdi-dots-vertical"
-      color="#EA80FC"
+      color="#5C6BC0"
       variant="tonal"
     ></v-btn>
   </template>

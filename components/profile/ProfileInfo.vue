@@ -18,7 +18,7 @@
       <div class="info-column">
         <v-card-title class="name">
           <span>{{ user.name }}</span>
-          <span class="subscribers">Подписчиков {{ user.subscribers.length }}</span>
+          <span class="subscribers">Подписчики: {{ user.subscribers.length }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <div class="info-container">

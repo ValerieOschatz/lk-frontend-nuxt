@@ -7,7 +7,7 @@
         v-if="owner"
         density="compact"
         icon="mdi-plus"
-        color="#EA80FC"
+        color="#5C6BC0"
         variant="tonal"
         @click="addPost"
       ></v-btn>

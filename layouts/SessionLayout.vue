@@ -12,7 +12,7 @@
 .page {
   width: 100vw;
   height: 100vh;
-  background-image: url(~/assets/images/ricardo-loaiza-p0TX8uYHC5k-unsplash.jpg);
+  background-image: url(/image2.jpg);
   display: flex;
 }
 
