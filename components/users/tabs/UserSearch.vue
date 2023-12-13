@@ -1,7 +1,7 @@
 <template>
   <div>
     <FormSearchUser />
-    <UserList />
+    <UserList :userList="userList" />
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   components: {
     FormSearchUser,
     UserList,
+  },
+  computed: {
+    ...mapGetters({
+      userList: "usersStore/getUserList",
+    }),
   },
 }
 </script>
