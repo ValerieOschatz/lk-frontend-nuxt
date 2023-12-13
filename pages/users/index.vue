@@ -13,11 +13,9 @@
       <v-window-item :value="1">
         One
       </v-window-item>
-
       <v-window-item :value="2">
-        Two
+        <UserSubscribers />
       </v-window-item>
-
       <v-window-item :value="3">
         <UserSearch />
       </v-window-item>
@@ -36,11 +34,13 @@ definePageMeta({
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import UserSearch from "../../components/users/tabs/UserSearch.vue";
+import UserSubscribers from "../../components/users/tabs/UserSubscribers.vue";
 
 export default {
   components: {
     Alert,
     UserSearch,
+    UserSubscribers,
   },
   data: () => ({
     tab: null,

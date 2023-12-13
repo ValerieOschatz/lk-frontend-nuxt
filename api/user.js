@@ -1,9 +1,11 @@
 import { instance } from "./instanceAxios"
 
-export const getUserListApi = ({ name }) =>
+export const getUserListApi = ({ name, subscribers, subscriptions }) =>
   instance.get("/user/list", {
     params: {
       name,
+      subscribers,
+      subscriptions,
     },
   }
 );

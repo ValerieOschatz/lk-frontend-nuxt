@@ -47,13 +47,13 @@ export const mutations = {
 };
 
 export const actions = {
-  setUserList({ commit }, { name }) {
-    if (!name) {
+  setUserList({ commit }, { name, subscribers, subscriptions, search }) {
+    if (search === 'name' && !name) {
       commit("setUserList", []);
       return;
     }
     
-    getUserListApi({ name })
+    getUserListApi({ name, subscribers, subscriptions })
     .then(res => {
       commit("setUserList", res.data);
     })

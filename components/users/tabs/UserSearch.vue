@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import FormSearchUser from "~/components/forms/FormSearchUser.vue";
 import UserList from "~/components/users/UserList.vue"
 
@@ -15,7 +15,5 @@ export default {
     FormSearchUser,
     UserList,
   },
-  data: () => ({
-  }),
 }
 </script>

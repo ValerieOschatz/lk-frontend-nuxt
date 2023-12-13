@@ -42,17 +42,19 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  data: () => ({
-  }),
+  props: {
+    userList: {
+      type: Array,
+      default: []
+    }
+  },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
-      userList: "usersStore/getUserList",
     }),
   },
   methods: {
     ...mapActions({
-      setUserList: "usersStore/setUserList",
       subscribe: "profileStore/subscribe",
       unsubscribe: "profileStore/unsubscribe",
     }),

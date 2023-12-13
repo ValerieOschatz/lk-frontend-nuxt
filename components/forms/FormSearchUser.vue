@@ -34,7 +34,7 @@ export default {
     }),
     onSearch() {
       this.setSearchedName(this.name);
-      this.setUserList({ name: this.name });
+      this.setUserList({ name: this.name, search: true });
     }
   },
 }
