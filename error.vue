@@ -23,7 +23,7 @@ export default {
 .page {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(234, 223, 255);
+  background-color: #C5CAE9;
   display: flex;
 }
 

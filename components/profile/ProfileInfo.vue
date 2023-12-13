@@ -14,6 +14,33 @@
           <span v-else class="text-h5">{{ user.name && user.name[0] }}</span>
         </v-avatar>
         <ProfileEditBtn v-if="owner" />
+        <div v-else class="btn-container">
+          <v-btn
+            v-if="isSubscribed"
+            size="x-small"
+            width="100%"
+            color="#E57373"
+            @click="onUnsubscribe"
+          >
+            Отписаться
+          </v-btn>
+          <v-btn
+            v-else
+            size="x-small"
+            width="100%"
+            color="#E57373"
+            @click="onSubscribe"
+          >
+            Подписаться
+          </v-btn>
+          <v-btn
+            size="x-small"
+            width="100%"
+            color="#E57373"
+          >
+            Сообщение
+          </v-btn>
+        </div>
       </div>
       <div class="info-column">
         <v-card-title class="name">
@@ -67,11 +94,24 @@ export default {
   },
   computed: {
     ...mapGetters({
+      profile: "profileStore/getProfile",
     }),
+    isSubscribed() {
+      return this.user.subscribers.includes(this.profile.id);
+    },
   },
   methods: {
     ...mapActions({
+      subscribe: "profileStore/subscribe",
+      unsubscribe: "profileStore/unsubscribe",
+      setUser: "usersStore/setUser",
     }),
+    onSubscribe() {
+      this.subscribe({ userId: this.user.id, option: 'card' });
+    },
+    onUnsubscribe() {
+      this.unsubscribe({ userId: this.user.id, option: 'card' });
+    }
   },
   watch: {
   }
@@ -113,5 +153,11 @@ export default {
   text-decoration: none;
   color: rgb(179, 91, 67);
   font-size: 12px;
+}
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 </style>

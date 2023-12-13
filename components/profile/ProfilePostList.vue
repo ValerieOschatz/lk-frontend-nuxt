@@ -43,7 +43,14 @@
               ></v-btn>
               <span class="likes-count">{{ post.likes.length }}</span>
             </div>
-            <v-btn variant="text" color="rgb(179, 91, 67)" @click="showCommentList(post)">Комментарии</v-btn>
+            <v-btn
+              v-if="commentsAccess"
+              variant="text"
+              color="rgb(179, 91, 67)"
+              @click="showCommentList(post)"
+            >
+              Комментарии
+            </v-btn>
           </div>
         </v-card>
       </li>
@@ -78,10 +85,10 @@ export default {
       user: "usersStore/getUser",
     }),
     postsAccess() {
-      return this.owner || this.user.subscribers.includes(this.profile.id) || this.user.privatSettings.posts;
+      return this.owner || this.user.privatSettings.posts || this.user.subscribers.includes(this.profile.id);
     },
     commentsAccess() {
-      return this.user.privatSettings.comments;
+      return (this.owner && this.profile.privatSettings.comments) || (!this.owner && this.user.privatSettings.comments);
     },
   },
   methods: {
@@ -108,6 +115,7 @@ export default {
   watch: {
     profile() {
       if (this.owner) this.setPostList({ owner: this.profile.id });
+      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
     },
     user() {
       if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });

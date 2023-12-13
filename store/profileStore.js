@@ -126,10 +126,11 @@ export const actions = {
       };
       dispatch("alertStore/setAlert", data, { root: true });    })
   },
-  subscribe({ state, dispatch }, userId) {
+  subscribe({ state, dispatch }, { userId, option }) {
     subscribeApi(userId)
     .then(res => {
-      dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
+      if (option === 'search') dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
+      if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
     })
     .catch(err => {
       const data = {
@@ -140,10 +141,11 @@ export const actions = {
       };
       dispatch("alertStore/setAlert", data, { root: true });    })
   },
-  unsubscribe({ state, dispatch }, userId) {
+  unsubscribe({ state, dispatch }, { userId, option }) {
     unsubscribeApi(userId)
     .then(res => {
-      dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
+      if (option === 'search') dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
+      if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
     })
     .catch(err => {
       const data = {

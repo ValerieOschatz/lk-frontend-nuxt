@@ -60,10 +60,10 @@ export default {
       return user.subscribers.includes(this.profile.id);
     },
     onSubscribe(userId) {
-      this.subscribe(userId);
+      this.subscribe({ userId, option: 'search' });
     },
     onUnsubscribe(userId) {
-      this.unsubscribe(userId);
+      this.unsubscribe({ userId, option: 'search' });
     }
   },
 }
