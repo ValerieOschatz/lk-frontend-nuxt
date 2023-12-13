@@ -6,7 +6,6 @@
     />
     <v-divider></v-divider>
     <ProfilePostList 
-      :user="profile"
       :owner="true"
     />
     <ModalAddPost />

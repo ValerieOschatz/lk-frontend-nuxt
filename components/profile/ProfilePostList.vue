@@ -1,8 +1,9 @@
 <template>
   <div class="post-list">
     <div class="title-container">
-      <h2 v-if="postList.length" class="list-title">Список постов:</h2>
-      <h2 v-else class="list-title">Список постов пуст</h2>
+      <h2 v-if="!postsAccess" class="list-title">Посты видны только подписчикам</h2>
+      <h2 v-else-if="postsAccess && postList.length" class="list-title">Список постов:</h2>
+      <h2 v-else-if="postsAccess && !postList.length" class="list-title">Список постов пуст</h2>
       <v-btn
         v-if="owner"
         density="compact"
@@ -12,7 +13,7 @@
         @click="addPost"
       ></v-btn>
     </div>
-    <ul class="list">
+    <ul v-if="postsAccess" class="list">
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
           <div class="owner-container">
@@ -65,22 +66,6 @@ export default {
   data: () => ({
   }),
   props: {
-    user: {
-      type: Object,
-      default() {
-        return {
-          id: '',
-          name: '',
-          photo: '',
-          description: '',
-          subscribers: [],
-          privatSettings: {
-            comments: null,
-            profileInfo: null,
-          }
-        }
-      },
-    },
     owner: {
       type: Boolean,
       default: false,
@@ -90,10 +75,14 @@ export default {
     ...mapGetters({
       postList: "postsStore/getPostList",
       profile: "profileStore/getProfile",
+      user: "usersStore/getUser",
     }),
-    userId() {
-      return this.user.id;
-    }
+    postsAccess() {
+      return this.owner || this.user.subscribers.includes(this.profile.id) || this.user.privatSettings.posts;
+    },
+    commentsAccess() {
+      return this.user.privatSettings.comments;
+    },
   },
   methods: {
     ...mapMutations({
@@ -117,10 +106,18 @@ export default {
     }
   },
   watch: {
-    userId() {
-      this.setPostList({ owner: this.userId });
-    }
+    profile() {
+      if (this.owner) this.setPostList({ owner: this.profile.id });
+    },
+    user() {
+      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
+    },
   },
+  mounted() {
+    if (this.owner && this.profile.id) {
+      this.setPostList({ owner: this.profile.id });
+    }
+  }
 }
 </script>
 

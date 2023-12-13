@@ -44,6 +44,7 @@ export const actions = {
     .then(res => {
       dispatch("modalStore/setModal", { type: 'modalLogout', value: false }, { root: true });
       navigateTo('/sign-in');
+      dispatch("profileStore/resetProfile", {}, { root: true });
     })
     .catch(err => {
       const data = {

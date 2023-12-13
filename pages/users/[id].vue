@@ -6,7 +6,6 @@
     />
     <v-divider></v-divider>
     <ProfilePostList 
-      :user="user"
       :owner="false"
     />
   </div>

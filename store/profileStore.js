@@ -48,6 +48,19 @@ export const mutations = {
   setSearchedName(state, data) {
     state.searchedName = data;
   },
+  resetProfile(state) {
+    state.profile = {
+      id: '',
+      name: '',
+      photo: '',
+      description: '',
+      subscribers: [],
+      privatSettings: {
+        comments: null,
+        posts: null,
+      },
+    };
+  },
 };
 
 export const actions = {
@@ -141,4 +154,7 @@ export const actions = {
       };
       dispatch("alertStore/setAlert", data, { root: true });    })
   },
+  resetProfile({ commit }) {
+    commit("resetProfile");
+  }
 };
