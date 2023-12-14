@@ -11,7 +11,8 @@
     </v-tabs>
     <v-window v-model="tab">
       <v-window-item :value="1">
-        One
+        <UserSearch :tab="tab" />
+        <UserList :tab="tab" option="subscriptions" />
       </v-window-item>
       <v-window-item :value="2">
         <UserSearch :tab="tab" />
@@ -52,19 +53,20 @@ export default {
       profile: "profileStore/getProfile",
       searchedName: "profileStore/getSearchedName",
       subscriberName: "profileStore/getSubscriberName",
-      userList: "usersStore/getUserList",
-      subscriberList: "usersStore/getSubscriberList",
+      subscriptionName: "profileStore/getSubscriptionName",
     }),
   },
   methods: {
     ...mapActions({
       setUserList: "usersStore/setUserList",
       setSubscriberList: "usersStore/setSubscriberList",
+      setSubscriptionList: "usersStore/setSubscriptionList",
     }),
   },
   watch: {
     tab() {
       if (this.tab === 1) {
+        this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile.id });
       } else if (this.tab === 2) {
         this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile.id });
       } else if (this.tab === 3) {
@@ -74,6 +76,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

@@ -6,6 +6,7 @@ import {
 export const state = () => ({
   userList: [],
   subscriberList: [],
+  subscriptionList:[],
   user: {
     id: '',
     name: '',
@@ -26,6 +27,9 @@ export const getters = {
   getSubscriberList(state) {
     return state.subscriberList;
   },
+  getSubscriptionList(state) {
+    return state.subscriptionList;
+  },
   getUser(state) {
     return state.user;
   },
@@ -37,6 +41,9 @@ export const mutations = {
   },
   setSubscriberList(state, data) {
     state.subscriberList = data;
+  },
+  setSubscriptionList(state, data) {
+    state.subscriptionList = data;
   },
   setUser(state, data) {
     state.user = {
@@ -78,6 +85,21 @@ export const actions = {
     getUserListApi({ name, subscribers })
     .then(res => {
       commit("setSubscriberList", res.data);
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  setSubscriptionList({ commit }, { name, subscriptions }) {
+    getUserListApi({ name, subscriptions })
+    .then(res => {
+      commit("setSubscriptionList", res.data);
     })
     .catch(err => {
       const data = {

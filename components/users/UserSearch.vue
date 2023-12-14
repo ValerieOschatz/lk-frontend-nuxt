@@ -40,13 +40,17 @@ export default {
     ...mapMutations({
       setSearchedName: "profileStore/setSearchedName",
       setSubscriberName: "profileStore/setSubscriberName",
+      setSubscriptionName: "profileStore/setSubscriptionName",
     }),
     ...mapActions({
       setUserList: "usersStore/setUserList",
       setSubscriberList: "usersStore/setSubscriberList",
+      setSubscriptionList: "usersStore/setSubscriptionList",
     }),
     onSearch() {
       if (this.tab === 1) {
+        this.setSubscriptionName(this.name);
+        this.setSubscriptionList({ name: this.name, subscriptions: this.profile.id });
       } else if (this.tab === 2) {
         this.setSubscriberName(this.name);
         this.setSubscriberList({ name: this.name, subscribers: this.profile.id });

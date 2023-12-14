@@ -57,9 +57,11 @@ export default {
       profile: "profileStore/getProfile",
       userList: "usersStore/getUserList",
       subscriberList: "usersStore/getSubscriberList",
+      subscriptionList: "usersStore/getSubscriptionList",
     }),
     list() {
       if (this.tab === 1) {
+        return this.subscriptionList;
       } else if (this.tab === 2) {
         return this.subscriberList;
       } else if (this.tab === 3) {

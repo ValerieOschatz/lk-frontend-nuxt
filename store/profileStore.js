@@ -21,6 +21,7 @@ export const state = () => ({
   },
   searchedName: '',
   subscriberName: '',
+  subscriptionName: '',
 });
 
 export const getters = {
@@ -32,6 +33,9 @@ export const getters = {
   },
   getSubscriberName(state) {
     return state.subscriberName;
+  },
+  getSubscriptionName(state) {
+    return state.subscriptionName;
   },
 };
 
@@ -54,6 +58,9 @@ export const mutations = {
   },
   setSubscriberName(state, data) {
     state.subscriberName = data;
+  },
+  setSubscriptionName(state, data) {
+    state.subscriptionName = data;
   },
   resetProfile(state) {
     state.profile = {
@@ -138,6 +145,7 @@ export const actions = {
     .then(res => {
       if (option === 'search') dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
       if (option === 'subscribers') dispatch("usersStore/setSubscriberList", { name: state.subscriberName, subscribers: profileId }, { root: true });
+      if (option === 'subscriptions') dispatch("usersStore/setSubscriptionList", { name: state.subscriptionName, subscriptions: profileId }, { root: true });
       if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
     })
     .catch(err => {
@@ -154,6 +162,7 @@ export const actions = {
     .then(res => {
       if (option === 'search') dispatch("usersStore/setUserList", { name: state.searchedName }, { root: true });
       if (option === 'subscribers') dispatch("usersStore/setSubscriberList", { name: state.subscriberName, subscribers: profileId }, { root: true });
+      if (option === 'subscriptions') dispatch("usersStore/setSubscriptionList", { name: state.subscriptionName, subscriptions: profileId }, { root: true });
       if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
     })
     .catch(err => {
