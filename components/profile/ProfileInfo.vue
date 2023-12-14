@@ -50,11 +50,6 @@
         <v-divider></v-divider>
         <div class="info-container">
           <p class="px-0 py-0 my-3">{{ user.description }}</p>
-          <div class="d-flex justify-space-evenly">
-            <NuxtLink to="" class="link">Подписки на каналы</NuxtLink>
-            <NuxtLink to="" class="link">Подписки на людей</NuxtLink>
-            <NuxtLink to="" class="link">Подписчики</NuxtLink>
-          </div>
         </div>
       </div>
     </div>
@@ -147,11 +142,6 @@ export default {
   padding: 0;
 }
 .subscribers {
-  font-size: 12px;
-}
-.link {
-  text-decoration: none;
-  color: rgb(179, 91, 67);
   font-size: 12px;
 }
 .btn-container {

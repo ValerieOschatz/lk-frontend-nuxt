@@ -17,7 +17,8 @@
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
           <div class="owner-container">
-            <span>{{ post.owner.name }}</span>
+            <NuxtLink v-if="post.owner._id === profile.id" to="/profile" class="link">{{ post.owner.name }}</NuxtLink>
+            <NuxtLink v-else :to="`/users/${post.owner._id}`" class="link">{{ post.owner.name }}</NuxtLink>
             <PostBtn v-if="post.owner._id === profile.id" :post="post" />
           </div>
           <span class="date">{{ convertDate(post.createdAt) }}</span>
@@ -143,5 +144,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+.link {
+  text-decoration: none;
+  color: rgb(179, 91, 67);
+  /* font-size: 12px; */
 }
 </style>
