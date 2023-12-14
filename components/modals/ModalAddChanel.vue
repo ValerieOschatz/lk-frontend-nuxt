@@ -65,7 +65,7 @@ export default {
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      // editProfileInfo: "profileStore/editProfileInfo",
+      createChanel: "chanelsStore/createChanel",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -80,7 +80,7 @@ export default {
           description: this.description
         };
 
-        // this.editProfileInfo(data);
+        this.createChanel(data);
       }
     },
     // setValues() {
@@ -95,6 +95,8 @@ export default {
     dialog() {
       if (this.dialog === false) {
         this.setModal({ type: 'modalAddChanel', value: false });
+        this.name = '';
+        this.description = '';
       } else {
         // this.setValues();
       }

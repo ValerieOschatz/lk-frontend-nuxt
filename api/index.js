@@ -35,3 +35,7 @@ export {
   getUserListApi,
   getUserCardApi,
 } from "./user";
+
+export {
+  createChanelApi,
+} from "./chanel";
