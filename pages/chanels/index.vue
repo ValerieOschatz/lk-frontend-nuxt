@@ -16,7 +16,15 @@
       </v-window-item>
       <v-window-item :value="3">
         <ChanelSearch />
-        <ModalCreateChanel />
+        <v-btn
+          variant="text"
+          color="rgb(179, 91, 67)"
+          block
+          @click="addChanel"
+        >
+          Создать канал
+        </v-btn>
+        <ModalAddChanel />
         <ChanelList />
       </v-window-item>
     </v-window>
@@ -35,14 +43,14 @@ import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ChanelSearch from "~/components/chanels/ChanelSearch.vue";
 import ChanelList from "~/components/chanels/ChanelList.vue";
-import ModalCreateChanel from "~/components/modals/ModalCreateChanel.vue";
+import ModalAddChanel from "~/components/modals/ModalAddChanel.vue";
 
 export default {
   components: {
     Alert,
     ChanelSearch,
     ChanelList,
-    ModalCreateChanel,
+    ModalAddChanel,
   },
   data: () => ({
     tab: null,
@@ -54,7 +62,11 @@ export default {
   },
   methods: {
     ...mapActions({
+      setModal: "modalStore/setModal",
     }),
+    addChanel() {
+      this.setModal({ type: 'modalAddChanel', value: true });
+    }
   },
   watch: {
     tab() {

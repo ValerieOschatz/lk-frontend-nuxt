@@ -35,6 +35,10 @@ export const state = () => ({
     isOpen: false,
     option: '',
   },
+  modalAddChanel: {
+    isOpen: false,
+    option: '',
+  },
 });
 
 export const getters = {
@@ -64,6 +68,9 @@ export const getters = {
   },
   getModalDeleteComment(state) {
     return state.modalDeleteComment;
+  },
+  getModalAddChanel(state) {
+    return state.modalAddChanel;
   },
 };
 

@@ -1,13 +1,5 @@
 <template>
   <div>
-    <v-btn
-      variant="text"
-      color="rgb(179, 91, 67)"
-      block
-      @click="dialog = true"
-    >
-      Создать канал
-    </v-btn>
     <v-dialog
       v-model="dialog"
       width="500"
@@ -64,17 +56,16 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      modalEditProfileInfo: "modalStore/getModalEditProfileInfo",
-      profile: "profileStore/getProfile",
+      modalAddChanel: "modalStore/getModalAddChanel",
     }),
     isOpen() {
-      return this.modalEditProfileInfo.isOpen;
+      return this.modalAddChanel.isOpen;
     },
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      editProfileInfo: "profileStore/editProfileInfo",
+      // editProfileInfo: "profileStore/editProfileInfo",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -89,27 +80,23 @@ export default {
           description: this.description
         };
 
-        this.editProfileInfo(data);
+        // this.editProfileInfo(data);
       }
     },
-    setValues() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
-    }
+    // setValues() {
+    //   this.name = this.profile.name;
+    //   this.description = this.profile.description;
+    // }
   },
   watch: {
-    profile() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
-    },
     isOpen() {
       this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalEditProfileInfo', value: false });
+        this.setModal({ type: 'modalAddChanel', value: false });
       } else {
-        this.setValues();
+        // this.setValues();
       }
     }
   }
