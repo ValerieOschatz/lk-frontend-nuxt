@@ -3,7 +3,7 @@
   item-props
   lines="three"
 >
-  <div v-for="user in userList" :key="user._id">
+  <div v-for="user in list" :key="user._id">
     <v-list-item
       :prepend-avatar="user.photo ? `http://localhost:3001/${user.photo}` : '/image2.jpg'"
       nav
@@ -43,15 +43,29 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
-    userList: {
-      type: Array,
-      default: []
-    }
+    tab: {
+      type: Number,
+      default: 0,
+    },
+    option: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
+      userList: "usersStore/getUserList",
+      subscriberList: "usersStore/getSubscriberList",
     }),
+    list() {
+      if (this.tab === 1) {
+      } else if (this.tab === 2) {
+        return this.subscriberList;
+      } else if (this.tab === 3) {
+        return this.userList;
+      }
+    }
   },
   methods: {
     ...mapActions({
@@ -62,10 +76,10 @@ export default {
       return user.subscribers.includes(this.profile.id);
     },
     onSubscribe(userId) {
-      this.subscribe({ userId, option: 'search' });
+      this.subscribe({ userId, profileId: this.profile.id, option: this.option });
     },
     onUnsubscribe(userId) {
-      this.unsubscribe({ userId, option: 'search' });
+      this.unsubscribe({ userId, profileId: this.profile.id, option: this.option });
     }
   },
 }

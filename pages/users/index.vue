@@ -14,10 +14,12 @@
         One
       </v-window-item>
       <v-window-item :value="2">
-        <UserSubscribers />
+        <UserSearch :tab="tab" />
+        <UserList :tab="tab" option="subscribers" />
       </v-window-item>
       <v-window-item :value="3">
-        <UserSearch />
+        <UserSearch :tab="tab" />
+        <UserList :tab="tab" option="search" />
       </v-window-item>
     </v-window>
     <Alert />
@@ -33,21 +35,42 @@ definePageMeta({
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
-import UserSearch from "../../components/users/tabs/UserSearch.vue";
-import UserSubscribers from "../../components/users/tabs/UserSubscribers.vue";
+import UserSearch from "~/components/users/UserSearch.vue";
+import UserList from "~/components/users/UserList.vue"
 
 export default {
   components: {
     Alert,
     UserSearch,
-    UserSubscribers,
+    UserList,
   },
   data: () => ({
     tab: null,
   }),
   computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
+      searchedName: "profileStore/getSearchedName",
+      subscriberName: "profileStore/getSubscriberName",
+      userList: "usersStore/getUserList",
+      subscriberList: "usersStore/getSubscriberList",
+    }),
   },
   methods: {
+    ...mapActions({
+      setUserList: "usersStore/setUserList",
+      setSubscriberList: "usersStore/setSubscriberList",
+    }),
+  },
+  watch: {
+    tab() {
+      if (this.tab === 1) {
+      } else if (this.tab === 2) {
+        this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile.id });
+      } else if (this.tab === 3) {
+        this.setUserList({ name: this.searchedName });
+      }
+    }
   }
 }
 </script>

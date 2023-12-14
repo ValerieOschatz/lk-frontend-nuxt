@@ -5,6 +5,7 @@ import {
 
 export const state = () => ({
   userList: [],
+  subscriberList: [],
   user: {
     id: '',
     name: '',
@@ -22,6 +23,9 @@ export const getters = {
   getUserList(state) {
     return state.userList;
   },
+  getSubscriberList(state) {
+    return state.subscriberList;
+  },
   getUser(state) {
     return state.user;
   },
@@ -30,6 +34,9 @@ export const getters = {
 export const mutations = {
   setUserList(state, data) {
     state.userList = data;
+  },
+  setSubscriberList(state, data) {
+    state.subscriberList = data;
   },
   setUser(state, data) {
     state.user = {
@@ -47,15 +54,30 @@ export const mutations = {
 };
 
 export const actions = {
-  setUserList({ commit }, { name, subscribers, subscriptions, search }) {
-    if (search === 'name' && !name) {
+  setUserList({ commit }, { name }) {
+    if (!name) {
       commit("setUserList", []);
       return;
     }
     
-    getUserListApi({ name, subscribers, subscriptions })
+    getUserListApi({ name })
     .then(res => {
       commit("setUserList", res.data);
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  setSubscriberList({ commit }, { name, subscribers }) {
+    getUserListApi({ name, subscribers })
+    .then(res => {
+      commit("setSubscriberList", res.data);
     })
     .catch(err => {
       const data = {
