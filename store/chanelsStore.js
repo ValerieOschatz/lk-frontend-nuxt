@@ -142,7 +142,7 @@ export const actions = {
     updateChanelInfoApi(data)
     .then(res => {
       dispatch("setChanel", { chanelId: res.data._id });
-      dispatch("modalStore/setModal", { type: 'modalEditChanelInfo', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditInfo', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

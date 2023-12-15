@@ -56,17 +56,22 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      modalEditProfileInfo: "modalStore/getModalEditProfileInfo",
+      modalEditInfo: "modalStore/getModalEditInfo",
       profile: "profileStore/getProfile",
+      chanel: "chanelsStore/getChanel",
     }),
     isOpen() {
-      return this.modalEditProfileInfo.isOpen;
+      return this.modalEditInfo.isOpen;
+    },
+    option() {
+      return this.modalEditInfo.option;
     },
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
       editProfileInfo: "profileStore/editProfileInfo",
+      editChanelInfo: "chanelsStore/editChanelInfo",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -81,25 +86,43 @@ export default {
           description: this.description
         };
 
-        this.editProfileInfo(data);
+        if (this.option === 'profile') {
+          this.editProfileInfo(data);
+        } else {
+          data.chanelId = this.chanel.id;
+          this.editChanelInfo(data);
+        }
       }
     },
     setValues() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
+      if (this.option === 'profile') {
+        this.name = this.profile.name;
+        this.description = this.profile.description;
+      } else {
+        this.name = this.chanel.name;
+        this.description = this.chanel.description;
+      }
     }
   },
   watch: {
     profile() {
-      this.name = this.profile.name;
-      this.description = this.profile.description;
+      if (this.option === 'profile') {
+        this.name = this.profile.name;
+        this.description = this.profile.description;
+      }
+    },
+    chanel() {
+      if (this.option === 'chanel') {
+        this.name = this.chanel.name;
+        this.description = this.chanel.description;
+      }
     },
     isOpen() {
       this.dialog = this.isOpen;
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalEditProfileInfo', value: false });
+        this.setModal({ type: 'modalEditInfo', value: false });
       } else {
         this.setValues();
       }

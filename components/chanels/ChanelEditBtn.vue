@@ -34,8 +34,8 @@ export default {
         type: 'modalEditPhoto',
       },
       {
-        title: 'Изменить данные профиля',
-        type: 'modalEditProfileInfo',
+        title: 'Изменить данные канала',
+        type: 'modalEditInfo',
       },
       { 
         title: 'Изменить настройки приватности',

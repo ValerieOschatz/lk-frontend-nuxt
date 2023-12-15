@@ -114,7 +114,7 @@ export const actions = {
     updateProfileInfoApi(data)
     .then(res => {
       dispatch("setProfile");
-      dispatch("modalStore/setModal", { type: 'modalEditProfileInfo', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditInfo', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

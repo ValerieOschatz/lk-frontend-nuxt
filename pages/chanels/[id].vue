@@ -6,6 +6,7 @@
       :owner="false"
     /> -->
     <ModalEditPhoto />
+    <ModalEditInfo />
     <Alert />
   </div>
 </template>
@@ -21,6 +22,7 @@ import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ChanelInfo from '../components/chanels/ChanelInfo.vue';
 import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
+import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 // import ProfilePostList from '../components/profile/ProfilePostList.vue';
 
 export default {
@@ -28,6 +30,7 @@ export default {
     Alert,
     ChanelInfo,
     ModalEditPhoto,
+    ModalEditInfo,
     // ProfilePostList,
   },
   methods: {

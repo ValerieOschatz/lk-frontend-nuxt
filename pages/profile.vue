@@ -11,7 +11,7 @@
     <ModalAddPost />
     <ModalDeletePostVue />
     <ModalEditPhoto />
-    <ModalEditProfileInfo />
+    <ModalEditInfo />
     <ModalEditPrivatSettings />
     <ModalLogout />
     <Alert />
@@ -31,7 +31,7 @@ import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalAddPost from '../components/modals/ModalAddPost.vue';
 import ModalDeletePostVue from "~/components/modals/ModalDeletePost.vue";
 import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
-import ModalEditProfileInfo from "~/components/modals/ModalEditProfileInfo.vue";
+import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 import ModalLogout from "~/components/modals/ModalLogout.vue";
 import Alert from '../components/Alert.vue';
@@ -43,7 +43,7 @@ export default {
     ModalAddPost,
     ModalDeletePostVue,
     ModalEditPhoto,
-    ModalEditProfileInfo,
+    ModalEditInfo,
     ModalEditPrivatSettings,
     ModalLogout,
     Alert,
