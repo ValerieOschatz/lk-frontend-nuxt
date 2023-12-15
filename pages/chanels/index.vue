@@ -58,6 +58,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
+      ownChanelName: "chanelsStore/getOwnChanelName",
     }),
   },
   methods: {
@@ -74,7 +75,7 @@ export default {
       if (this.tab === 1) {
       } else if (this.tab === 2) {
       } else if (this.tab === 3) {
-        this.setOwnChanelList({ owner: this.profile.id });
+        this.setOwnChanelList({ owner: this.profile.id, name: this.ownChanelName });
       }
     }
   }

@@ -5,11 +5,15 @@ import {
 
 export const state = () => ({
   ownChanelList: [],
+  ownChanelName: '',
 });
 
 export const getters = {
   getOwnChanelList(state) {
     return state.ownChanelList;
+  },
+  getOwnChanelName(state) {
+    return state.ownChanelName;
   },
 };
 
@@ -17,11 +21,14 @@ export const mutations = {
   setOwnChanelList(state, data) {
     state.ownChanelList = data;
   },
+  setOwnChanelName(state, data) {
+    state.ownChanelName = data;
+  },
 };
 
 export const actions = {
-  setOwnChanelList({ commit }, { owner }) {
-    getChanelListApi({ owner })
+  setOwnChanelList({ commit }, { owner, name }) {
+    getChanelListApi({ owner, name })
     .then(res => {
       commit("setOwnChanelList", res.data);
     })

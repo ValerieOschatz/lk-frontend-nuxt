@@ -7,7 +7,7 @@
     <v-text-field
       density="compact"
       variant="solo"
-      label="Введите имя"
+      label="Введите название"
       append-inner-icon="mdi-magnify"
       single-line
       hide-details
@@ -38,25 +38,17 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setSearchedName: "profileStore/setSearchedName",
-      setSubscriberName: "profileStore/setSubscriberName",
-      setSubscriptionName: "profileStore/setSubscriptionName",
+      setOwnChanelName: "chanelsStore/setOwnChanelName",
     }),
     ...mapActions({
-      setUserList: "usersStore/setUserList",
-      setSubscriberList: "usersStore/setSubscriberList",
-      setSubscriptionList: "usersStore/setSubscriptionList",
+      setOwnChanelList: "chanelsStore/setOwnChanelList",
     }),
     onSearch() {
       if (this.tab === 1) {
-        this.setSubscriptionName(this.name);
-        this.setSubscriptionList({ name: this.name, subscriptions: this.profile.id });
       } else if (this.tab === 2) {
-        this.setSubscriberName(this.name);
-        this.setSubscriberList({ name: this.name, subscribers: this.profile.id });
       } else if (this.tab === 3) {
-        this.setSearchedName(this.name);
-        this.setUserList({ name: this.name });
+        this.setOwnChanelName(this.name);
+        this.setOwnChanelList({ owner: this.profile.id, name: this.name });
       }
     }
   },
