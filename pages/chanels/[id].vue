@@ -1,51 +1,38 @@
 <template>
   <div>
-    <ProfileInfo
-      :user="user"
-      :owner="false"
-    />
+    <ChanelInfo />
     <v-divider></v-divider>
-    <ProfilePostList 
+    <!-- <ProfilePostList 
       :owner="false"
-    />
+    /> -->
   </div>
 </template>
 
 <script setup>
 definePageMeta({
-  name: "UserCardPage",
+  name: "ChanelCardPage",
 })
 </script>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
-import ProfileInfo from '../components/profile/ProfileInfo.vue';
-import ProfilePostList from '../components/profile/ProfilePostList.vue';
+import ChanelInfo from '../components/chanels/ChanelInfo.vue';
+// import ProfilePostList from '../components/profile/ProfilePostList.vue';
 
 export default {
   components: {
     Alert,
-    ProfileInfo,
-    ProfilePostList,
-  },
-  data: () => ({
-  }),
-  computed: {
-    ...mapGetters({
-      user: "usersStore/getUser",
-    }),
+    ChanelInfo,
+    // ProfilePostList,
   },
   methods: {
     ...mapActions({
-      setUser: "usersStore/setUser",
+      setChanel: "chanelsStore/setChanel",
     }),
   },
   mounted() {
-    this.setUser({ userId: this.$route.params.id });
+    this.setChanel({ chanelId: this.$route.params.id });
   }
 }
 </script>
-
-<style scoped>
-</style>

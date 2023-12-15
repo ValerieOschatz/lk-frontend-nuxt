@@ -39,4 +39,5 @@ export {
 export {
   getChanelListApi,
   createChanelApi,
+  getChanelCardApi,
 } from "./chanel";

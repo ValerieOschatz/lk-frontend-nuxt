@@ -10,6 +10,14 @@ export const getChanelListApi = ({ owner, name, subscriptions }) =>
   }
 );
 
+export const getChanelCardApi = ({ chanelId }) =>
+  instance.get("/chanel/card", {
+    params: {
+      chanelId,
+    },
+  }
+);
+
 export const createChanelApi = ({ name, description }) => {
   return instance.post("/chanel/create", {
     name,
