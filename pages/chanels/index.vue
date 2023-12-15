@@ -15,7 +15,7 @@
       <v-window-item :value="2">
       </v-window-item>
       <v-window-item :value="3">
-        <ChanelSearch />
+        <ChanelSearch :tab="tab" />
         <v-btn
           variant="text"
           color="rgb(179, 91, 67)"
@@ -25,7 +25,7 @@
           Создать канал
         </v-btn>
         <ModalAddChanel />
-        <ChanelList />
+        <ChanelList :tab="tab" option="own" />
       </v-window-item>
     </v-window>
     <Alert />
@@ -63,6 +63,7 @@ export default {
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
+      setOwnChanelList: "chanelsStore/setOwnChanelList",
     }),
     addChanel() {
       this.setModal({ type: 'modalAddChanel', value: true });
@@ -73,6 +74,7 @@ export default {
       if (this.tab === 1) {
       } else if (this.tab === 2) {
       } else if (this.tab === 3) {
+        this.setOwnChanelList({ owner: this.profile.id });
       }
     }
   }

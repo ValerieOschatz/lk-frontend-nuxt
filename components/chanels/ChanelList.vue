@@ -3,33 +3,28 @@
   item-props
   lines="three"
 >
-  <div v-for="user in list" :key="user._id">
+  <div v-for="chanel in list" :key="chanel._id">
     <v-list-item
-      :prepend-avatar="user.photo ? `http://localhost:3001/${user.photo}` : '/image2.jpg'"
+      :prepend-avatar="chanel.photo ? `http://localhost:3001/${chanel.photo}` : '/image2.jpg'"
       nav
       height="60"
     >
-    <v-list-item-title class="link" @click="navigateTo(`/users/${user._id}`)">{{ user.name }}</v-list-item-title>
-    <v-list-item-subtitle>{{ `Подписчики: ${user.subscribers.length}` }}</v-list-item-subtitle>
-      <template v-slot:append>
+    <v-list-item-title class="link" @click="navigateTo(`/chanels/${chanel._id}`)">{{ chanel.name }}</v-list-item-title>
+    <v-list-item-subtitle>{{ `Подписчики: ${chanel.subscribers.length}` }}</v-list-item-subtitle>
+      <template v-slot:append v-if="chanel.owner !== profile.id">
         <v-btn
-          v-if="isSubscribed(user)"
+          v-if="isSubscribed(chanel)"
           variant="text"
-          icon="mdi-account-minus"
+          icon="mdi-minus-box-multiple-outline"
           color="#E57373"
-          @click="onUnsubscribe(user._id)"
+          @click="onUnsubscribe(chanel._id)"
         ></v-btn>
         <v-btn
           v-else
           variant="text"
-          icon="mdi-account-plus"
+          icon="mdi-plus-box-multiple-outline"
           color="#E57373"
-          @click="onSubscribe(user._id)"
-        ></v-btn>
-        <v-btn
-          variant="text"
-          icon="mdi-email-outline"
-          color="#E57373"
+          @click="onSubscribe(chanel._id)"
         ></v-btn>
       </template>
     </v-list-item>
@@ -55,17 +50,13 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
-      userList: "usersStore/getUserList",
-      subscriberList: "usersStore/getSubscriberList",
-      subscriptionList: "usersStore/getSubscriptionList",
+      ownChanelList: "chanelsStore/getOwnChanelList",
     }),
     list() {
       if (this.tab === 1) {
-        return this.subscriptionList;
       } else if (this.tab === 2) {
-        return this.subscriberList;
       } else if (this.tab === 3) {
-        return this.userList;
+        return this.ownChanelList;
       }
     }
   },
@@ -74,8 +65,8 @@ export default {
       subscribe: "profileStore/subscribe",
       unsubscribe: "profileStore/unsubscribe",
     }),
-    isSubscribed(user) {
-      return user.subscribers.includes(this.profile.id);
+    isSubscribed(chanel) {
+      return chanel.subscribers.includes(this.profile.id);
     },
     onSubscribe(userId) {
       this.subscribe({ userId, profileId: this.profile.id, option: this.option });

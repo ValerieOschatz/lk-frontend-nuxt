@@ -37,5 +37,6 @@ export {
 } from "./user";
 
 export {
+  getChanelListApi,
   createChanelApi,
 } from "./chanel";
