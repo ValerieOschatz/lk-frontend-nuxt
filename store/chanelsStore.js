@@ -2,6 +2,10 @@ import {
   createChanelApi,
   getChanelListApi,
   getChanelCardApi,
+  updateChanelPhotoApi,
+  updateChanelInfoApi,
+  updateChanelPrivatSettingsApi,
+  deleteChanelApi,
 } from "../api";
 
 export const state = () => ({
@@ -54,6 +58,20 @@ export const mutations = {
       },
     };
   },
+  resetChanel(state) {
+    state.chanel = {
+      id: '',
+      name: '',
+      photo: '',
+      description: '',
+      owner: '',
+      subscribers: [],
+      privatSettings: {
+        comments: null,
+        posts: null,
+      },
+    };
+  },
 };
 
 export const actions = {
@@ -93,6 +111,69 @@ export const actions = {
     .then(res => {
       dispatch("setOwnChanelList", { owner: res.data.owner });
       dispatch("modalStore/setModal", { type: 'modalAddChanel', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  editChanelPhoto({ dispatch }, data) {
+    updateChanelPhotoApi(data)
+    .then(res => {
+      dispatch("setChanel", { chanelId: res.data._id });
+      dispatch("modalStore/setModal", { type: 'modalEditChanelPhoto', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  editChanelInfo({ dispatch }, data) {
+    updateChanelInfoApi(data)
+    .then(res => {
+      dispatch("setChanel", { chanelId: res.data._id });
+      dispatch("modalStore/setModal", { type: 'modalEditChanelInfo', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  editPrivatSettings({ dispatch }, data) {
+    updateChanelPrivatSettingsApi(data)
+    .then(res => {
+      dispatch("setChanel", { chanelId: res.data._id });
+      dispatch("modalStore/setModal", { type: 'modalEditChanelPrivatSettings', value: false }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  deleteChanel({ commit, dispatch }, { chanelId }) {
+    deleteChanelApi({ chanelId })
+    .then(res => {
+      navigateTo('/chanels');
+      commit("resetChanel");
+      dispatch("modalStore/setModal", { type: 'modalDeleteChanel', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

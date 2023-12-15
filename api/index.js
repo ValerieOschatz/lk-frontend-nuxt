@@ -40,4 +40,8 @@ export {
   getChanelListApi,
   createChanelApi,
   getChanelCardApi,
+  updateChanelPhotoApi,
+  updateChanelInfoApi,
+  updateChanelPrivatSettingsApi,
+  deleteChanelApi,
 } from "./chanel";

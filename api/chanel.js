@@ -24,3 +24,35 @@ export const createChanelApi = ({ name, description }) => {
     description,
   });
 };
+
+export const updateChanelPhotoApi = (data) => {
+  return instance.patch("/chanel/photo", data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+export const updateChanelInfoApi = ({ chanelId, name, description }) => {
+  return instance.patch("/chanel/info", {
+    chanelId,
+    name,
+    description,
+  });
+};
+
+export const updateChanelPrivatSettingsApi = ({ chanelId, comments, posts }) => {
+  return instance.patch("/chanel/privat-settings", {
+    chanelId,
+    comments,
+    posts,
+  });
+};
+
+export const deleteChanelApi = ({ chanelId }) => {
+  return instance.delete("/chanel/delete", {
+    params: {
+      chanelId,
+    }
+  });
+};
