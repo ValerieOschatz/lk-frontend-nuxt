@@ -41,16 +41,21 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      modalEditProfilePhoto: "modalStore/getModalEditProfilePhoto",
+      modalEditPhoto: "modalStore/getModalEditPhoto",
+      chanel: "chanelsStore/getChanel",
     }),
     isOpen() {
-      return this.modalEditProfilePhoto.isOpen;
+      return this.modalEditPhoto.isOpen;
+    },
+    option() {
+      return this.modalEditPhoto.option;
     },
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
-      editPhoto: "profileStore/editProfilePhoto",
+      editProfilePhoto: "profileStore/editProfilePhoto",
+      editChanelPhoto: "chanelsStore/editChanelPhoto",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -65,7 +70,12 @@ export default {
         if (!this.image) {
           this.dialog = false;
         } else {
-          this.editPhoto(formData);
+          if (this.option === 'profile') {
+            this.editProfilePhoto(formData);
+          } else {
+            formData.append('chanelId', this.chanel.id);
+            this.editChanelPhoto(formData);
+          }
         }
         this.clear();
       }
@@ -80,7 +90,7 @@ export default {
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalEditProfilePhoto', value: false });
+        this.setModal({ type: 'modalEditPhoto', value: false });
         this.clear();
       }
     }

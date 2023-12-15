@@ -126,7 +126,7 @@ export const actions = {
     updateChanelPhotoApi(data)
     .then(res => {
       dispatch("setChanel", { chanelId: res.data._id });
-      dispatch("modalStore/setModal", { type: 'modalEditChanelPhoto', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditPhoto', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

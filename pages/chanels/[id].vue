@@ -5,6 +5,8 @@
     <!-- <ProfilePostList 
       :owner="false"
     /> -->
+    <ModalEditPhoto />
+    <Alert />
   </div>
 </template>
 
@@ -18,12 +20,14 @@ definePageMeta({
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ChanelInfo from '../components/chanels/ChanelInfo.vue';
+import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
 // import ProfilePostList from '../components/profile/ProfilePostList.vue';
 
 export default {
   components: {
     Alert,
     ChanelInfo,
+    ModalEditPhoto,
     // ProfilePostList,
   },
   methods: {

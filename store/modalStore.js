@@ -1,5 +1,5 @@
 export const state = () => ({
-  modalEditProfilePhoto: {
+  modalEditPhoto: {
     isOpen: false,
     option: '',
   },
@@ -42,8 +42,8 @@ export const state = () => ({
 });
 
 export const getters = {
-  getModalEditProfilePhoto(state) {
-    return state.modalEditProfilePhoto;
+  getModalEditPhoto(state) {
+    return state.modalEditPhoto;
   },
   getModalEditProfileInfo(state) {
     return state.modalEditProfileInfo;

@@ -31,7 +31,7 @@ export default {
     items: [
       {
         title: 'Изменить фото',
-        type: 'modalEditProfilePhoto',
+        type: 'modalEditPhoto',
       },
       {
         title: 'Изменить данные профиля',
@@ -52,7 +52,7 @@ export default {
       setModal: "modalStore/setModal",
     }),
     setOption(type) {
-      this.setModal({ type, value: true });
+      this.setModal({ type, value: true, option: 'profile' });
     }
   }
 }

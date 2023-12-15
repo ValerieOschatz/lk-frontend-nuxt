@@ -98,7 +98,7 @@ export const actions = {
     updateProfilePhotoApi(data)
     .then(res => {
       dispatch("setProfile");
-      dispatch("modalStore/setModal", { type: 'modalEditProfilePhoto', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditPhoto', value: false }, { root: true });
     })
     .catch(err => {
       const data = {
