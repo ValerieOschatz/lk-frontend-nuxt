@@ -2,13 +2,12 @@
   <div>
     <ChanelInfo />
     <v-divider></v-divider>
-    <!-- <ProfilePostList 
-      :owner="false"
-    /> -->
+    <ChanelPostList />
     <ModalEditPhoto />
     <ModalEditInfo />
     <ModalEditPrivatSettings />
     <ModalDelete />
+    <ModalCommentList />
     <Alert />
   </div>
 </template>
@@ -23,21 +22,23 @@ definePageMeta({
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ChanelInfo from '../components/chanels/ChanelInfo.vue';
+import ChanelPostList from '../components/chanels/ChanelPostList.vue';
 import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
 import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 import ModalDelete from "~/components/modals/ModalDelete.vue";
-// import ProfilePostList from '../components/profile/ProfilePostList.vue';
+import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 
 export default {
   components: {
     Alert,
     ChanelInfo,
+    ChanelPostList,
     ModalEditPhoto,
     ModalEditInfo,
     ModalEditPrivatSettings,
     ModalDelete,
-    // ProfilePostList,
+    ModalCommentList,
   },
   methods: {
     ...mapActions({

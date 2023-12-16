@@ -5,7 +5,7 @@
       <h2 v-else-if="postsAccess && postList.length" class="list-title">Список постов:</h2>
       <h2 v-else-if="postsAccess && !postList.length" class="list-title">Список постов пуст</h2>
       <v-btn
-        v-if="owner"
+        v-if="ownChanel"
         density="compact"
         icon="mdi-plus"
         color="#5C6BC0"
@@ -17,8 +17,7 @@
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
           <div class="owner-container">
-            <NuxtLink v-if="post.owner._id === profile.id" to="/profile" class="link">{{ post.owner.name }}</NuxtLink>
-            <NuxtLink v-else :to="`/users/${post.owner._id}`" class="link">{{ post.owner.name }}</NuxtLink>
+            <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="link">{{ post.ownerChanel.name }}</NuxtLink>
             <PostBtn v-if="post.owner._id === profile.id" :post="post" />
           </div>
           <span class="date">{{ convertDate(post.createdAt) }}</span>
@@ -68,25 +67,20 @@ export default {
   components: {
     PostBtn,
   },
-  data: () => ({
-  }),
-  props: {
-    owner: {
-      type: Boolean,
-      default: false,
-    },
-  },
   computed: {
     ...mapGetters({
       postList: "postsStore/getPostList",
       profile: "profileStore/getProfile",
-      user: "usersStore/getUser",
+      chanel: "chanelsStore/getChanel",
     }),
+    ownChanel() {
+      return this.chanel.owner === this.profile.id;
+    },
     postsAccess() {
-      return this.owner || this.user.privatSettings.posts || this.user.subscribers.includes(this.profile.id);
+      return this.ownChanel || this.chanel.privatSettings.posts || this.chanel.subscribers.includes(this.profile.id);
     },
     commentsAccess() {
-      return (this.owner && this.profile.privatSettings.comments) || (!this.owner && this.user.privatSettings.comments);
+      return this.chanel.privatSettings.comments;
     },
   },
   methods: {
@@ -111,18 +105,9 @@ export default {
     }
   },
   watch: {
-    profile() {
-      if (this.owner) this.setPostList({ owner: this.profile.id });
-      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
+    chanel() {
+      if (this.postsAccess) this.setPostList({ ownerChanel: this.chanel.id });
     },
-    user() {
-      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
-    },
-  },
-  mounted() {
-    if (this.owner && this.profile.id) {
-      this.setPostList({ owner: this.profile.id });
-    }
   }
 }
 </script>
@@ -145,6 +130,5 @@ export default {
 .link {
   text-decoration: none;
   color: rgb(179, 91, 67);
-  /* font-size: 12px; */
 }
 </style>

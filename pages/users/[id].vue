@@ -9,6 +9,7 @@
       :owner="false"
     />
     <ModalDelete />
+    <ModalCommentList />
     <Alert />
   </div>
 </template>
@@ -25,6 +26,7 @@ import Alert from '../components/Alert.vue';
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalDelete from "~/components/modals/ModalDelete.vue";
+import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 
 export default {
   components: {
@@ -32,9 +34,8 @@ export default {
     ProfileInfo,
     ProfilePostList,
     ModalDelete,
+    ModalCommentList,
   },
-  data: () => ({
-  }),
   computed: {
     ...mapGetters({
       user: "usersStore/getUser",

@@ -14,6 +14,7 @@
     <ModalEditInfo />
     <ModalEditPrivatSettings />
     <ModalLogout />
+    <ModalCommentList />
     <Alert />
   </div>
 </template>
@@ -34,6 +35,7 @@ import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
 import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 import ModalLogout from "~/components/modals/ModalLogout.vue";
+import ModalCommentList from "~/components/modals/ModalCommentList.vue";
 import Alert from '../components/Alert.vue';
 
 export default {
@@ -46,6 +48,7 @@ export default {
     ModalEditInfo,
     ModalEditPrivatSettings,
     ModalLogout,
+    ModalCommentList,
     Alert,
   },
   computed: {
