@@ -54,6 +54,7 @@ export default {
     ...mapGetters({
       modalAddPost: "modalStore/getModalAddPost",
       selectedPost: "postsStore/getSelectedPost",
+      chanel: "chanelsStore/getChanel",
     }),
     isOpen() {
       return this.modalAddPost.isOpen;
@@ -87,6 +88,7 @@ export default {
           const formData = new FormData();
           if (this.text) formData.append('text', this.text);
           if (this.image) formData.append('image', this.image[0]);
+          if (this.$route.path.split('/')[1] === 'chanels') formData.append('ownerChanel', this.chanel.id);
           if (!this.text && !this.image) {
             this.dialog = false;
           } else {

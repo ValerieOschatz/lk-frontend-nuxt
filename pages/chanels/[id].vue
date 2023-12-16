@@ -8,6 +8,7 @@
     <ModalEditPrivatSettings />
     <ModalDelete />
     <ModalCommentList />
+    <ModalAddPost />
     <Alert />
   </div>
 </template>
@@ -28,6 +29,7 @@ import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 import ModalDelete from "~/components/modals/ModalDelete.vue";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
+import ModalAddPost from '../components/modals/ModalAddPost.vue';
 
 export default {
   components: {
@@ -39,6 +41,7 @@ export default {
     ModalEditPrivatSettings,
     ModalDelete,
     ModalCommentList,
+    ModalAddPost,
   },
   methods: {
     ...mapActions({

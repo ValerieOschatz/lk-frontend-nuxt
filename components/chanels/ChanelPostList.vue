@@ -16,7 +16,7 @@
     <ul v-if="postsAccess" class="list">
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
-          <div class="owner-container">
+          <div v-if="post.ownerChanel" class="owner-container">
             <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="link">{{ post.ownerChanel.name }}</NuxtLink>
             <PostBtn v-if="post.owner._id === profile.id" :post="post" />
           </div>

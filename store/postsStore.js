@@ -43,7 +43,11 @@ export const actions = {
   createPost({ dispatch }, data) {
     createPostApi(data)
     .then(res => {
-      dispatch("setPostList", { owner: res.data.owner });
+      if (res.data.ownerChanel) {
+        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      } else {
+        dispatch("setPostList", { owner: res.data.owner });
+      }
       dispatch("modalStore/setModal", { type: 'modalAddPost', value: false, option: '' }, { root: true });
     })
     .catch(err => {
