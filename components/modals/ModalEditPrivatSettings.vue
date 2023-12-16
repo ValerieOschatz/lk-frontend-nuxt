@@ -48,15 +48,20 @@ export default {
     ...mapGetters({
       modalEditPrivatSettings: "modalStore/getModalEditPrivatSettings",
       profile: "profileStore/getProfile",
+      chanel: "chanelsStore/getChanel",
     }),
     isOpen() {
       return this.modalEditPrivatSettings.isOpen;
+    },
+    option() {
+      return this.modalEditPrivatSettings.option;
     },
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
       editPrivatSettings: "profileStore/editPrivatSettings",
+      editChaneSettings: "chanelsStore/editPrivatSettings",
     }),
     async submitForm() {
       const data = {
@@ -64,17 +69,35 @@ export default {
         posts: this.posts,
       };
 
-      this.editPrivatSettings(data);
+      if (this.option === 'profile') {
+        this.editPrivatSettings(data);
+      } else {
+        data.chanelId = this.chanel.id;
+        this.editChaneSettings(data);
+      }
     },
     setValues() {
-      this.comments = this.profile.privatSettings.comments ? true : false;
-      this.posts = this.profile.privatSettings.posts ? true : false;
+      if (this.option === 'profile') {
+        this.comments = this.profile.privatSettings.comments ? true : false;
+        this.posts = this.profile.privatSettings.posts ? true : false;
+      } else {
+        this.comments = this.chanel.privatSettings.comments ? true : false;
+        this.posts = this.chanel.privatSettings.posts ? true : false;
+      }
     }
   },
   watch: {
     profile() {
-      this.comments = this.profile.privatSettings.comments ? true : false;
+      if (this.option === 'profile') {
+        this.comments = this.profile.privatSettings.comments ? true : false;
       this.posts = this.profile.privatSettings.posts ? true : false;
+      }
+    },
+    chanel() {
+      if (this.option === 'chanel') {
+        this.comments = this.chanel.privatSettings.comments ? true : false;
+        this.posts = this.chanel.privatSettings.posts ? true : false;
+      }
     },
     isOpen() {
       this.dialog = this.isOpen;

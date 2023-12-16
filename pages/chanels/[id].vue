@@ -7,6 +7,7 @@
     /> -->
     <ModalEditPhoto />
     <ModalEditInfo />
+    <ModalEditPrivatSettings />
     <Alert />
   </div>
 </template>
@@ -23,6 +24,7 @@ import Alert from '../components/Alert.vue';
 import ChanelInfo from '../components/chanels/ChanelInfo.vue';
 import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
 import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
+import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
 // import ProfilePostList from '../components/profile/ProfilePostList.vue';
 
 export default {
@@ -31,6 +33,7 @@ export default {
     ChanelInfo,
     ModalEditPhoto,
     ModalEditInfo,
+    ModalEditPrivatSettings,
     // ProfilePostList,
   },
   methods: {

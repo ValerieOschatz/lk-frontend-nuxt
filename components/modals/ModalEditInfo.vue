@@ -14,7 +14,7 @@
           >
             <v-text-field
               variant="underlined"
-              label="Имя"
+              :label="option === 'profile' ? 'Имя' : 'Название'"
               v-model="name"
               :rules="nameRules"
             ></v-text-field>

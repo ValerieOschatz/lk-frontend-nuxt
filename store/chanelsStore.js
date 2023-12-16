@@ -157,7 +157,7 @@ export const actions = {
     updateChanelPrivatSettingsApi(data)
     .then(res => {
       dispatch("setChanel", { chanelId: res.data._id });
-      dispatch("modalStore/setModal", { type: 'modalEditChanelPrivatSettings', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalEditPrivatSettings', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

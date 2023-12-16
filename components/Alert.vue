@@ -57,6 +57,6 @@ export default {
 .alert {
   position: fixed;
   top: 10px;
-  left: 10px;
+  right: 10px;
 }
 </style>
