@@ -42,8 +42,8 @@ export default {
         type: 'modalEditPrivatSettings',
       },
       {
-        title: 'Выйти из профиля',
-        type: 'modalLogout',
+        title: 'Удалить канал',
+        type: 'modalDelete',
       },
     ],
   }),

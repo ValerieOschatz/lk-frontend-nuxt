@@ -76,7 +76,7 @@ export const actions = {
     deletePostApi({ postId })
     .then(res => {
       dispatch("setPostList", { owner });
-      dispatch("modalStore/setModal", { type: 'modalDeletePost', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

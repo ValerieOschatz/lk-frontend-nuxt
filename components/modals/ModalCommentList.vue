@@ -58,7 +58,6 @@
       </v-card>
     </v-dialog>
     <ModalAddComment />
-    <ModalDeleteComment />
   </div>
 </template>
 
@@ -66,13 +65,11 @@
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import { convertDate } from "~/utils/convertDate";
 import ModalAddComment from "./ModalAddComment.vue";
-import ModalDeleteComment from "./ModalDeleteComment.vue";
 import CommentBtn from "~/components/CommentBtn.vue";
 
 export default {
   components: {
     ModalAddComment,
-    ModalDeleteComment,
     CommentBtn,
   },
   data: () => ({

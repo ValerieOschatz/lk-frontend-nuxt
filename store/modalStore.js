@@ -19,7 +19,7 @@ export const state = () => ({
     isOpen: false,
     option: '',
   },
-  modalDeletePost: {
+  modalDelete: {
     isOpen: false,
     option: '',
   },
@@ -28,10 +28,6 @@ export const state = () => ({
     option: '',
   },
   modalAddComment: {
-    isOpen: false,
-    option: '',
-  },
-  modalDeleteComment: {
     isOpen: false,
     option: '',
   },
@@ -57,17 +53,14 @@ export const getters = {
   getModalAddPost(state) {
     return state.modalAddPost;
   },
-  getModalDeletePost(state) {
-    return state.modalDeletePost;
+  getModalDelete(state) {
+    return state.modalDelete;
   },
   getModalCommentList(state) {
     return state.modalCommentList;
   },
   getModalAddComment(state) {
     return state.modalAddComment;
-  },
-  getModalDeleteComment(state) {
-    return state.modalDeleteComment;
   },
   getModalAddChanel(state) {
     return state.modalAddChanel;

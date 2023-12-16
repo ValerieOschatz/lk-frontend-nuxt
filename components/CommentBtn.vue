@@ -34,7 +34,7 @@ export default {
       },
       {
         title: 'Удалить',
-        type: 'modalDeleteComment',
+        type: 'modalDelete',
       },
     ],
   }),
@@ -56,8 +56,9 @@ export default {
 
       if (type === 'modalAddComment') {
         this.setModal({ type, value: true, option: 'update' });
+      } else {
+        this.setModal({ type, value: true, option: 'comment' });
       }
-      this.setModal({ type, value: true });
     }
   }
 }

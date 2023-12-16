@@ -34,7 +34,7 @@ export default {
       },
       {
         title: 'Удалить',
-        type: 'modalDeletePost',
+        type: 'modalDelete',
       },
     ],
   }),
@@ -56,8 +56,9 @@ export default {
 
       if (type === 'modalAddPost') {
         this.setModal({ type, value: true, option: 'update' });
+      } else {
+        this.setModal({ type, value: true, option: 'post' });
       }
-      this.setModal({ type, value: true });
     }
   }
 }

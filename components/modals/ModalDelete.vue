@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-text>
-          Удалить комментарий?
+          Удалить?
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -28,25 +28,40 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      modalDeleteComment: "modalStore/getModalDeleteComment",
+      profile: "profileStore/getProfile",
+      modalDelete: "modalStore/getModalDelete",
       selectedPost: "postsStore/getSelectedPost",
       selectedComment: "commentsStore/getSelectedComment",
+      chanel: "chanelsStore/getChanel",
     }),
     isOpen() {
-      return this.modalDeleteComment.isOpen;
+      return this.modalDelete.isOpen;
+    },
+    option() {
+      return this.modalDelete.option;
     },
   },
   methods: {
     ...mapMutations({
+      setSelectedPost: "postsStore/setSelectedPost",
       setSelectedComment: "commentsStore/setSelectedComment",
     }),
     ...mapActions({
       setModal: "modalStore/setModal",
+      deletePost: "postsStore/deletePost",
       deleteComment: "commentsStore/deleteComment",
+      deleteChanel: "chanelsStore/deleteChanel",
     }),
     onDelete() {
-      this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
-      this.setSelectedComment(null);
+      if (this.option === 'post') {
+        this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id });
+        this.setSelectedPost(null);
+      } else if (this.option === 'comment') {
+        this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
+        this.setSelectedComment(null);
+      } else {
+        this.deleteChanel({ chanelId: this.chanel.id });
+      }
     }
   },
   watch: {
@@ -55,8 +70,9 @@ export default {
     },
     dialog() {
       if (this.dialog === false) {
-        this.setModal({ type: 'modalDeleteComment', value: false });
-        this.setSelectedComment(null);
+        this.setModal({ type: 'modalDelete', value: false });
+        if (this.option === 'post') this.setSelectedPost(null);
+        if (this.option === 'comment') this.setSelectedComment(null);
       }
     }
   }

@@ -9,7 +9,7 @@
       :owner="true"
     />
     <ModalAddPost />
-    <ModalDeletePostVue />
+    <ModalDelete />
     <ModalEditPhoto />
     <ModalEditInfo />
     <ModalEditPrivatSettings />
@@ -29,7 +29,7 @@ import { mapGetters, mapActions } from "vuex";
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalAddPost from '../components/modals/ModalAddPost.vue';
-import ModalDeletePostVue from "~/components/modals/ModalDeletePost.vue";
+import ModalDelete from "~/components/modals/ModalDelete.vue";
 import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
 import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
 import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
@@ -41,7 +41,7 @@ export default {
     ProfileInfo,
     ProfilePostList,
     ModalAddPost,
-    ModalDeletePostVue,
+    ModalDelete,
     ModalEditPhoto,
     ModalEditInfo,
     ModalEditPrivatSettings,

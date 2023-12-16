@@ -82,7 +82,7 @@ export const actions = {
     deleteCommentApi({ commentId })
     .then(res => {
       dispatch("setCommentList", { post });
-      dispatch("modalStore/setModal", { type: 'modalDeleteComment', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
     })
     .catch(err => {
       const data = {

@@ -8,6 +8,8 @@
     <ProfilePostList 
       :owner="false"
     />
+    <ModalDelete />
+    <Alert />
   </div>
 </template>
 
@@ -22,12 +24,14 @@ import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
+import ModalDelete from "~/components/modals/ModalDelete.vue";
 
 export default {
   components: {
     Alert,
     ProfileInfo,
     ProfilePostList,
+    ModalDelete,
   },
   data: () => ({
   }),

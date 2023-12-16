@@ -173,7 +173,7 @@ export const actions = {
     .then(res => {
       navigateTo('/chanels');
       commit("resetChanel");
-      dispatch("modalStore/setModal", { type: 'modalDeleteChanel', value: false }, { root: true });
+      dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
     })
     .catch(err => {
       const data = {
