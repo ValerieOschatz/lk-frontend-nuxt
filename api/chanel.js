@@ -56,3 +56,17 @@ export const deleteChanelApi = ({ chanelId }) => {
     }
   });
 };
+
+export const subscribeChanelApi = (chanelId) => {
+  return instance.put("/chanel/subscribe", {
+    chanelId,
+  });
+};
+
+export const unsubscribeChanelApi = (chanelId) => {
+  return instance.delete("/chanel/subscribe", {
+    params: {
+      chanelId,
+    }
+  });
+};

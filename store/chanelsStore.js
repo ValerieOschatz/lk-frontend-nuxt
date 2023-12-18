@@ -6,6 +6,8 @@ import {
   updateChanelInfoApi,
   updateChanelPrivatSettingsApi,
   deleteChanelApi,
+  subscribeChanelApi,
+  unsubscribeChanelApi,
 } from "../api";
 
 export const state = () => ({
@@ -247,5 +249,37 @@ export const actions = {
       };
       dispatch("alertStore/setAlert", data, { root: true });
     })
+  },
+  subscribe({ state, dispatch }, { chanelId, profileId, option }) {
+    subscribeChanelApi(chanelId)
+    .then(res => {
+      if (option === 'search') dispatch("setSearchedChanelList", { name: state.searchedName });
+      if (option === 'subscriptions') dispatch("setSubscriptionChanelList", { name: state.subscriptionName, subscriptions: profileId });
+      // if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
+  },
+  unsubscribe({ state, dispatch }, { chanelId, profileId, option }) {
+    unsubscribeChanelApi(chanelId)
+    .then(res => {
+      if (option === 'search') dispatch("setSearchedChanelList", { name: state.searchedName });
+      if (option === 'subscriptions') dispatch("setSubscriptionChanelList", { name: state.subscriptionName, subscriptions: profileId });
+      // if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });    })
   },
 };

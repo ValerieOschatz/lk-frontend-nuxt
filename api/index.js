@@ -44,4 +44,6 @@ export {
   updateChanelInfoApi,
   updateChanelPrivatSettingsApi,
   deleteChanelApi,
+  subscribeChanelApi,
+  unsubscribeChanelApi,
 } from "./chanel";

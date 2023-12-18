@@ -65,12 +65,19 @@ export default {
   },
   watch: {
     tab() {
+      if (this.profile.id) {
+        if (this.tab === 1) {
+          this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile.id });
+        } else if (this.tab === 2) {
+          this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile.id });
+        } else if (this.tab === 3) {
+          this.setUserList({ name: this.searchedName });
+        }
+      }
+    },
+    profile() {
       if (this.tab === 1) {
         this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile.id });
-      } else if (this.tab === 2) {
-        this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile.id });
-      } else if (this.tab === 3) {
-        this.setUserList({ name: this.searchedName });
       }
     }
   }

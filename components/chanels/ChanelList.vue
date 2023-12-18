@@ -66,17 +66,19 @@ export default {
   },
   methods: {
     ...mapActions({
-      subscribe: "profileStore/subscribe",
-      unsubscribe: "profileStore/unsubscribe",
+      subscribe: "chanelsStore/subscribe",
+      unsubscribe: "chanelsStore/unsubscribe",
     }),
     isSubscribed(chanel) {
       return chanel.subscribers.includes(this.profile.id);
     },
-    onSubscribe(userId) {
-      this.subscribe({ userId, profileId: this.profile.id, option: this.option });
+    onSubscribe(chanelId) {
+      console.log(this.option)
+      this.subscribe({ chanelId, profileId: this.profile.id, option: this.option });
     },
-    onUnsubscribe(userId) {
-      this.unsubscribe({ userId, profileId: this.profile.id, option: this.option });
+    onUnsubscribe(chanelId) {
+      console.log(this.option)
+      this.unsubscribe({ chanelId, profileId: this.profile.id, option: this.option });
     }
   },
 }

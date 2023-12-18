@@ -80,12 +80,19 @@ export default {
   },
   watch: {
     tab() {
+      if (this.profile.id) {
+        if (this.tab === 1) {
+          this.setSubscriptionChanelList({ name: this.subscriptionName, subscriptions: this.profile.id });
+        } else if (this.tab === 2) {
+          this.setSearchedChanelList({ name: this.searchedName });
+        } else if (this.tab === 3) {
+          this.setOwnChanelList({ owner: this.profile.id, name: this.ownChanelName });
+        }
+      }
+    },
+    profile() {
       if (this.tab === 1) {
         this.setSubscriptionChanelList({ name: this.subscriptionName, subscriptions: this.profile.id });
-      } else if (this.tab === 2) {
-        this.setSearchedChanelList({ name: this.searchedName });
-      } else if (this.tab === 3) {
-        this.setOwnChanelList({ owner: this.profile.id, name: this.ownChanelName });
       }
     }
   }
