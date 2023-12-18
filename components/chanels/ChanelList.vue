@@ -73,11 +73,9 @@ export default {
       return chanel.subscribers.includes(this.profile.id);
     },
     onSubscribe(chanelId) {
-      console.log(this.option)
       this.subscribe({ chanelId, profileId: this.profile.id, option: this.option });
     },
     onUnsubscribe(chanelId) {
-      console.log(this.option)
       this.unsubscribe({ chanelId, profileId: this.profile.id, option: this.option });
     }
   },

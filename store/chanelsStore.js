@@ -255,7 +255,7 @@ export const actions = {
     .then(res => {
       if (option === 'search') dispatch("setSearchedChanelList", { name: state.searchedName });
       if (option === 'subscriptions') dispatch("setSubscriptionChanelList", { name: state.subscriptionName, subscriptions: profileId });
-      // if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
+      if (option === 'card') dispatch("setChanel", { chanelId });
     })
     .catch(err => {
       const data = {
@@ -271,7 +271,7 @@ export const actions = {
     .then(res => {
       if (option === 'search') dispatch("setSearchedChanelList", { name: state.searchedName });
       if (option === 'subscriptions') dispatch("setSubscriptionChanelList", { name: state.subscriptionName, subscriptions: profileId });
-      // if (option === 'card') dispatch("usersStore/setUser", { userId }, { root: true });
+      if (option === 'card') dispatch("setChanel", { chanelId });
     })
     .catch(err => {
       const data = {

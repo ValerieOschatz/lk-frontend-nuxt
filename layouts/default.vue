@@ -1,11 +1,12 @@
 <template>
   <v-app>
-    <div class="page">
+    <div v-if="profile.id" class="page">
       <Sidebar />
       <v-card class="content">
         <slot />
       </v-card>
     </div>
+    <div v-else class="page"></div>
   </v-app>
 </template>
 

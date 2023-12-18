@@ -4,10 +4,6 @@ import {
   logoutUserApi,
 } from "../api";
 
-export const state = () => ({});
-export const getters = {};
-export const mutations = {};
-
 export const actions = {
   login({ dispatch }, { login, password }) {
     loginUserApi({ login, password })
@@ -55,5 +51,5 @@ export const actions = {
       };
       dispatch("alertStore/setAlert", data, { root: true });
     })
-  }
+  },
 };

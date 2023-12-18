@@ -67,15 +67,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      subscribe: "profileStore/subscribe",
-      unsubscribe: "profileStore/unsubscribe",
-      setUser: "usersStore/setUser",
+      subscribe: "chanelsStore/subscribe",
+      unsubscribe: "chanelsStore/unsubscribe",
     }),
     onSubscribe() {
-      this.subscribe({ userId: this.user.id, option: 'card' });
+      this.subscribe({ chanelId: this.chanel.id, option: 'card' });
     },
     onUnsubscribe() {
-      this.unsubscribe({ userId: this.user.id, option: 'card' });
+      this.unsubscribe({ chanelId: this.chanel.id, option: 'card' });
     }
   }
 }

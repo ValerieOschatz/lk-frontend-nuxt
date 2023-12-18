@@ -86,7 +86,6 @@ export default {
     ...mapActions({
       subscribe: "profileStore/subscribe",
       unsubscribe: "profileStore/unsubscribe",
-      setUser: "usersStore/setUser",
     }),
     onSubscribe() {
       this.subscribe({ userId: this.user.id, option: 'card' });
