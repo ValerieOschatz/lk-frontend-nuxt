@@ -1,6 +1,6 @@
 <template>
-    <div class="info-card">
-      <div class="photo-column">
+    <div class="info">
+      <div class="info__photo-column">
         <v-avatar
           color="#A1887F"
           size="100"
@@ -14,7 +14,7 @@
           <span v-else class="text-h5">{{ user.name && user.name[0] }}</span>
         </v-avatar>
         <ProfileEditBtn v-if="owner" />
-        <div v-else class="btn-container">
+        <div v-else class="info__btn-container">
           <v-btn
             v-if="isSubscribed"
             size="x-small"
@@ -42,13 +42,13 @@
           </v-btn>
         </div>
       </div>
-      <div class="info-column">
-        <v-card-title class="name">
+      <div class="info__info-column">
+        <v-card-title class="info__name">
           <span>{{ user.name }}</span>
-          <span class="subscribers">Подписчики: {{ user.subscribers.length }}</span>
+          <span class="info__subscribers">Подписчики: {{ user.subscribers.length }}</span>
         </v-card-title>
         <v-divider></v-divider>
-        <div class="info-container">
+        <div class="info__info-container">
           <p class="px-0 py-0 my-3">{{ user.description }}</p>
         </div>
       </div>
@@ -99,40 +99,5 @@ export default {
 </script>
 
 <style scoped>
-.info-card {
-  display: flex;
-  gap: 40px;
-  padding-bottom: 20px;
-}
-.photo-column {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  align-items: center;
-  gap: 20px;
-}
-.info-column {
-  width: 80%;
-}
-.info-container {
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.name {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 0;
-}
-.subscribers {
-  font-size: 12px;
-}
-.btn-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
+@import url(../../assets/styles/info.css);
 </style>

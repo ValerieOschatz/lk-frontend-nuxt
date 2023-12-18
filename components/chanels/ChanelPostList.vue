@@ -1,9 +1,9 @@
 <template>
-  <div class="post-list">
-    <div class="title-container">
-      <h2 v-if="!postsAccess" class="list-title">Посты видны только подписчикам</h2>
-      <h2 v-else-if="postsAccess && postList.length" class="list-title">Список постов:</h2>
-      <h2 v-else-if="postsAccess && !postList.length" class="list-title">Список постов пуст</h2>
+  <div class="posts">
+    <div class="posts__title-container">
+      <h2 v-if="!postsAccess" class="posts__title">Посты видны только подписчикам</h2>
+      <h2 v-else-if="postsAccess && postList.length" class="posts__title">Список постов:</h2>
+      <h2 v-else-if="postsAccess && !postList.length" class="posts__title">Список постов пуст</h2>
       <v-btn
         v-if="ownChanel"
         density="compact"
@@ -16,15 +16,15 @@
     <ul v-if="postsAccess" class="list">
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
-          <div v-if="post.ownerChanel" class="owner-container">
-            <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="link">{{ post.ownerChanel.name }}</NuxtLink>
+          <div v-if="post.ownerChanel" class="list__owner-container">
+            <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="list__link">{{ post.ownerChanel.name }}</NuxtLink>
             <PostBtn v-if="post.owner._id === profile.id" :post="post" />
           </div>
-          <span class="date">{{ convertDate(post.createdAt) }}</span>
-          <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="image" />
-          <p v-if="post.text" class="text">{{ post.text }}</p>
-          <div class="actions">
-            <div class="likes">
+          <span class="list__date">{{ convertDate(post.createdAt) }}</span>
+          <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="list__image" />
+          <p v-if="post.text" class="list__text">{{ post.text }}</p>
+          <div class="list__actions">
+            <div class="list__likes">
               <v-btn
                 v-if="getOwnLike(post)"
                 density="compact"
@@ -41,7 +41,7 @@
                 variant="tonal"
                 @click="addLikePost(post._id)"
               ></v-btn>
-              <span class="likes-count">{{ post.likes.length }}</span>
+              <span class="list__likes-count">{{ post.likes.length }}</span>
             </div>
             <v-btn
               v-if="commentsAccess"
@@ -113,22 +113,6 @@ export default {
 </script>
 
 <style scoped>
+@import url(../../assets/styles/posts.css);
 @import url(../../assets/styles/list.css);
-.post-list {
-  padding-top: 20px;
-}
-.list-title {
-  font-size: 18px;
-  font-weight: 400;
-}
-.title-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.link {
-  text-decoration: none;
-  color: rgb(179, 91, 67);
-}
 </style>

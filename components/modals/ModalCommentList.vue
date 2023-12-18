@@ -24,14 +24,14 @@
           <ul class="list mt-2" v-if="commentList.length">
             <li v-for="comment in commentList" :key="comment._id">
               <v-card elevation="4">
-                <div class="owner-container">
+                <div class="list__owner-container">
                   <span>{{ comment.owner.name }}</span>
                   <CommentBtn v-if="comment.owner._id === profile.id" :comment="comment" />
                 </div>
-                <span class="date">{{ convertDate(comment.createdAt) }}</span>
-                <p class="text">{{ comment.text }}</p>
-                <div class="actions">
-                  <div class="likes">
+                <span class="list__date">{{ convertDate(comment.createdAt) }}</span>
+                <p class="list__text">{{ comment.text }}</p>
+                <div class="list__actions">
+                  <div class="list__likes">
                     <v-btn
                       v-if="getOwnLike(comment)"
                       density="compact"
@@ -48,7 +48,7 @@
                       variant="tonal"
                       @click="addLikeComment(comment._id)"
                     ></v-btn>
-                    <span class="likes-count">{{ comment.likes.length }}</span>
+                    <span class="list__likes-count">{{ comment.likes.length }}</span>
                   </div>
                 </div>
               </v-card>
