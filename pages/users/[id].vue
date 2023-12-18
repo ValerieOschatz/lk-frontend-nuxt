@@ -1,13 +1,8 @@
 <template>
   <div>
-    <ProfileInfo
-      :user="user"
-      :owner="false"
-    />
+    <ProfileInfo />
     <v-divider></v-divider>
-    <ProfilePostList 
-      :owner="false"
-    />
+    <ProfilePostList />
     <ModalDelete />
     <ModalCommentList />
     <Alert />
@@ -21,7 +16,7 @@ definePageMeta({
 </script>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
@@ -35,11 +30,6 @@ export default {
     ProfilePostList,
     ModalDelete,
     ModalCommentList,
-  },
-  computed: {
-    ...mapGetters({
-      user: "usersStore/getUser",
-    }),
   },
   methods: {
     ...mapActions({

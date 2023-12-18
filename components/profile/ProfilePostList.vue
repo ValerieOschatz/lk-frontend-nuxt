@@ -68,20 +68,15 @@ export default {
   components: {
     PostBtn,
   },
-  data: () => ({
-  }),
-  props: {
-    owner: {
-      type: Boolean,
-      default: false,
-    },
-  },
   computed: {
     ...mapGetters({
       postList: "postsStore/getPostList",
       profile: "profileStore/getProfile",
       user: "usersStore/getUser",
     }),
+    owner() {
+      return this.$route.path.split('/')[1] === 'profile' ? true : false;
+    },
     postsAccess() {
       return this.owner || this.user.privatSettings.posts || this.user.subscribers.includes(this.profile.id);
     },
@@ -145,6 +140,5 @@ export default {
 .link {
   text-decoration: none;
   color: rgb(179, 91, 67);
-  /* font-size: 12px; */
 }
 </style>

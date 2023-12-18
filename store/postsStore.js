@@ -63,7 +63,11 @@ export const actions = {
   updatePost({ dispatch }, { postId, text }) {
     updatePostApi({ postId, text })
     .then(res => {
-      dispatch("setPostList", { owner: res.data.owner });
+      if (res.data.ownerChanel) {
+        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      } else {
+        dispatch("setPostList", { owner: res.data.owner });
+      }
       dispatch("modalStore/setModal", { type: 'modalAddPost', value: false, option: '' }, { root: true });
     })
     .catch(err => {
@@ -76,10 +80,14 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  deletePost({ dispatch }, { postId, owner }) {
+  deletePost({ dispatch }, { postId, owner, ownerChanel }) {
     deletePostApi({ postId })
     .then(res => {
-      dispatch("setPostList", { owner });
+      if (ownerChanel) {
+        dispatch("setPostList", { ownerChanel });
+      } else {
+        dispatch("setPostList", { owner });
+      }
       dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
     })
     .catch(err => {
@@ -95,7 +103,11 @@ export const actions = {
   addLikePost({ dispatch }, postId) {
     addLikePostApi(postId)
     .then(res => {
-      dispatch("setPostList", { owner: res.data.owner });
+      if (res.data.ownerChanel) {
+        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      } else {
+        dispatch("setPostList", { owner: res.data.owner });
+      }
     })
     .catch(err => {
       const data = {
@@ -110,7 +122,11 @@ export const actions = {
   deleteLikePost({ dispatch }, postId) {
     deleteLikePostApi(postId)
     .then(res => {
-      dispatch("setPostList", { owner: res.data.owner });
+      if (res.data.ownerChanel) {
+        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      } else {
+        dispatch("setPostList", { owner: res.data.owner });
+      }
     })
     .catch(err => {
       const data = {

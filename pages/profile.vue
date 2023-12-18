@@ -1,13 +1,8 @@
 <template>
   <div>
-    <ProfileInfo
-      :user="profile"
-      :owner="true"
-    />
+    <ProfileInfo />
     <v-divider></v-divider>
-    <ProfilePostList 
-      :owner="true"
-    />
+    <ProfilePostList />
     <ModalAddPost />
     <ModalDelete />
     <ModalEditPhoto />
@@ -26,7 +21,6 @@ definePageMeta({
 </script>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import ProfileInfo from '../components/profile/ProfileInfo.vue';
 import ProfilePostList from '../components/profile/ProfilePostList.vue';
 import ModalAddPost from '../components/modals/ModalAddPost.vue';
@@ -50,16 +44,6 @@ export default {
     ModalLogout,
     ModalCommentList,
     Alert,
-  },
-  computed: {
-    ...mapGetters({
-      profile: "profileStore/getProfile",
-    }),
-  },
-  methods: {
-    ...mapActions({
-      setProfile: "profileStore/setProfile",
-    }),
   }
 }
 </script>

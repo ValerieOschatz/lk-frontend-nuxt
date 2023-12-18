@@ -54,7 +54,11 @@ export default {
     }),
     onDelete() {
       if (this.option === 'post') {
-        this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id });
+        if (this.$route.path.split('/')[1] === 'chanels') {
+          this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id, ownerChanel: this.chanel.id });
+        } else {
+          this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id });
+        }
         this.setSelectedPost(null);
       } else if (this.option === 'comment') {
         this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });

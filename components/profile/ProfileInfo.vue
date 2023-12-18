@@ -63,34 +63,21 @@ export default {
   components: {
     ProfileEditBtn,
   },
-  data: () => ({
-  }),
-  props: {
-    user: {
-      type: Object,
-      default() {
-        return {
-          id: '',
-          name: '',
-          photo: '',
-          description: '',
-          subscribers: [],
-          privatSettings: {
-            comments: null,
-            profileInfo: null,
-          }
-        }
-      },
-    },
-    owner: {
-      type: Boolean,
-      default: false,
-    }
-  },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
+      currentUser: "usersStore/getUser",
     }),
+    owner() {
+      return this.$route.path.split('/')[1] === 'profile' ? true : false;
+    },
+    user() {
+      if (this.owner) {
+        return this.profile;
+      } else {
+        return this.currentUser;
+      }
+    },
     isSubscribed() {
       return this.user.subscribers.includes(this.profile.id);
     },
@@ -107,8 +94,6 @@ export default {
     onUnsubscribe() {
       this.unsubscribe({ userId: this.user.id, option: 'card' });
     }
-  },
-  watch: {
   }
 }
 </script>
