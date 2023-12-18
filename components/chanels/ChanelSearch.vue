@@ -39,18 +39,31 @@ export default {
   methods: {
     ...mapMutations({
       setOwnChanelName: "chanelsStore/setOwnChanelName",
+      setSearchedChanelName: "chanelsStore/setSearchedChanelName",
+      setSubscriptionChanelName: "chanelsStore/setSubscriptionChanelName",
     }),
     ...mapActions({
       setOwnChanelList: "chanelsStore/setOwnChanelList",
+      setSearchedChanelList: "chanelsStore/setSearchedChanelList",
+      setSubscriptionChanelList: "chanelsStore/setSubscriptionChanelList",
     }),
     onSearch() {
       if (this.tab === 1) {
+        this.setSubscriptionChanelName(this.name);
+        this.setSubscriptionChanelList({ name: this.name, subscriptions: this.profile.id });
       } else if (this.tab === 2) {
+        this.setSearchedChanelName(this.name);
+        this.setSearchedChanelList({ name: this.name });
       } else if (this.tab === 3) {
         this.setOwnChanelName(this.name);
         this.setOwnChanelList({ owner: this.profile.id, name: this.name });
       }
     }
   },
+  mounted() {
+    this.setSubscriptionChanelName(this.name);
+    this.setSearchedChanelName(this.name);
+    this.setOwnChanelName(this.name);
+  }
 }
 </script>

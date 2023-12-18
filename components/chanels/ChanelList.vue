@@ -51,10 +51,14 @@ export default {
     ...mapGetters({
       profile: "profileStore/getProfile",
       ownChanelList: "chanelsStore/getOwnChanelList",
+      searchedChanelList: "chanelsStore/getSearchedChanelList",
+      subscriptionChanelList: "chanelsStore/getSubscriptionChanelList",
     }),
     list() {
       if (this.tab === 1) {
+        return this.subscriptionChanelList;
       } else if (this.tab === 2) {
+        return this.searchedChanelList;
       } else if (this.tab === 3) {
         return this.ownChanelList;
       }

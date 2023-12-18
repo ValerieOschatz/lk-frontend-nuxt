@@ -10,7 +10,11 @@ import {
 
 export const state = () => ({
   ownChanelList: [],
+  searchedChanelList: [],
+  subscriptionChanelList: [],
   ownChanelName: '',
+  searchedName: '',
+  subscriptionName: '',
   chanel: {
     id: '',
     name: '',
@@ -29,8 +33,20 @@ export const getters = {
   getOwnChanelList(state) {
     return state.ownChanelList;
   },
+  getSearchedChanelList(state) {
+    return state.searchedChanelList;
+  },
+  getSubscriptionChanelList(state) {
+    return state.subscriptionChanelList;
+  },
   getOwnChanelName(state) {
     return state.ownChanelName;
+  },
+  getSearchedChanelName(state) {
+    return state.searchedName;
+  },
+  getSubscriptionChanelName(state) {
+    return state.subscriptionName;
   },
   getChanel(state) {
     return state.chanel;
@@ -41,8 +57,20 @@ export const mutations = {
   setOwnChanelList(state, data) {
     state.ownChanelList = data;
   },
+  setSearchedChanelList(state, data) {
+    state.searchedChanelList = data;
+  },
+  setSubscriptionChanelList(state, data) {
+    state.subscriptionChanelList = data;
+  },
   setOwnChanelName(state, data) {
     state.ownChanelName = data;
+  },
+  setSearchedChanelName(state, data) {
+    state.searchedName = data;
+  },
+  setSubscriptionChanelName(state, data) {
+    state.subscriptionName = data;
   },
   setChanel(state, data) {
     state.chanel = {
@@ -79,6 +107,41 @@ export const actions = {
     getChanelListApi({ owner, name })
     .then(res => {
       commit("setOwnChanelList", res.data);
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  setSearchedChanelList({ commit }, { name }) {
+    if (!name) {
+      commit("setSearchedChanelList", []);
+      return;
+    }
+
+    getChanelListApi({ name })
+    .then(res => {
+      commit("setSearchedChanelList", res.data);
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  setSubscriptionChanelList({ commit }, { subscriptions, name }) {
+    getChanelListApi({ subscriptions, name })
+    .then(res => {
+      commit("setSubscriptionChanelList", res.data);
     })
     .catch(err => {
       const data = {

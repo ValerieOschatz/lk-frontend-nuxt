@@ -60,5 +60,10 @@ export default {
       }
     }
   },
+  mounted() {
+    this.setSubscriptionName(this.name);
+    this.setSubscriberName(this.name);
+    this.setSearchedName(this.name);
+  }
 }
 </script>

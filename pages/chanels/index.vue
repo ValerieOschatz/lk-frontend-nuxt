@@ -11,8 +11,12 @@
     </v-tabs>
     <v-window v-model="tab">
       <v-window-item :value="1">
+        <ChanelSearch :tab="tab" />
+        <ChanelList :tab="tab" option="subscriptions" />
       </v-window-item>
       <v-window-item :value="2">
+        <ChanelSearch :tab="tab" />
+        <ChanelList :tab="tab" option="search" />
       </v-window-item>
       <v-window-item :value="3">
         <ChanelSearch :tab="tab" />
@@ -59,12 +63,16 @@ export default {
     ...mapGetters({
       profile: "profileStore/getProfile",
       ownChanelName: "chanelsStore/getOwnChanelName",
+      searchedName: "chanelsStore/getSearchedChanelName",
+      subscriptionName: "chanelsStore/getSubscriptionChanelName",
     }),
   },
   methods: {
     ...mapActions({
       setModal: "modalStore/setModal",
       setOwnChanelList: "chanelsStore/setOwnChanelList",
+      setSearchedChanelList: "chanelsStore/setSearchedChanelList",
+      setSubscriptionChanelList: "chanelsStore/setSubscriptionChanelList",
     }),
     addChanel() {
       this.setModal({ type: 'modalAddChanel', value: true });
@@ -73,7 +81,9 @@ export default {
   watch: {
     tab() {
       if (this.tab === 1) {
+        this.setSubscriptionChanelList({ name: this.subscriptionName, subscriptions: this.profile.id });
       } else if (this.tab === 2) {
+        this.setSearchedChanelList({ name: this.searchedName });
       } else if (this.tab === 3) {
         this.setOwnChanelList({ owner: this.profile.id, name: this.ownChanelName });
       }
