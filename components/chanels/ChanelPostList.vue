@@ -13,59 +13,17 @@
         @click="addPost"
       ></v-btn>
     </div>
-    <ul v-if="postsAccess" class="list">
-      <li v-for="post in postList" :key="post._id">
-        <v-card elevation="4">
-          <div v-if="post.ownerChanel" class="list__owner-container">
-            <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="list__link">{{ post.ownerChanel.name }}</NuxtLink>
-            <PostBtn v-if="post.owner._id === profile.id" :post="post" />
-          </div>
-          <span class="list__date">{{ convertDate(post.createdAt) }}</span>
-          <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="list__image" />
-          <p v-if="post.text" class="list__text">{{ post.text }}</p>
-          <div class="list__actions">
-            <div class="list__likes">
-              <v-btn
-                v-if="getOwnLike(post)"
-                density="compact"
-                icon="mdi-heart"
-                color="#E57373"
-                variant="tonal"
-                @click="deleteLikePost(post._id)"
-              ></v-btn>
-              <v-btn
-                v-else
-                density="compact"
-                icon="mdi-heart-outline"
-                color="#E57373"
-                variant="tonal"
-                @click="addLikePost(post._id)"
-              ></v-btn>
-              <span class="list__likes-count">{{ post.likes.length }}</span>
-            </div>
-            <v-btn
-              v-if="commentsAccess"
-              variant="text"
-              color="rgb(179, 91, 67)"
-              @click="showCommentList(post)"
-            >
-              Комментарии
-            </v-btn>
-          </div>
-        </v-card>
-      </li>
-    </ul>
+    <PostList v-if="postsAccess" />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from "vuex";
-import PostBtn from "../PostBtn.vue";
-import { convertDate } from "~/utils/convertDate";
+import { mapGetters, mapActions } from "vuex";
+import PostList from "~/components/PostList.vue";
 
 export default {
   components: {
-    PostBtn,
+    PostList,
   },
   computed: {
     ...mapGetters({
@@ -79,30 +37,15 @@ export default {
     postsAccess() {
       return this.ownChanel || this.chanel.privatSettings.posts || this.chanel.subscribers.includes(this.profile.id);
     },
-    commentsAccess() {
-      return this.chanel.privatSettings.comments;
-    },
   },
   methods: {
-    ...mapMutations({
-      setSelectedPost: "postsStore/setSelectedPost",
-    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
-      addLikePost: "postsStore/addLikePost",
-      deleteLikePost: "postsStore/deleteLikePost",
     }),
     addPost() {
       this.setModal({ type: 'modalAddPost', value: true, option: 'create' });
     },
-    getOwnLike(post) {
-      return post.likes.includes(this.profile.id);
-    },
-    showCommentList(post) {
-      this.setSelectedPost(post);
-      this.setModal({ type: 'modalCommentList', value: true });
-    }
   },
   watch: {
     chanel() {
@@ -114,5 +57,4 @@ export default {
 
 <style scoped>
 @import url(../../assets/styles/posts.css);
-@import url(../../assets/styles/list.css);
 </style>
