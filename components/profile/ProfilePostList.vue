@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import PostList from "~/components/PostList.vue";
 
 export default {
@@ -39,6 +39,9 @@ export default {
     },
   },
   methods: {
+    ...mapMutations({
+      setLoading: "postsStore/setLoading",
+    }),
     ...mapActions({
       setModal: "modalStore/setModal",
       setPostList: "postsStore/setPostList",
@@ -49,14 +52,17 @@ export default {
   },
   watch: {
     profile() {
+      this.setLoading(true);
       if (this.owner) this.setPostList({ owner: this.profile.id });
       if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
     },
     user() {
+      this.setLoading(true);
       if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
     },
   },
   mounted() {
+    this.setLoading(true);
     if (this.owner && this.profile.id) {
       this.setPostList({ owner: this.profile.id });
     }

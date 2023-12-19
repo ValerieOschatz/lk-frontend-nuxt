@@ -105,7 +105,7 @@ export default {
       }
     },
     selectedComment() {
-      if (this.selectedComment) this.text = this.selectedComment.text;
+      this.text = this.selectedComment ? this.selectedComment.text : '';
     }
   }
 }

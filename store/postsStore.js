@@ -10,6 +10,7 @@ import {
 export const state = () => ({
   postList: [],
   selectedPost: null,
+  loading: false,
 });
 
 export const getters = {
@@ -18,6 +19,9 @@ export const getters = {
   },
   getSelectedPost(state) {
     return state.selectedPost;
+  },
+  getLoading(state) {
+    return state.loading;
   },
 };
 
@@ -28,16 +32,22 @@ export const mutations = {
   setSelectedPost(state, data) {
     state.selectedPost = data;
   },
+  setLoading(state, data) {
+    state.loading = data;
+  },
 };
 
 export const actions = {
-  setPostList({ commit }, { owner, ownerChanel }) {
-    getPostListApi({ owner, ownerChanel })
+  setPostList({ commit }, { owner, ownerChanel, tape }) {
+    getPostListApi({ owner, ownerChanel, tape })
     .then(res => {
       commit("setPostList", res.data);
     })
     .catch(err => {
       console.log(err);
+    })
+    .finally(() => {
+      commit("setLoading", false);
     })
   },
   createPost({ dispatch }, data) {
@@ -100,13 +110,17 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  addLikePost({ dispatch }, postId) {
+  addLikePost({ dispatch }, { postId, tape }) {
     addLikePostApi(postId)
     .then(res => {
-      if (res.data.ownerChanel) {
-        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      if (tape) {
+        dispatch("setPostList", { tape });
       } else {
-        dispatch("setPostList", { owner: res.data.owner });
+        if (res.data.ownerChanel) {
+          dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+        } else {
+          dispatch("setPostList", { owner: res.data.owner });
+        }
       }
     })
     .catch(err => {
@@ -119,13 +133,17 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  deleteLikePost({ dispatch }, postId) {
+  deleteLikePost({ dispatch }, { postId, tape }) {
     deleteLikePostApi(postId)
     .then(res => {
-      if (res.data.ownerChanel) {
-        dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+      if (tape) {
+        dispatch("setPostList", { tape });
       } else {
-        dispatch("setPostList", { owner: res.data.owner });
+        if (res.data.ownerChanel) {
+          dispatch("setPostList", { ownerChanel: res.data.ownerChanel });
+        } else {
+          dispatch("setPostList", { owner: res.data.owner });
+        }
       }
     })
     .catch(err => {

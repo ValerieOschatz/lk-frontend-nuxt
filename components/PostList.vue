@@ -1,5 +1,7 @@
 <template>
-    <ul class="list">
+  <div>
+    <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+    <ul v-else class="list">
       <li v-for="post in postList" :key="post._id">
         <v-card elevation="4">
           <div v-if="post.ownerChanel" class="list__owner-container">
@@ -22,7 +24,7 @@
                 icon="mdi-heart"
                 color="#E57373"
                 variant="tonal"
-                @click="deleteLikePost(post._id)"
+                @click="deleteLike(post._id)"
               ></v-btn>
               <v-btn
                 v-else
@@ -30,7 +32,7 @@
                 icon="mdi-heart-outline"
                 color="#E57373"
                 variant="tonal"
-                @click="addLikePost(post._id)"
+                @click="addLike(post._id)"
               ></v-btn>
               <span class="list__likes-count">{{ post.likes.length }}</span>
             </div>
@@ -46,6 +48,7 @@
         </v-card>
       </li>
     </ul>
+  </div>
 </template>
 
 <script>
@@ -62,6 +65,7 @@ export default {
       postList: "postsStore/getPostList",
       profile: "profileStore/getProfile",
       chanel: "chanelsStore/getChanel",
+      loading: "postsStore/getLoading",
     }),
   },
   methods: {
@@ -83,6 +87,20 @@ export default {
     showCommentList(post) {
       this.setSelectedPost(post);
       this.setModal({ type: 'modalCommentList', value: true });
+    },
+    addLike(postId) {
+      if (this.$route.path === '/tape') {
+        this.addLikePost({ postId, tape: 1 });
+      } else {
+        this.addLikePost({ postId, tape: 0 });
+      }
+    },
+    deleteLike(postId) {
+      if (this.$route.path === '/tape') {
+        this.deleteLikePost({ postId, tape: 1 });
+      } else {
+        this.deleteLikePost({ postId, tape: 0 });
+      }
     }
   }
 }

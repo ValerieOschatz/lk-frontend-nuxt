@@ -14,6 +14,7 @@ definePageMeta({
 </script>
 
 <script>
+import { mapMutations, mapActions } from "vuex";
 import PostList from "~/components/PostList.vue";
 import ModalDelete from "~/components/modals/ModalDelete.vue";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
@@ -25,6 +26,18 @@ export default {
     ModalDelete,
     ModalCommentList,
     Alert,
+  },
+  methods: {
+    ...mapMutations({
+      setLoading: "postsStore/setLoading",
+    }),
+    ...mapActions({
+      setPostList: "postsStore/setPostList",
+    })
+  },
+  mounted() {
+    this.setLoading(true);
+    this.setPostList({ tape: 1 });
   }
 }
 </script>

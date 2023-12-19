@@ -1,10 +1,11 @@
 import { instance } from "./instanceAxios";
 
-export const getPostListApi = ({ owner, ownerChanel }) =>
+export const getPostListApi = ({ owner, ownerChanel, tape }) =>
   instance.get("/post/list", {
     params: {
       owner,
       ownerChanel,
+      tape,
     },
   }
 );
