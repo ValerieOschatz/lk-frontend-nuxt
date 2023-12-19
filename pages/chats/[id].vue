@@ -1,15 +1,10 @@
 <template>
-  <div>
-    <ChanelInfo />
-    <v-divider></v-divider>
-    <ChanelPostList />
-    <ModalEditPhoto />
-    <ModalEditInfo />
-    <ModalEditPrivatSettings />
-    <ModalDelete />
-    <ModalCommentList />
-    <ModalAddPost />
-    <Alert />
+  <div class="h-100">
+    <!-- <div class="chat-container">
+      <ChatInfo />
+      <ChatMessageForm />
+    </div>
+    <Alert /> -->
   </div>
 </template>
 
@@ -21,35 +16,29 @@ definePageMeta({
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Alert from '../components/Alert.vue';
-import ChanelInfo from '../components/chanels/ChanelInfo.vue';
-import ChanelPostList from '../components/chanels/ChanelPostList.vue';
-import ModalEditPhoto from "~/components/modals/ModalEditPhoto.vue";
-import ModalEditInfo from "~/components/modals/ModalEditInfo.vue";
-import ModalEditPrivatSettings from "~/components/modals/ModalEditPrivatSettings.vue";
-import ModalDelete from "~/components/modals/ModalDelete.vue";
-import ModalCommentList from "~/components/modals/ModalCommentList.vue";
-import ModalAddPost from '../components/modals/ModalAddPost.vue';
+import Alert from '~/components/Alert.vue';
+import ChatInfo from '~/components/chats/ChatInfo.vue';
+import ChatMessageForm from '~/components/chats/ChatMessageForm.vue';
 
 export default {
   components: {
     Alert,
-    ChanelInfo,
-    ChanelPostList,
-    ModalEditPhoto,
-    ModalEditInfo,
-    ModalEditPrivatSettings,
-    ModalDelete,
-    ModalCommentList,
-    ModalAddPost,
+    ChatInfo,
+    ChatMessageForm,
   },
   methods: {
     ...mapActions({
-      setChanel: "chanelsStore/setChanel",
+      subscribe: "profileStore/subscribe",
     }),
-  },
-  mounted() {
-    this.setChanel({ chanelId: this.$route.params.id });
   }
 }
 </script>
+
+<style scoped>
+.chat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+</style>

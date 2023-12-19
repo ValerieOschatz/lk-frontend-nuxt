@@ -26,13 +26,19 @@ export default {
   data: () => ({
     text: '',
     textRules: [
-      // v => !!v || 'Обязательное поле',
       v => (v.length <= 500) || 'Допустимо не более 500 символов',
     ],
   }),
+  computed: {
+    otherParticipants() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const userId = user.id ? user.id : user._id;
+      return [userId];
+    }
+  },
   methods: {
     ...mapActions({
-      createComment: "commentsStore/createComment",
+      createChat: "chatsStore/createChat",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -42,6 +48,7 @@ export default {
       const valid = validity.valid;
       
       if (valid && this.text) {
+        this.createChat({ otherParticipants: this.otherParticipants, text: this.text });
         this.text = '';
       }
     },
