@@ -30,6 +30,7 @@
           variant="text"
           icon="mdi-email-outline"
           color="#E57373"
+          @click="writeMessage(user)"
         ></v-btn>
       </template>
     </v-list-item>
@@ -82,6 +83,10 @@ export default {
     },
     onUnsubscribe(userId) {
       this.unsubscribe({ userId, profileId: this.profile.id, option: this.option });
+    },
+    writeMessage(user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      navigateTo('/chats/new');
     }
   },
 }

@@ -37,6 +37,7 @@
             size="x-small"
             width="100%"
             color="#E57373"
+            @click="writeMessage()"
           >
             Сообщение
           </v-btn>
@@ -92,6 +93,10 @@ export default {
     },
     onUnsubscribe() {
       this.unsubscribe({ userId: this.user.id, option: 'card' });
+    },
+    writeMessage() {
+      localStorage.setItem('user', JSON.stringify(this.user));
+      navigateTo('/chats/new');
     }
   }
 }
