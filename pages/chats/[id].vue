@@ -1,10 +1,10 @@
 <template>
   <div class="h-100">
-    <!-- <div class="chat-container">
+    <div class="chat-container">
       <ChatInfo />
       <ChatMessageForm />
     </div>
-    <Alert /> -->
+    <Alert />
   </div>
 </template>
 
@@ -28,8 +28,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      subscribe: "profileStore/subscribe",
+      setChat: "chatsStore/setChat",
     }),
+  },
+  mounted() {
+    this.setChat({ chatId: this.$route.params.id });
   }
 }
 </script>

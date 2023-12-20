@@ -6,9 +6,16 @@ import {
 export const state = () => ({
   chat: {
     id: '',
+    name: '',
+    photo: '',
     participants: [],
     createdAt: '',
-    updatedAt: ''
+    updatedAt: '',
+    groupDetails: {
+      isGroup: false,
+      creator: null,
+      rights: false,
+    },
   },
 });
 
@@ -20,11 +27,18 @@ export const getters = {
 
 export const mutations = {
   setChat(state, data) {
-    state.chanel = {
+    state.chat = {
       id: data._id,
+      name: data.name,
+      photo: data.photo,
       participants: data.participants,
       createdAt: data.createdAt,
-      updatedAt: data.updatedAt
+      updatedAt: data.updatedAt,
+      groupDetails: {
+        isGroup: data.groupDetails.isGroup,
+        creator: data.groupDetails.creator,
+        rights: data.groupDetails.rights,
+      },
     };
   },
 };

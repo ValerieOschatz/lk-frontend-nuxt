@@ -3,7 +3,7 @@
   ref="form"
 >
   <v-textarea
-    variant="underlined"
+    bg-color="#FBE9E7"
     label="Сообщение"
     v-model="text"
     :rules="textRules"

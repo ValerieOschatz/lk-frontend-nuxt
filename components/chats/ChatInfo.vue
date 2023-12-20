@@ -28,7 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
-      user: "usersStore/getUser",
+      currentChat: "chatsStore/getChat",
     }),
     chat() {
       if (this.$route.path === '/chats/new') {
@@ -37,6 +37,14 @@ export default {
           name: user.name,
           photo: user.photo
         }
+      } else {
+        const chat = this.currentChat;
+        if (!chat.groupDetails.isGroup) {
+          const person = chat.participants.find(item => item._id !== this.profile.id);
+          chat.name = person.name;
+          chat.photo = person.photo;
+        }
+        return chat;
       }
     }
   }
