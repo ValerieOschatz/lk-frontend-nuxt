@@ -1,5 +1,5 @@
 <template>
-  <div class="message-list">
+  <div class="message-list" ref="messageList">
     <v-sheet
       v-for="message in messageList"
       :key="message._id"
@@ -23,6 +23,22 @@ export default {
       profile: "profileStore/getProfile",
       messageList: "messagesStore/getMessageList",
     }),
+  },
+  methods: {
+    scrollDown() {
+      const messageList = this.$refs.messageList;
+      setTimeout(() => {
+        messageList.scrollTop = messageList.scrollHeight;
+      })
+    }
+  },
+  watch: {
+    messageList() {
+      this.scrollDown();
+    }
+  },
+  mounted() {
+    this.scrollDown()
   }
 }
 </script>
@@ -31,7 +47,10 @@ export default {
 .message-list {
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  padding: 20px;
+  gap: 10px;
+  overflow-y: scroll;
+  max-height: calc(100vh - 340px);
 }
 .message-list__message {
   width: fit-content;
