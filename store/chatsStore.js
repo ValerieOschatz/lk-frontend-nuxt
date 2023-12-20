@@ -66,7 +66,7 @@ export const actions = {
       commit("setChat", res.data);
     })
     .catch(err => {
-      navigateTo('/chanels');
+      navigateTo('/chats');
       const data = {
         isOpen: true,
         text: err.response.data.message,

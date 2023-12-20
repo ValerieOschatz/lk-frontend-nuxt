@@ -1,5 +1,5 @@
 <template>
-  <v-list>
+  <v-list v-if="chat">
     <v-list-item
       :prepend-avatar="chat.photo ? `http://localhost:3001/${chat.photo}` : '/image2.jpg'"
       :title="chat.name"
@@ -38,13 +38,15 @@ export default {
           photo: user.photo
         }
       } else {
-        const chat = this.currentChat;
-        if (!chat.groupDetails.isGroup) {
-          const person = chat.participants.find(item => item._id !== this.profile.id);
-          chat.name = person.name;
-          chat.photo = person.photo;
+        if (this.currentChat.id) {
+          const chat = this.currentChat;
+          if (!chat.groupDetails.isGroup) {
+            const person = chat.participants.find(item => item._id !== this.profile.id);
+            chat.name = person.name;
+            chat.photo = person.photo;
+          }
+          return chat;
         }
-        return chat;
       }
     }
   }

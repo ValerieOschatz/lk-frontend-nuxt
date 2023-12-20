@@ -29,10 +29,13 @@ export default {
   methods: {
     ...mapActions({
       setChat: "chatsStore/setChat",
+      setMessageList: "messagesStore/setMessageList",
     }),
   },
   mounted() {
-    this.setChat({ chatId: this.$route.params.id });
+    const id = this.$route.params.id;
+    this.setChat({ chatId: id });
+    this.setMessageList({ chat: id });
   }
 }
 </script>

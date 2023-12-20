@@ -55,4 +55,5 @@ export {
 
 export {
   createMessageApi,
+  getMessageListApi,
 } from "./message";
