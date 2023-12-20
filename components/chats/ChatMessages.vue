@@ -4,20 +4,25 @@
       v-for="message in messageList"
       :key="message._id"
       rounded="lg"
-      :color="`${message.sender._id === profile.id ? '#F3E5F5' : '#ECEFF1'}`"
+      :color="`${message.sender._id === profile.id ? '#FFCCBC' : '#fff'}`"
       :class="`message-list__message ${message.sender._id === profile.id && 'message-list__message_own'}`"
     >
-    <v-card-text class="py-2">
-      {{ message.text }}
-    </v-card-text>
+      <v-card-text class="py-2">
+        {{ message.text }}
+      </v-card-text>
+      <ChatMessageMenu v-if="message.sender._id === profile.id" :message="message" />
     </v-sheet>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import ChatMessageMenu from '~/components/chats/ChatMessageMenu.vue';
 
 export default {
+  components: {
+    ChatMessageMenu,
+  },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",
@@ -51,6 +56,7 @@ export default {
   gap: 10px;
   overflow-y: scroll;
   max-height: calc(100vh - 340px);
+  background-color: #f7f7f7;
 }
 .message-list__message {
   width: fit-content;

@@ -4,7 +4,7 @@
 >
   <v-textarea
     bg-color="#FBE9E7"
-    label="Сообщение"
+    label="Новое сообщение"
     v-model="text"
     :rules="textRules"
   ></v-textarea>

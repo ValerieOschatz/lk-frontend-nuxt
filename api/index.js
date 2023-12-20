@@ -56,4 +56,6 @@ export {
 export {
   createMessageApi,
   getMessageListApi,
+  updateMessageApi,
+  deleteMessageApi,
 } from "./message";

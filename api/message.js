@@ -14,3 +14,18 @@ export const createMessageApi = ({ text, chat }) => {
     chat,
   });
 };
+
+export const updateMessageApi = ({ messageId, text }) => {
+  return instance.patch("/message/update", {
+    messageId,
+    text,
+  });
+};
+
+export const deleteMessageApi = ({ messageId }) => {
+  return instance.delete("/message/delete", {
+    params: {
+      messageId,
+    }
+  });
+};

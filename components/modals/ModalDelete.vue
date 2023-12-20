@@ -33,6 +33,8 @@ export default {
       selectedPost: "postsStore/getSelectedPost",
       selectedComment: "commentsStore/getSelectedComment",
       chanel: "chanelsStore/getChanel",
+      selectedMessage: "messagesStore/getSelectedMessage",
+      chat: "chatsStore/getChat",
     }),
     isOpen() {
       return this.modalDelete.isOpen;
@@ -45,12 +47,14 @@ export default {
     ...mapMutations({
       setSelectedPost: "postsStore/setSelectedPost",
       setSelectedComment: "commentsStore/setSelectedComment",
+      setSelectedMessage: "messagesStore/setSelectedMessage",
     }),
     ...mapActions({
       setModal: "modalStore/setModal",
       deletePost: "postsStore/deletePost",
       deleteComment: "commentsStore/deleteComment",
       deleteChanel: "chanelsStore/deleteChanel",
+      deleteMessage: "messagesStore/deleteMessage",
     }),
     onDelete() {
       if (this.option === 'post') {
@@ -63,8 +67,10 @@ export default {
       } else if (this.option === 'comment') {
         this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
         this.setSelectedComment(null);
-      } else {
+      } else if (this.option === 'chanel') {
         this.deleteChanel({ chanelId: this.chanel.id });
+      } else if (this.option === 'message') {
+        this.deleteMessage({ chat: this.chat.id, messageId: this.selectedMessage._id });
       }
     }
   },
@@ -77,6 +83,7 @@ export default {
         this.setModal({ type: 'modalDelete', value: false });
         if (this.option === 'post') this.setSelectedPost(null);
         if (this.option === 'comment') this.setSelectedComment(null);
+        if (this.option === 'message') this.setSelectedMessage(null);
       }
     }
   }

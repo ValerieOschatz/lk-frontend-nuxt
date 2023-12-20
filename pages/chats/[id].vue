@@ -7,6 +7,8 @@
         <ChatMessageForm />
       </div>
     </div>
+    <ModalEditMessage />
+    <ModalDelete />
     <Alert />
   </div>
 </template>
@@ -23,6 +25,8 @@ import Alert from '~/components/Alert.vue';
 import ChatInfo from '~/components/chats/ChatInfo.vue';
 import ChatMessages from '~/components/chats/ChatMessages.vue';
 import ChatMessageForm from '~/components/chats/ChatMessageForm.vue';
+import ModalEditMessage from "~/components/modals/ModalEditMessage.vue";
+import ModalDelete from "~/components/modals/ModalDelete.vue";
 
 export default {
   components: {
@@ -30,6 +34,8 @@ export default {
     ChatInfo,
     ChatMessages,
     ChatMessageForm,
+    ModalEditMessage,
+    ModalDelete,
   },
   methods: {
     ...mapActions({

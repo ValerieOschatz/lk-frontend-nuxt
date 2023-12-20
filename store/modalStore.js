@@ -35,6 +35,10 @@ export const state = () => ({
     isOpen: false,
     option: '',
   },
+  modalEditMessage: {
+    isOpen: false,
+    option: '',
+  },
 });
 
 export const getters = {
@@ -64,6 +68,9 @@ export const getters = {
   },
   getModalAddChanel(state) {
     return state.modalAddChanel;
+  },
+  getModalEditMessage(state) {
+    return state.modalEditMessage;
   },
 };
 
