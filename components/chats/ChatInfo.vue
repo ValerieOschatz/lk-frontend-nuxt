@@ -1,6 +1,7 @@
 <template>
-  <v-list v-if="chat">
+  <v-list v-if="chat" class="py-0">
     <v-list-item
+      class="py-0"
       :prepend-avatar="chat.photo ? `http://localhost:3001/${chat.photo}` : '/image2.jpg'"
       :title="chat.name"
       nav
@@ -9,11 +10,13 @@
       <template v-slot:append v-if="chat.id">
         <v-btn
           variant="text"
+          density="compact"
           icon="mdi-dots-vertical"
           color="#E57373"
         ></v-btn>
       </template>
     </v-list-item>
+    <v-divider></v-divider>
   </v-list>
 </template>
 
@@ -21,10 +24,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-  data () {
-    return {
-    }
-  },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",

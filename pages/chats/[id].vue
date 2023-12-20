@@ -2,7 +2,10 @@
   <div class="h-100">
     <div class="chat-container">
       <ChatInfo />
-      <ChatMessageForm />
+      <div>
+        <ChatMessages />
+        <ChatMessageForm />
+      </div>
     </div>
     <Alert />
   </div>
@@ -18,12 +21,14 @@ definePageMeta({
 import { mapGetters, mapActions } from "vuex";
 import Alert from '~/components/Alert.vue';
 import ChatInfo from '~/components/chats/ChatInfo.vue';
+import ChatMessages from '~/components/chats/ChatMessages.vue';
 import ChatMessageForm from '~/components/chats/ChatMessageForm.vue';
 
 export default {
   components: {
     Alert,
     ChatInfo,
+    ChatMessages,
     ChatMessageForm,
   },
   methods: {
