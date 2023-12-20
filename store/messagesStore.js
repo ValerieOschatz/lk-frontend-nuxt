@@ -23,6 +23,7 @@ export const actions = {
   createMessage({ dispatch }, { text, chat }) {
     createMessageApi({ text, chat })
     .then(res => {
+      dispatch("setMessageList", { chat });
     })
     .catch(err => {
       const data = {

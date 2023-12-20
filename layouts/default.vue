@@ -46,6 +46,6 @@ export default {
   width: calc(100% - 20px);
   max-width: 880px;
   margin: 20px auto;
-  padding: 40px;
+  padding: 20px;
 }
 </style>

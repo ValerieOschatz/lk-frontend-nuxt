@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data: () => ({
@@ -30,6 +30,10 @@ export default {
     ],
   }),
   computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
+      chat: "chatsStore/getChat",
+    }),
     otherParticipants() {
       const user = JSON.parse(localStorage.getItem('user'));
       const userId = user.id ? user.id : user._id;
@@ -39,6 +43,7 @@ export default {
   methods: {
     ...mapActions({
       createChat: "chatsStore/createChat",
+      createMessage: "messagesStore/createMessage",
     }),
     async validate () {
       return await this.$refs.form.validate();
@@ -48,7 +53,11 @@ export default {
       const valid = validity.valid;
       
       if (valid && this.text) {
-        this.createChat({ otherParticipants: this.otherParticipants, text: this.text });
+        if (this.$route.path === '/chats/new') {
+          this.createChat({ otherParticipants: this.otherParticipants, text: this.text });
+        } else {
+          this.createMessage({ text: this.text, chat: this.chat.id });
+        }
         this.text = '';
       }
     },
