@@ -8,12 +8,7 @@
       height="60"
     >
       <template v-slot:append v-if="chat._id">
-        <v-btn
-          variant="text"
-          density="compact"
-          icon="mdi-dots-vertical"
-          color="#E57373"
-        ></v-btn>
+        <ChatBtn :chat="currentChat" />
       </template>
     </v-list-item>
     <v-divider></v-divider>
@@ -22,8 +17,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import ChatBtn from '~/components/chats/ChatBtn.vue';
 
 export default {
+  components: {
+    ChatBtn,
+  },
   computed: {
     ...mapGetters({
       profile: "profileStore/getProfile",

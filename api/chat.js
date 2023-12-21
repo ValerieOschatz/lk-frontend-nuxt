@@ -21,3 +21,11 @@ export const createChatApi = ({ otherParticipants }) => {
     otherParticipants,
   });
 };
+
+export const deleteChatApi = ({ chatId }) => {
+  return instance.delete("/chat/delete", {
+    params: {
+      chatId,
+    }
+  });
+};

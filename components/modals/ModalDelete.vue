@@ -35,6 +35,7 @@ export default {
       chanel: "chanelsStore/getChanel",
       selectedMessage: "messagesStore/getSelectedMessage",
       chat: "chatsStore/getChat",
+      selectedChat: "chatsStore/getSelectedChat",
     }),
     isOpen() {
       return this.modalDelete.isOpen;
@@ -48,6 +49,7 @@ export default {
       setSelectedPost: "postsStore/setSelectedPost",
       setSelectedComment: "commentsStore/setSelectedComment",
       setSelectedMessage: "messagesStore/setSelectedMessage",
+      setSelectedChat: "chatsStore/setSelectedChat",
     }),
     ...mapActions({
       setModal: "modalStore/setModal",
@@ -55,6 +57,7 @@ export default {
       deleteComment: "commentsStore/deleteComment",
       deleteChanel: "chanelsStore/deleteChanel",
       deleteMessage: "messagesStore/deleteMessage",
+      deleteChat: "chatsStore/deleteChat",
     }),
     onDelete() {
       if (this.option === 'post') {
@@ -71,6 +74,8 @@ export default {
         this.deleteChanel({ chanelId: this.chanel._id });
       } else if (this.option === 'message') {
         this.deleteMessage({ chat: this.chat._id, messageId: this.selectedMessage._id });
+      } else if (this.option === 'chat') {
+        this.deleteChat({ chatId: this.selectedChat._id });
       }
     }
   },
@@ -84,6 +89,7 @@ export default {
         if (this.option === 'post') this.setSelectedPost(null);
         if (this.option === 'comment') this.setSelectedComment(null);
         if (this.option === 'message') this.setSelectedMessage(null);
+        if (this.option === 'chat') this.setSelectedChat(null);
       }
     }
   }

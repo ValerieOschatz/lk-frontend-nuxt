@@ -2,6 +2,7 @@ import {
   createChatApi,
   getChatCardApi,
   checkChatApi,
+  deleteChatApi,
 } from "../api";
 
 export const state = () => ({
@@ -18,11 +19,15 @@ export const state = () => ({
       rights: false,
     },
   },
+  selectedChat: null,
 });
 
 export const getters = {
   getChat(state) {
     return state.chat;
+  },
+  getSelectedChat(state) {
+    return state.selectedChat;
   },
 };
 
@@ -41,6 +46,9 @@ export const mutations = {
         rights: data.groupDetails.rights,
       },
     };
+  },
+  setSelectedChat(state, data) {
+    state.selectedChat = data;
   },
 };
 
@@ -89,6 +97,22 @@ export const actions = {
     })
     .catch(err => {
       navigateTo('/chats');
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  deleteChat({ dispatch }, { chatId }) {
+    deleteChatApi({ chatId })
+    .then(res => {
+      dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
+      navigateTo('/chats');
+    })
+    .catch(err => {
       const data = {
         isOpen: true,
         text: err.response.data.message,
