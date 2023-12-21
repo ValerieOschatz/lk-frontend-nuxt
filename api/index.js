@@ -53,6 +53,7 @@ export {
   createChatApi,
   checkChatApi,
   deleteChatApi,
+  getChatListApi,
 } from "./chat";
 
 export {

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ChatList />
+    <ModalDelete />
     <Alert />
   </div>
 </template>
@@ -13,10 +15,14 @@ definePageMeta({
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Alert from '../components/Alert.vue';
+import ChatList from '../components/chats/ChatList.vue';
+import ModalDelete from "~/components/modals/ModalDelete.vue";
 
 export default {
   components: {
     Alert,
+    ChatList,
+    ModalDelete,
   },
   computed: {
     ...mapGetters({
@@ -25,8 +31,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      setModal: "modalStore/setModal",
+      setChatList: "chatsStore/setChatList",
     }),
   },
+  mounted() {
+    this.setChatList();
+  }
 }
 </script>

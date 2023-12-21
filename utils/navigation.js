@@ -18,5 +18,10 @@ export const routes = [
     name: 'Каналы',
     link: '/chanels',
     icon: 'mdi-group',
+  },
+  {
+    name: 'Чаты',
+    link: '/chats',
+    icon: 'mdi-forum-outline',
   }
 ]

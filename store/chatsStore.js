@@ -3,9 +3,11 @@ import {
   getChatCardApi,
   checkChatApi,
   deleteChatApi,
+  getChatListApi,
 } from "../api";
 
 export const state = () => ({
+  chatList: [],
   chat: {
     _id: '',
     name: '',
@@ -23,6 +25,9 @@ export const state = () => ({
 });
 
 export const getters = {
+  getChatList(state) {
+    return state.chatList;
+  },
   getChat(state) {
     return state.chat;
   },
@@ -32,6 +37,9 @@ export const getters = {
 };
 
 export const mutations = {
+  setChatList(state, data) {
+    state.chatList = data;
+  },
   setChat(state, data) {
     state.chat = {
       _id: data._id,
@@ -53,6 +61,21 @@ export const mutations = {
 };
 
 export const actions = {
+  setChatList({ commit }) {
+    getChatListApi()
+    .then(res => {
+      commit("setChatList", res.data);
+    })
+    .catch(err => {
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
   createChat({ dispatch }, { otherParticipants, text }) {
     createChatApi({ otherParticipants })
     .then(res => {

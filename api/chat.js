@@ -1,5 +1,7 @@
 import { instance } from "./instanceAxios"
 
+export const getChatListApi = () => instance.get("/chat/list", {});
+
 export const checkChatApi = ({ participant }) =>
   instance.get("/chat/check", {
     params: {
