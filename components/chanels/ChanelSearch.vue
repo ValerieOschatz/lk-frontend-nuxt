@@ -50,13 +50,13 @@ export default {
     onSearch() {
       if (this.tab === 1) {
         this.setSubscriptionChanelName(this.name);
-        this.setSubscriptionChanelList({ name: this.name, subscriptions: this.profile.id });
+        this.setSubscriptionChanelList({ name: this.name, subscriptions: this.profile._id });
       } else if (this.tab === 2) {
         this.setSearchedChanelName(this.name);
         this.setSearchedChanelList({ name: this.name });
       } else if (this.tab === 3) {
         this.setOwnChanelName(this.name);
-        this.setOwnChanelList({ owner: this.profile.id, name: this.name });
+        this.setOwnChanelList({ owner: this.profile._id, name: this.name });
       }
     }
   },

@@ -6,12 +6,12 @@
         <v-card elevation="4">
           <div v-if="post.ownerChanel" class="list__owner-container">
             <NuxtLink :to="`/chanels/${post.ownerChanel._id}`" class="list__link">{{ post.ownerChanel.name }}</NuxtLink>
-            <PostBtn v-if="post.owner._id === profile.id" :post="post" />
+            <PostBtn v-if="post.owner._id === profile._id" :post="post" />
           </div>
           <div v-else class="list__owner-container">
-            <NuxtLink v-if="post.owner._id === profile.id" to="/profile" class="list__link">{{ post.owner.name }}</NuxtLink>
+            <NuxtLink v-if="post.owner._id === profile._id" to="/profile" class="list__link">{{ post.owner.name }}</NuxtLink>
             <NuxtLink v-else :to="`/users/${post.owner._id}`" class="list__link">{{ post.owner.name }}</NuxtLink>
-            <PostBtn v-if="post.owner._id === profile.id" :post="post" />
+            <PostBtn v-if="post.owner._id === profile._id" :post="post" />
           </div>
           <span class="list__date">{{ convertDate(post.createdAt) }}</span>
           <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="list__image" />
@@ -82,7 +82,7 @@ export default {
       return profile.privatSettings.comments;
     },
     getOwnLike(post) {
-      return post.likes.includes(this.profile.id);
+      return post.likes.includes(this.profile._id);
     },
     showCommentList(post) {
       this.setSelectedPost(post);

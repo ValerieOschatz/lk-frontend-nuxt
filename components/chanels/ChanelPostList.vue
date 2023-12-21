@@ -32,10 +32,10 @@ export default {
       chanel: "chanelsStore/getChanel",
     }),
     ownChanel() {
-      return this.chanel.owner === this.profile.id;
+      return this.chanel.owner === this.profile._id;
     },
     postsAccess() {
-      return this.ownChanel || this.chanel.privatSettings.posts || this.chanel.subscribers.includes(this.profile.id);
+      return this.ownChanel || this.chanel.privatSettings.posts || this.chanel.subscribers.includes(this.profile._id);
     },
   },
   methods: {
@@ -53,7 +53,7 @@ export default {
   watch: {
     chanel() {
       this.setLoading(true);
-      if (this.postsAccess) this.setPostList({ ownerChanel: this.chanel.id });
+      if (this.postsAccess) this.setPostList({ ownerChanel: this.chanel._id });
     },
   }
 }

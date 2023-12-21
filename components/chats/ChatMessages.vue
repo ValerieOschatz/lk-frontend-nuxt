@@ -4,13 +4,13 @@
       v-for="message in messageList"
       :key="message._id"
       rounded="lg"
-      :color="`${message.sender._id === profile.id ? '#FFCCBC' : '#fff'}`"
-      :class="`message-list__message ${message.sender._id === profile.id && 'message-list__message_own'}`"
+      :color="`${message.sender._id === profile._id ? '#FFCCBC' : '#fff'}`"
+      :class="`message-list__message ${message.sender._id === profile._id && 'message-list__message_own'}`"
     >
       <v-card-text class="py-2">
         {{ message.text }}
       </v-card-text>
-      <ChatMessageMenu v-if="message.sender._id === profile.id" :message="message" />
+      <ChatMessageMenu v-if="message.sender._id === profile._id" :message="message" />
     </v-sheet>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted() {
-    this.scrollDown()
+    this.scrollDown();
   }
 }
 </script>
@@ -52,10 +52,11 @@ export default {
 .message-list {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   padding: 20px;
   gap: 10px;
   overflow-y: scroll;
-  max-height: calc(100vh - 340px);
+  height: calc(100vh - 340px);
   background-color: #f7f7f7;
 }
 .message-list__message {

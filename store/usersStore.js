@@ -8,7 +8,7 @@ export const state = () => ({
   subscriberList: [],
   subscriptionList:[],
   user: {
-    id: '',
+    _id: '',
     name: '',
     photo: '',
     description: '',
@@ -47,7 +47,7 @@ export const mutations = {
   },
   setUser(state, data) {
     state.user = {
-      id: data._id,
+      _id: data._id,
       name: data.name,
       photo: data.photo,
       description: data.description,

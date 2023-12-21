@@ -9,7 +9,7 @@ import {
 
 export const state = () => ({
   profile: {
-    id: '',
+    _id: '',
     name: '',
     photo: '',
     description: '',
@@ -42,7 +42,7 @@ export const getters = {
 export const mutations = {
   setProfile(state, data) {
     state.profile = {
-      id: data._id,
+      _id: data._id,
       name: data.name,
       photo: data.photo,
       description: data.description,
@@ -64,7 +64,7 @@ export const mutations = {
   },
   resetProfile(state) {
     state.profile = {
-      id: '',
+      _id: '',
       name: '',
       photo: '',
       description: '',

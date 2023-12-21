@@ -7,7 +7,7 @@
       nav
       height="60"
     >
-      <template v-slot:append v-if="chat.id">
+      <template v-slot:append v-if="chat._id">
         <v-btn
           variant="text"
           density="compact"
@@ -37,10 +37,10 @@ export default {
           photo: user.photo
         }
       } else {
-        if (this.currentChat.id) {
+        if (this.currentChat._id) {
           const chat = this.currentChat;
           if (!chat.groupDetails.isGroup) {
-            const person = chat.participants.find(item => item._id !== this.profile.id);
+            const person = chat.participants.find(item => item._id !== this.profile._id);
             chat.name = person.name;
             chat.photo = person.photo;
           }

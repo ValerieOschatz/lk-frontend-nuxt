@@ -18,7 +18,7 @@ export const state = () => ({
   searchedName: '',
   subscriptionName: '',
   chanel: {
-    id: '',
+    _id: '',
     name: '',
     photo: '',
     description: '',
@@ -76,7 +76,7 @@ export const mutations = {
   },
   setChanel(state, data) {
     state.chanel = {
-      id: data._id,
+      _id: data._id,
       name: data.name,
       photo: data.photo,
       description: data.description,
@@ -90,7 +90,7 @@ export const mutations = {
   },
   resetChanel(state) {
     state.chanel = {
-      id: '',
+      _id: '',
       name: '',
       photo: '',
       description: '',

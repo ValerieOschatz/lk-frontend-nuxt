@@ -3,7 +3,7 @@
   ref="form"
 >
   <v-textarea
-    bg-color="#FBE9E7"
+    bg-color="#E8EAF6"
     label="Новое сообщение"
     v-model="text"
     :rules="textRules"
@@ -36,7 +36,7 @@ export default {
     }),
     otherParticipants() {
       const user = JSON.parse(localStorage.getItem('user'));
-      const userId = user.id ? user.id : user._id;
+      const userId = user._id;
       return [userId];
     }
   },
@@ -56,7 +56,7 @@ export default {
         if (this.$route.path === '/chats/new') {
           this.createChat({ otherParticipants: this.otherParticipants, text: this.text });
         } else {
-          this.createMessage({ text: this.text, chat: this.chat.id });
+          this.createMessage({ text: this.text, chat: this.chat._id });
         }
         this.text = '';
       }

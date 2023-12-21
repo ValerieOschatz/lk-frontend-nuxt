@@ -59,18 +59,18 @@ export default {
     onDelete() {
       if (this.option === 'post') {
         if (this.$route.path.split('/')[1] === 'chanels') {
-          this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id, ownerChanel: this.chanel.id });
+          this.deletePost({ postId: this.selectedPost._id, owner: this.profile._id, ownerChanel: this.chanel._id });
         } else {
-          this.deletePost({ postId: this.selectedPost._id, owner: this.profile.id });
+          this.deletePost({ postId: this.selectedPost._id, owner: this.profile._id });
         }
         this.setSelectedPost(null);
       } else if (this.option === 'comment') {
         this.deleteComment({ post: this.selectedPost._id, commentId: this.selectedComment._id });
         this.setSelectedComment(null);
       } else if (this.option === 'chanel') {
-        this.deleteChanel({ chanelId: this.chanel.id });
+        this.deleteChanel({ chanelId: this.chanel._id });
       } else if (this.option === 'message') {
-        this.deleteMessage({ chat: this.chat.id, messageId: this.selectedMessage._id });
+        this.deleteMessage({ chat: this.chat._id, messageId: this.selectedMessage._id });
       }
     }
   },

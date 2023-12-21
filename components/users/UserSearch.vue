@@ -50,10 +50,10 @@ export default {
     onSearch() {
       if (this.tab === 1) {
         this.setSubscriptionName(this.name);
-        this.setSubscriptionList({ name: this.name, subscriptions: this.profile.id });
+        this.setSubscriptionList({ name: this.name, subscriptions: this.profile._id });
       } else if (this.tab === 2) {
         this.setSubscriberName(this.name);
-        this.setSubscriberList({ name: this.name, subscribers: this.profile.id });
+        this.setSubscriberList({ name: this.name, subscribers: this.profile._id });
       } else if (this.tab === 3) {
         this.setSearchedName(this.name);
         this.setUserList({ name: this.name });

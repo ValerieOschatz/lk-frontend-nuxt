@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div v-if="profile.id" class="page">
+    <div v-if="profile._id" class="page">
       <Sidebar />
       <v-card class="content">
         <slot />
@@ -28,7 +28,7 @@ export default {
     }),
   },
   mounted() {
-    if (!this.profile.id) {
+    if (!this.profile._id) {
       this.setProfile();
     }
   }

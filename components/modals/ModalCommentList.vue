@@ -26,7 +26,7 @@
               <v-card elevation="4">
                 <div class="list__owner-container">
                   <span>{{ comment.owner.name }}</span>
-                  <CommentBtn v-if="comment.owner._id === profile.id" :comment="comment" />
+                  <CommentBtn v-if="comment.owner._id === profile._id" :comment="comment" />
                 </div>
                 <span class="list__date">{{ convertDate(comment.createdAt) }}</span>
                 <p class="list__text">{{ comment.text }}</p>
@@ -97,7 +97,7 @@ export default {
       deleteLikeComment: "commentsStore/deleteLikeComment",
     }),
     getOwnLike(comment) {
-      return comment.likes.includes(this.profile.id);
+      return comment.likes.includes(this.profile._id);
     },
     addComment() {
       this.setModal({ type: 'modalAddComment', value: true, option: 'create' });

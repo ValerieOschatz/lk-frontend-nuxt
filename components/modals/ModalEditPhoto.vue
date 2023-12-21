@@ -73,7 +73,7 @@ export default {
           if (this.option === 'profile') {
             this.editProfilePhoto(formData);
           } else {
-            formData.append('chanelId', this.chanel.id);
+            formData.append('chanelId', this.chanel._id);
             this.editChanelPhoto(formData);
           }
         }

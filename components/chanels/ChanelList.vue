@@ -11,7 +11,7 @@
     >
     <v-list-item-title class="link" @click="navigateTo(`/chanels/${chanel._id}`)">{{ chanel.name }}</v-list-item-title>
     <v-list-item-subtitle>{{ `Подписчики: ${chanel.subscribers.length}` }}</v-list-item-subtitle>
-      <template v-slot:append v-if="chanel.owner !== profile.id">
+      <template v-slot:append v-if="chanel.owner !== profile._id">
         <v-btn
           v-if="isSubscribed(chanel)"
           variant="text"
@@ -70,13 +70,13 @@ export default {
       unsubscribe: "chanelsStore/unsubscribe",
     }),
     isSubscribed(chanel) {
-      return chanel.subscribers.includes(this.profile.id);
+      return chanel.subscribers.includes(this.profile._id);
     },
     onSubscribe(chanelId) {
-      this.subscribe({ chanelId, profileId: this.profile.id, option: this.option });
+      this.subscribe({ chanelId, profileId: this.profile._id, option: this.option });
     },
     onUnsubscribe(chanelId) {
-      this.unsubscribe({ chanelId, profileId: this.profile.id, option: this.option });
+      this.unsubscribe({ chanelId, profileId: this.profile._id, option: this.option });
     }
   },
 }

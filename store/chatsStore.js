@@ -1,11 +1,12 @@
 import {
   createChatApi,
   getChatCardApi,
+  checkChatApi,
 } from "../api";
 
 export const state = () => ({
   chat: {
-    id: '',
+    _id: '',
     name: '',
     photo: '',
     participants: [],
@@ -28,7 +29,7 @@ export const getters = {
 export const mutations = {
   setChat(state, data) {
     state.chat = {
-      id: data._id,
+      _id: data._id,
       name: data.name,
       photo: data.photo,
       participants: data.participants,
@@ -64,6 +65,22 @@ export const actions = {
     getChatCardApi({ chatId })
     .then(res => {
       commit("setChat", res.data);
+    })
+    .catch(err => {
+      navigateTo('/chats');
+      const data = {
+        isOpen: true,
+        text: err.response.data.message,
+        color: 'error',
+        icon: '$warning',
+      };
+      dispatch("alertStore/setAlert", data, { root: true });
+    })
+  },
+  checkChat({ commit, dispatch }, user) {
+    checkChatApi({ participant: user._id })
+    .then(res => {
+      console.log(res)
     })
     .catch(err => {
       navigateTo('/chats');

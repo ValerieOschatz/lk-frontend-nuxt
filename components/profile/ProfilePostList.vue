@@ -35,7 +35,7 @@ export default {
       return this.$route.path.split('/')[1] === 'profile' ? true : false;
     },
     postsAccess() {
-      return this.owner || this.user.privatSettings.posts || this.user.subscribers.includes(this.profile.id);
+      return this.owner || this.user.privatSettings.posts || this.user.subscribers.includes(this.profile._id);
     },
   },
   methods: {
@@ -53,18 +53,18 @@ export default {
   watch: {
     profile() {
       this.setLoading(true);
-      if (this.owner) this.setPostList({ owner: this.profile.id });
-      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
+      if (this.owner) this.setPostList({ owner: this.profile._id });
+      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user._id });
     },
     user() {
       this.setLoading(true);
-      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user.id });
+      if (!this.owner && this.postsAccess) this.setPostList({ owner: this.user._id });
     },
   },
   mounted() {
     this.setLoading(true);
-    if (this.owner && this.profile.id) {
-      this.setPostList({ owner: this.profile.id });
+    if (this.owner && this.profile._id) {
+      this.setPostList({ owner: this.profile._id });
     }
   }
 }

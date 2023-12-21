@@ -80,23 +80,25 @@ export default {
       }
     },
     isSubscribed() {
-      return this.user.subscribers.includes(this.profile.id);
+      return this.user.subscribers.includes(this.profile._id);
     },
   },
   methods: {
     ...mapActions({
       subscribe: "profileStore/subscribe",
       unsubscribe: "profileStore/unsubscribe",
+      checkChat: "chatsStore/checkChat",
     }),
     onSubscribe() {
-      this.subscribe({ userId: this.user.id, option: 'card' });
+      this.subscribe({ userId: this.user._id, option: 'card' });
     },
     onUnsubscribe() {
-      this.unsubscribe({ userId: this.user.id, option: 'card' });
+      this.unsubscribe({ userId: this.user._id, option: 'card' });
     },
     writeMessage() {
-      localStorage.setItem('user', JSON.stringify(this.user));
-      navigateTo('/chats/new');
+      // localStorage.setItem('user', JSON.stringify(this.user));
+      // navigateTo('/chats/new');
+      this.checkChat(this.user);
     }
   }
 }

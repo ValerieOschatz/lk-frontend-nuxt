@@ -65,11 +65,11 @@ export default {
   },
   watch: {
     tab() {
-      if (this.profile.id) {
+      if (this.profile._id) {
         if (this.tab === 1) {
-          this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile.id });
+          this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile._id });
         } else if (this.tab === 2) {
-          this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile.id });
+          this.setSubscriberList({ name: this.subscriberName, subscribers: this.profile._id });
         } else if (this.tab === 3) {
           this.setUserList({ name: this.searchedName });
         }
@@ -77,7 +77,7 @@ export default {
     },
     profile() {
       if (this.tab === 1) {
-        this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile.id });
+        this.setSubscriptionList({ name: this.subscriptionName, subscriptions: this.profile._id });
       }
     }
   }

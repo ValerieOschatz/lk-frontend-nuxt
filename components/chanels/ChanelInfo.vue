@@ -13,7 +13,7 @@
       ></v-img>
       <span v-else class="text-h5">{{ chanel.name && chanel.name[0] }}</span>
     </v-avatar>
-    <ChanelEditBtn v-if="chanel.owner === profile.id" />
+    <ChanelEditBtn v-if="chanel.owner === profile._id" />
     <div v-else class="info__btn-container">
       <v-btn
         v-if="isSubscribed"
@@ -62,7 +62,7 @@ export default {
       chanel: "chanelsStore/getChanel",
     }),
     isSubscribed() {
-      return this.chanel.subscribers.includes(this.profile.id);
+      return this.chanel.subscribers.includes(this.profile._id);
     },
   },
   methods: {
@@ -71,10 +71,10 @@ export default {
       unsubscribe: "chanelsStore/unsubscribe",
     }),
     onSubscribe() {
-      this.subscribe({ chanelId: this.chanel.id, option: 'card' });
+      this.subscribe({ chanelId: this.chanel._id, option: 'card' });
     },
     onUnsubscribe() {
-      this.unsubscribe({ chanelId: this.chanel.id, option: 'card' });
+      this.unsubscribe({ chanelId: this.chanel._id, option: 'card' });
     }
   }
 }

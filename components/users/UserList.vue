@@ -76,13 +76,13 @@ export default {
       unsubscribe: "profileStore/unsubscribe",
     }),
     isSubscribed(user) {
-      return user.subscribers.includes(this.profile.id);
+      return user.subscribers.includes(this.profile._id);
     },
     onSubscribe(userId) {
-      this.subscribe({ userId, profileId: this.profile.id, option: this.option });
+      this.subscribe({ userId, profileId: this.profile._id, option: this.option });
     },
     onUnsubscribe(userId) {
-      this.unsubscribe({ userId, profileId: this.profile.id, option: this.option });
+      this.unsubscribe({ userId, profileId: this.profile._id, option: this.option });
     },
     writeMessage(user) {
       localStorage.setItem('user', JSON.stringify(user));

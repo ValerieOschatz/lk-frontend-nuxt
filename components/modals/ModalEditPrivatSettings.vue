@@ -72,7 +72,7 @@ export default {
       if (this.option === 'profile') {
         this.editPrivatSettings(data);
       } else {
-        data.chanelId = this.chanel.id;
+        data.chanelId = this.chanel._id;
         this.editChaneSettings(data);
       }
     },
