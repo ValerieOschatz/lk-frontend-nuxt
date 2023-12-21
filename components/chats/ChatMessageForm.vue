@@ -1,6 +1,7 @@
 <template>
 <v-form
   ref="form"
+  @submit.prevent="submitForm"
 >
   <v-textarea
     bg-color="#E8EAF6"
@@ -9,7 +10,7 @@
     :rules="textRules"
   ></v-textarea>
   <v-btn
-    @click="submitForm"
+    type="submit"
     color="rgb(179, 91, 67)"
     variant="text"
     size="small"

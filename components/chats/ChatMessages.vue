@@ -29,22 +29,6 @@ export default {
       profile: "profileStore/getProfile",
       messageList: "messagesStore/getMessageList",
     }),
-  },
-  methods: {
-    scrollDown() {
-      const messageList = this.$refs.messageList;
-      setTimeout(() => {
-        messageList.scrollTop = messageList.scrollHeight;
-      })
-    }
-  },
-  watch: {
-    messageList() {
-      this.scrollDown();
-    }
-  },
-  mounted() {
-    this.scrollDown();
   }
 }
 </script>
@@ -52,8 +36,7 @@ export default {
 <style scoped>
 .message-list {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
   padding: 20px;
   gap: 10px;
   overflow-y: scroll;
@@ -64,7 +47,6 @@ export default {
   width: fit-content;
   max-width: 80%;
 }
-
 .message-list__message_own {
   margin-left: auto;
 }
