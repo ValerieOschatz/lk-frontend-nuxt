@@ -1,6 +1,7 @@
 <template>
   <div class="message-list" ref="messageList">
     <v-sheet
+      v-if="$route.path !== '/chats/new'"
       v-for="message in messageList"
       :key="message._id"
       rounded="lg"
@@ -56,7 +57,7 @@ export default {
   padding: 20px;
   gap: 10px;
   overflow-y: scroll;
-  height: calc(100vh - 340px);
+  height: calc(100vh - 343px);
   background-color: #f7f7f7;
 }
 .message-list__message {

@@ -77,10 +77,15 @@ export const actions = {
       dispatch("alertStore/setAlert", data, { root: true });
     })
   },
-  checkChat({ commit, dispatch }, user) {
+  checkChat({ dispatch }, user) {
     checkChatApi({ participant: user._id })
     .then(res => {
-      console.log(res)
+      if (res.data) {
+        navigateTo(`/chats/${res.data._id}`);
+      } else {
+        localStorage.setItem('user', JSON.stringify(user));
+        navigateTo('/chats/new');
+      }
     })
     .catch(err => {
       navigateTo('/chats');

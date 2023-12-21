@@ -2,7 +2,10 @@
   <div class="h-100">
     <div class="chat-container">
       <ChatInfo />
-      <ChatMessageForm />
+      <div>
+        <ChatMessages />
+        <ChatMessageForm />
+      </div>
     </div>
     <Alert />
   </div>
@@ -19,12 +22,14 @@ import { mapGetters, mapActions } from "vuex";
 import Alert from '~/components/Alert.vue';
 import ChatInfo from '~/components/chats/ChatInfo.vue';
 import ChatMessageForm from '~/components/chats/ChatMessageForm.vue';
+import ChatMessages from '~/components/chats/ChatMessages.vue';
 
 export default {
   components: {
     Alert,
     ChatInfo,
     ChatMessageForm,
+    ChatMessages,
   },
 }
 </script>

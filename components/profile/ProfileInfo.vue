@@ -96,8 +96,6 @@ export default {
       this.unsubscribe({ userId: this.user._id, option: 'card' });
     },
     writeMessage() {
-      // localStorage.setItem('user', JSON.stringify(this.user));
-      // navigateTo('/chats/new');
       this.checkChat(this.user);
     }
   }

@@ -74,6 +74,7 @@ export default {
     ...mapActions({
       subscribe: "profileStore/subscribe",
       unsubscribe: "profileStore/unsubscribe",
+      checkChat: "chatsStore/checkChat",
     }),
     isSubscribed(user) {
       return user.subscribers.includes(this.profile._id);
@@ -85,8 +86,7 @@ export default {
       this.unsubscribe({ userId, profileId: this.profile._id, option: this.option });
     },
     writeMessage(user) {
-      localStorage.setItem('user', JSON.stringify(user));
-      navigateTo('/chats/new');
+      this.checkChat(user);
     }
   },
 }
