@@ -4,7 +4,6 @@
     <v-btn
       v-bind="props"  
       variant="text"
-      density="compact"
       icon="mdi-dots-vertical"
       color="#E57373"
     ></v-btn>

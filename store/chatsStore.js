@@ -133,6 +133,7 @@ export const actions = {
     deleteChatApi({ chatId })
     .then(res => {
       dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
+      dispatch("setChatList");
       navigateTo('/chats');
     })
     .catch(err => {

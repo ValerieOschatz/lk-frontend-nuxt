@@ -2,7 +2,7 @@
 <div class="list-container">
   <p v-if="!list.length" class="empty">Чатов пока нет</p>
   <div v-else>
-    <v-card-title>Список чатов:</v-card-title>
+    <v-card-title class="title">Список чатов:</v-card-title>
     <v-list
       item-props
       lines="three"
@@ -41,7 +41,14 @@
         chatList: "chatsStore/getChatList",
       }),
       list() {
-        return this.chatList;
+        return this.chatList.map(chat => {
+          if (!chat.groupDetails.isGroup) {
+            const person = chat.participants.find(item => item._id !== this.profile._id);
+            chat.name = person.name;
+            chat.photo = person.photo;
+          }
+          return chat;
+        })
       }
     }
   }
@@ -53,6 +60,9 @@
   }
   .empty {
     text-align: center;
+  }
+  .title {
+    color: #df9696;
   }
   </style>
   
