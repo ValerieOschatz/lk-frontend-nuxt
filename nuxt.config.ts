@@ -37,6 +37,7 @@ export default defineNuxtConfig({
       })
     },
     'nuxt3-vuex-module',
+    'nuxt-socket-io',
   ],
 
   vite: {
@@ -46,4 +47,12 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  io: {
+    sockets: [{
+      name: 'main',
+      url: 'http://localhost:3001',
+      default: true,
+    }]
+  }
 })

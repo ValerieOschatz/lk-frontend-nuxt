@@ -31,9 +31,7 @@ export const mutations = {
 export const actions = {
   createMessage({ dispatch }, { text, chat }) {
     createMessageApi({ text, chat })
-    .then(res => {
-      dispatch("setMessageList", { chat });
-    })
+    .then(res => {})
     .catch(err => {
       const data = {
         isOpen: true,
@@ -62,7 +60,6 @@ export const actions = {
   updateMessage({ dispatch }, { messageId, text }) {
     updateMessageApi({ messageId, text })
     .then(res => {
-      dispatch("setMessageList", { chat: res.data.chat });
       dispatch("modalStore/setModal", { type: 'modalEditMessage', value: false }, { root: true });
     })
     .catch(err => {
@@ -78,7 +75,6 @@ export const actions = {
   deleteMessage({ dispatch }, { chat, messageId }) {
     deleteMessageApi({ messageId })
     .then(res => {
-      dispatch("setMessageList", { chat });
       dispatch("modalStore/setModal", { type: 'modalDelete', value: false }, { root: true });
     })
     .catch(err => {
