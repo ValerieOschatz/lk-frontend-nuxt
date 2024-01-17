@@ -3,6 +3,7 @@
   v-model="drawer"
   :rail="rail"
   permanent
+  class="bg-lime-lighten-5"
   @click="rail = false"
 >
   <v-list>
@@ -16,7 +17,7 @@
         <v-btn
           variant="text"
           icon="mdi-chevron-left"
-          color="#E57373"
+          color="#DD2C00"
           @click.stop="rail = !rail"
         ></v-btn>
       </template>
@@ -33,7 +34,7 @@
       :to="route.link"
       :prepend-icon="route.icon"
       :title="route.name"
-      color="#E57373"
+      color="#DD2C00"
     ></v-list-item>
   </v-list>
 </v-navigation-drawer>

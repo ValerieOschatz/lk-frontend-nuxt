@@ -1,7 +1,7 @@
 .info {
   display: flex;
   gap: 40px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .info__photo-column {
