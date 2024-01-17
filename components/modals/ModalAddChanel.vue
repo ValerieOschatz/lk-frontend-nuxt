@@ -83,10 +83,6 @@ export default {
         this.createChanel(data);
       }
     },
-    // setValues() {
-    //   this.name = this.profile.name;
-    //   this.description = this.profile.description;
-    // }
   },
   watch: {
     isOpen() {
@@ -97,8 +93,6 @@ export default {
         this.setModal({ type: 'modalAddChanel', value: false });
         this.name = '';
         this.description = '';
-      } else {
-        // this.setValues();
       }
     }
   }

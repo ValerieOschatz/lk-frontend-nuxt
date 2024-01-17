@@ -81,15 +81,5 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  text-align: center;
-}
-.link {
-  text-decoration: none;
-  color: rgb(102, 92, 110);
-  font-size: 12px;
-  text-align: center;
-  display: block;
-  margin: 5px;
-}
+@import url(../assets/styles/auth-form.css);
 </style>

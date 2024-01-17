@@ -57,31 +57,5 @@ export default {
 </script>
 
 <style scoped>
-.page {
-  min-height: 100vh;
-  background-color: #C5CAE9;
-  display: flex;
-}
-.content {
-  width: calc(100% - 20px);
-  max-width: 880px;
-  margin: 20px auto;
-  padding: 20px;
-}
-
-@media screen and (max-width: 990px) {
-  .content {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    margin: 0;
-    padding-left: 80px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .content {
-    padding: 60px 10px 20px;
-  }
-}
+@import url(../assets/styles/default.css);
 </style>

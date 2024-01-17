@@ -1,0 +1,30 @@
+.message-list {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 20px;
+  gap: 10px;
+  overflow-y: scroll;
+  height: calc(100vh - 343px);
+  background-color: #f7f7f7;
+}
+
+.message-list__message {
+  width: fit-content;
+  max-width: 80%;
+}
+
+.message-list__message_own {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 990px) {
+  .message-list {
+    height: calc(100vh - 303px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .message-list {
+    height: calc(100vh - 343px);
+  }
+}

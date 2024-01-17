@@ -9,21 +9,5 @@
 </template>
 
 <style scoped>
-.page {
-  height: 100vh;
-  background-image: url(/image2.jpg);
-  display: flex;
-}
-
-.content {
-  padding: 20px;
-  margin: auto;
-  width: 344px;
-}
-
-@media screen and (max-width: 425px) {
-  .content {
-    width: calc(100% - 20px);
-  }
-}
+@import url(../assets/styles/session.css);
 </style>
