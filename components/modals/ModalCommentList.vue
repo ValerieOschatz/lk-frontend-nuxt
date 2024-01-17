@@ -7,7 +7,7 @@
       scrollable
     >
       <v-card>
-        <v-toolbar color="rgb(220, 205, 235)">
+        <v-toolbar color="rgb(220, 205, 235)" density="compact">
           <v-toolbar-title>Комментарии</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn variant="text" icon="mdi-close" @click="dialog = false"></v-btn>

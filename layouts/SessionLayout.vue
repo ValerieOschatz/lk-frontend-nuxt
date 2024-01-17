@@ -10,7 +10,6 @@
 
 <style scoped>
 .page {
-  width: 100vw;
   height: 100vh;
   background-image: url(/image2.jpg);
   display: flex;
@@ -20,5 +19,11 @@
   padding: 20px;
   margin: auto;
   width: 344px;
+}
+
+@media screen and (max-width: 425px) {
+  .content {
+    width: calc(100% - 20px);
+  }
 }
 </style>

@@ -3,7 +3,7 @@
   class="mx-auto"
   ref="form"
 >
-  <v-card-text>
+  <v-card-text class="px-0">
     <v-text-field
       density="compact"
       variant="solo"

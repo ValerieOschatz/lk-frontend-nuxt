@@ -58,7 +58,6 @@ export default {
 
 <style scoped>
 .page {
-  width: 100vw;
   min-height: 100vh;
   background-color: #C5CAE9;
   display: flex;
@@ -76,8 +75,13 @@ export default {
     max-width: 100%;
     height: 100%;
     margin: 0;
-    padding: 20px 40px;
     padding-left: 80px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    padding: 60px 10px 20px;
   }
 }
 </style>

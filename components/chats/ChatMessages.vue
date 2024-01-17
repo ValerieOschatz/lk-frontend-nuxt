@@ -1,5 +1,5 @@
 <template>
-  <div class="message-list" ref="messageList">
+  <div class="message-list">
     <v-sheet
       v-if="$route.path !== '/chats/new'"
       v-for="message in messageList"
@@ -49,5 +49,16 @@ export default {
 }
 .message-list__message_own {
   margin-left: auto;
+}
+
+@media screen and (max-width: 990px) {
+  .message-list {
+    height: calc(100vh - 303px);
+  }
+}
+@media screen and (max-width: 600px) {
+  .message-list {
+    height: calc(100vh - 343px);
+  }
 }
 </style>

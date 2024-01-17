@@ -4,6 +4,8 @@
       v-model="tab"
       color="#E57373"
       align-tabs="center"
+      center-active
+      show-arrows
     >
       <v-tab :value="1">Подписки</v-tab>
       <v-tab :value="2">Подписчики</v-tab>

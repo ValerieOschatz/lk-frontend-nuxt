@@ -5,6 +5,7 @@
       v-bind="props"
       size="small"
       width="100%"
+      max-width="300px"
       color="#E57373"
     >
       Настройки
