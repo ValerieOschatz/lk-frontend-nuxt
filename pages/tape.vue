@@ -1,5 +1,7 @@
 <template>
   <div>
+    <v-card-title v-if="postList.length" class="title">Лента</v-card-title>
+    <v-card-title v-else class="title">Лента пуста</v-card-title>
     <PostList />
     <ModalDelete />
     <ModalCommentList />
@@ -14,7 +16,7 @@ definePageMeta({
 </script>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import PostList from "~/components/PostList.vue";
 import ModalDelete from "~/components/modals/ModalDelete.vue";
 import ModalCommentList from "~/components/modals/ModalCommentList.vue";
@@ -26,6 +28,11 @@ export default {
     ModalDelete,
     ModalCommentList,
     Alert,
+  },
+  computed: {
+    ...mapGetters({
+      postList: "postsStore/getPostList",
+    }),
   },
   methods: {
     ...mapMutations({
@@ -41,3 +48,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.title {
+  color: #df9696;
+}
+</style>

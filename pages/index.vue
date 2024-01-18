@@ -1,6 +1,6 @@
 <template></template>
 
-<script setup>
+<!-- <script setup>
 definePageMeta({
   middleware: [
     function() {
@@ -14,4 +14,25 @@ definePageMeta({
     }
   ],
 })
+</script> -->
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setProfile: "profileStore/setProfile",
+    }),
+  },
+  mounted() {
+    if (!this.profile._id) {
+      this.setProfile();
+    }
+  }
+}
 </script>

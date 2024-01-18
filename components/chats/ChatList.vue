@@ -26,43 +26,43 @@
 </div>
 </template>
   
-  <script>
-  import { mapGetters } from "vuex";
-  import ChatBtn from '~/components/chats/ChatBtn.vue';
-  import { convertDate } from "~/utils/convertDate";
-  
-  export default {
-    components: {
-      ChatBtn,
-    },
-    computed: {
-      ...mapGetters({
-        profile: "profileStore/getProfile",
-        chatList: "chatsStore/getChatList",
-      }),
-      list() {
-        return this.chatList.map(chat => {
-          if (!chat.groupDetails.isGroup) {
-            const person = chat.participants.find(item => item._id !== this.profile._id);
-            chat.name = person.name;
-            chat.photo = person.photo;
-          }
-          return chat;
-        })
-      }
+<script>
+import { mapGetters } from "vuex";
+import ChatBtn from '~/components/chats/ChatBtn.vue';
+import { convertDate } from "~/utils/convertDate";
+
+export default {
+  components: {
+    ChatBtn,
+  },
+  computed: {
+    ...mapGetters({
+      profile: "profileStore/getProfile",
+      chatList: "chatsStore/getChatList",
+    }),
+    list() {
+      return this.chatList.map(chat => {
+        if (!chat.groupDetails.isGroup) {
+          const person = chat.participants.find(item => item._id !== this.profile._id);
+          chat.name = person.name;
+          chat.photo = person.photo;
+        }
+        return chat;
+      })
     }
   }
-  </script>
+}
+</script>
   
-  <style scoped>
-  .link {
-    cursor: pointer;
-  }
-  .empty {
-    text-align: center;
-  }
-  .title {
-    color: #df9696;
-  }
-  </style>
+<style scoped>
+.link {
+  cursor: pointer;
+}
+.empty {
+  text-align: center;
+}
+.title {
+  color: #df9696;
+}
+</style>
   
