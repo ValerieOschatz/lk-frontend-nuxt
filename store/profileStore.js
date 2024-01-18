@@ -82,6 +82,7 @@ export const actions = {
     getProfileApi()
     .then(res => {
       commit("setProfile", res.data);
+      navigateTo('/profile');
     })
     .catch(err => {
       navigateTo('/sign-in');
