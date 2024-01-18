@@ -78,20 +78,13 @@ export const mutations = {
 };
 
 export const actions = {
-  setProfile({ commit, dispatch }) {
+  setProfile({ commit }) {
     getProfileApi()
     .then(res => {
       commit("setProfile", res.data);
     })
     .catch(err => {
       navigateTo('/sign-in');
-      const data = {
-        isOpen: true,
-        text: "На сервере произошла ошибка",
-        color: 'error',
-        icon: '$warning',
-      };
-      dispatch("alertStore/setAlert", data, { root: true });
     })
   },
   editProfilePhoto({ dispatch }, data) {
