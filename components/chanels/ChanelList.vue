@@ -5,7 +5,7 @@
 >
   <div v-for="chanel in list" :key="chanel._id">
     <v-list-item
-      :prepend-avatar="chanel.photo ? `http://localhost:3001/${chanel.photo}` : '/image2.jpg'"
+      :prepend-avatar="chanel.photo ? `http://158.160.142.248/api/${chanel.photo}` : '/image2.jpg'"
       nav
       height="60"
     >

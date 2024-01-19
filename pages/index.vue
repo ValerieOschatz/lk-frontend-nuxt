@@ -29,9 +29,16 @@ export default {
       setProfile: "profileStore/setProfile",
     }),
   },
+  watch: {
+    profile() {
+      if (this.profile._id) {
+        navigateTo('/profile');
+      }
+    }
+  },
   mounted() {
-    if (!this.profile._id) {
-      this.setProfile();
+    if (this.profile._id) {
+      navigateTo('/profile');
     }
   }
 }

@@ -2,7 +2,7 @@
   <v-list v-if="chat" class="py-0">
     <v-list-item
       class="py-0"
-      :prepend-avatar="chat.photo ? `http://localhost:3001/${chat.photo}` : '/image2.jpg'"
+      :prepend-avatar="chat.photo ? `http://158.160.142.248/api/${chat.photo}` : '/image2.jpg'"
       :title="chat.name"
       nav
       height="60"

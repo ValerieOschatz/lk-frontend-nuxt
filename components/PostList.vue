@@ -14,7 +14,7 @@
             <PostBtn v-if="post.owner._id === profile._id" :post="post" />
           </div>
           <span class="list__date">{{ convertDate(post.createdAt) }}</span>
-          <img v-if="post.photo" :src="`http://localhost:3001/${post.photo}`" class="list__image" />
+          <img v-if="post.photo" :src="`http://158.160.142.248/api/${post.photo}`" class="list__image" />
           <p v-if="post.text" class="list__text">{{ post.text }}</p>
           <div class="list__actions">
             <div class="list__likes">

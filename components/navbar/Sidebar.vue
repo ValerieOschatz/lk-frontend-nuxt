@@ -8,7 +8,7 @@
 >
   <v-list>
     <v-list-item
-      :prepend-avatar="profile.photo ? `http://localhost:3001/${profile.photo}` : '/image2.jpg'"
+      :prepend-avatar="profile.photo ? `http://158.160.142.248/api/${profile.photo}` : '/image2.jpg'"
       :title="profile.name"
       nav
       height="60"

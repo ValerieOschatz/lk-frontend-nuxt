@@ -9,7 +9,7 @@
     >
       <div v-for="chat in list" :key="chat._id">
         <v-list-item
-          :prepend-avatar="chat.photo ? `http://localhost:3001/${chat.photo}` : '/image2.jpg'"
+          :prepend-avatar="chat.photo ? `http://158.160.142.248/api/${chat.photo}` : '/image2.jpg'"
           nav
           height="60"
         >

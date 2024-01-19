@@ -7,7 +7,7 @@
     >
       <v-img
         v-if="chanel.photo"
-        :src="`http://localhost:3001/${chanel.photo}`"
+        :src="`http://158.160.142.248/api/${chanel.photo}`"
         alt="avatar"
         cover
       ></v-img>

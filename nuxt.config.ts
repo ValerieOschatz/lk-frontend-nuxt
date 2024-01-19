@@ -55,7 +55,8 @@ export default defineNuxtConfig({
   io: {
     sockets: [{
       name: 'main',
-      url: 'http://localhost:3001',
+      // url: 'http://localhost:3001',
+      url: 'http://158.160.142.248',
       default: true,
     }]
   }

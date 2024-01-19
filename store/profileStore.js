@@ -82,7 +82,6 @@ export const actions = {
     getProfileApi()
     .then(res => {
       commit("setProfile", res.data);
-      navigateTo('/profile');
     })
     .catch(err => {
       navigateTo('/sign-in');
@@ -95,13 +94,24 @@ export const actions = {
       dispatch("modalStore/setModal", { type: 'modalEditPhoto', value: false }, { root: true });
     })
     .catch(err => {
-      const data = {
-        isOpen: true,
-        text: err.response.data.message,
-        color: 'error',
-        icon: '$warning',
-      };
-      dispatch("alertStore/setAlert", data, { root: true });
+      console.log('err', err.response)
+      if (err.response.status === 413) {
+        const data = {
+          isOpen: true,
+          text: 'Слишком большой файл',
+          color: 'error',
+          icon: '$warning',
+        };
+        dispatch("alertStore/setAlert", data, { root: true });
+      } else {
+        const data = {
+          isOpen: true,
+          text: err.response.data.message,
+          color: 'error',
+          icon: '$warning',
+        };
+        dispatch("alertStore/setAlert", data, { root: true });
+      }
     })
   },
   editProfileInfo({ dispatch }, data) {
