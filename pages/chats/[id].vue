@@ -48,9 +48,7 @@ export default {
     this.setChat({ chatId: id });
     this.setMessageList({ chat: id });
 
-    this.socket = this.$nuxtSocket({
-      channel: '/api'
-    });
+    this.socket = this.$nuxtSocket({});
     this.socket.emit('chat', id);
     this.socket.on('chatMessage', () => {
       this.setMessageList({ chat: id });
